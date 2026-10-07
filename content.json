@@ -39,6 +39,10 @@
         {
           "label": "서버 권한 관리 구현 기록",
           "url": "https://github.com/DKU-Dan-Zzan/Danzzan-BE/pull/74"
+        },
+        {
+          "label": "기존 운영 URL (현재 운영 종료)",
+          "url": "https://danfesta2026.yaaksok.com/"
         }
       ],
       "role": "4인 팀에서 초기 기획·요구사항 정리, Codex를 활용한 기능 단위 풀스택 개발, NHN Cloud 배포·운영·모니터링과 현장 스태프 업무를 수행했습니다.",
@@ -205,6 +209,10 @@
         {
           "label": "서비스 화면·시연 영상",
           "url": "https://github.com/DKU-Dan-Zzan"
+        },
+        {
+          "label": "기존 운영 URL (현재 운영 종료)",
+          "url": "https://danfesta2026.yaaksok.com/"
         }
       ]
     },
