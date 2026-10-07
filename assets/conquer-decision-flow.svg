@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">Conquer Health 구현안 비교와 공동 개선</title><desc id="desc">각자 구현 실험, 부분 평가 한계 검토, 응답 규칙 공동 개선, 최종 벤치마크 평가 순서의 설명용 도식</desc>
+<rect width="1200" height="420" fill="#f8fafc"/>
+<g font-family="sans-serif" fill="#24272b">
+<text x="45" y="56" font-size="17" fill="#006ecd">CONQUER HEALTH · 판단과 공동 개선 과정</text>
+<text x="45" y="103" font-size="30" font-weight="700">비교 결과를 출발점으로, 의료 답변의 요건까지 확인</text>
+<g fill="white" stroke="#dce0e4"><rect x="45" y="150" width="260" height="184" rx="8"/><rect x="328" y="150" width="260" height="184" rx="8"/><rect x="611" y="150" width="260" height="184" rx="8"/><rect x="894" y="150" width="260" height="184" rx="8"/></g>
+<g font-size="17" fill="#006ecd"><text x="65" y="184">01 · 팀의 실험</text><text x="348" y="184">02 · 내가 제안한 판단</text><text x="631" y="184">03 · 응답 규칙 공동 개선</text><text x="914" y="184">04 · 팀의 최종 평가</text></g>
+<g font-size="23" font-weight="600"><text x="65" y="227">구현안 비교</text><text x="348" y="227">한계를 알고 선택</text><text x="631" y="227">답변 요건 구체화</text><text x="914" y="227">평균 46.51점</text></g>
+<g font-size="18" fill="#525960"><text x="65" y="267">외부 검색 활용안과</text><text x="65" y="294">응답 지침 중심안</text><text x="348" y="267">부분 평가의 한계와</text><text x="348" y="294">남은 시간을 함께 고려</text><text x="631" y="267">질문 누락 · 위험 신호</text><text x="631" y="294">필요한 정보 확인</text><text x="914" y="267">3라운드 · 14팀 중 1위</text><text x="914" y="294">벤치마크상 수상</text></g>
+<text x="45" y="383" font-size="16" fill="#686d73">경험을 정리한 설명용 도식 · 개발 중 대시보드 점수와 최종 평가 점수는 별도</text>
+</g></svg>

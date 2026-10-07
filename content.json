@@ -1,0 +1,946 @@
+{
+  "projects": [
+    {
+      "slug": "danzzan",
+      "title": "단짠",
+      "subtitle": "기획부터 풀스택 개발, 배포와 두 차례 축제 운영까지",
+      "period": "2026-01 – 진행 중",
+      "category": "service",
+      "kind": "4인 팀 · 실서비스 운영",
+      "summary": "흩어진 축제 정보를 모으고 학생의 예매와 운영진의 현장 입장을 연결한 대학 축제 웹앱입니다. 총학생회·네이버페이와 요구를 조율하고, 기능 단위 풀스택 개발과 NHN Cloud 배포·운영을 맡았습니다.",
+      "tech": [
+        "React",
+        "TypeScript",
+        "Spring Boot",
+        "MySQL",
+        "Docker",
+        "NHN Cloud",
+        "Redis",
+        "Kafka"
+      ],
+      "outcome": "봄축제 팀 서비스 성과: 가입자 6,063명 · 티켓 3,500장 매진. 두 차례 축제 운영 후 운영진 권한 관리 기능을 고도화하고 있습니다.",
+      "links": [
+        {
+          "label": "프론트엔드 저장소",
+          "url": "https://github.com/DKU-Dan-Zzan/Danzzan-FE"
+        },
+        {
+          "label": "백엔드 저장소",
+          "url": "https://github.com/DKU-Dan-Zzan/Danzzan-BE"
+        },
+        {
+          "label": "운영진 관리 화면 구현 기록",
+          "url": "https://github.com/DKU-Dan-Zzan/Danzzan-FE/pull/120"
+        },
+        {
+          "label": "서버 권한 관리 구현 기록",
+          "url": "https://github.com/DKU-Dan-Zzan/Danzzan-BE/pull/74"
+        }
+      ],
+      "role": "4인 팀에서 초기 기획·요구사항 정리, Codex를 활용한 기능 단위 풀스택 개발, NHN Cloud 배포·운영·모니터링과 현장 스태프 업무를 수행했습니다.",
+      "sections": [
+        {
+          "title": "서비스의 시작과 내가 맡은 범위",
+          "paragraphs": [
+            "학생은 축제 정보와 예매를 여러 채널에서 확인하고, 운영진은 재학생 확인과 현장 배부를 처리해야 했습니다. 4인 팀이 총학생회와 요구를 정리하며 축제 정보 탐색·예매·입장 업무를 연결하는 웹앱을 만들었습니다.",
+            "팀은 기능 단위로 역할을 나눠 각자 화면과 서버를 함께 개발했습니다. 저는 초기 요구사항 정리부터 React/TypeScript와 Spring Boot 기능 개발, NHN Cloud 배포, 운영 모니터링에 참여했습니다. 구현에는 Codex를 활용하고 정책과 이용 흐름을 판단한 뒤 직접 동작을 확인했습니다."
+          ],
+          "steps": [
+            {
+              "title": "요구사항",
+              "text": "학생·운영진의 요구를 정리하고 팀과 범위 결정"
+            },
+            {
+              "title": "구현·확인",
+              "text": "기능 단위 FE·BE 개발과 직접 사용 점검"
+            },
+            {
+              "title": "배포·운영",
+              "text": "NHN Cloud 배포와 축제 현장 업무"
+            },
+            {
+              "title": "후속 개선",
+              "text": "운영 중 남은 수작업을 관리 기능으로 전환"
+            }
+          ]
+        },
+        {
+          "title": "01. 외부 협업의 범위를 정하고 가입·입장으로 연결",
+          "paragraphs": [
+            "축제를 한 달 앞두고 네이버페이의 얼굴인증 입장 서비스와 협업이 제안됐습니다. 기존 예매 기능을 유지하면서 정해진 일정 안에 입장 연계를 준비해야 했습니다.",
+            "저는 로그인 API를 새로 연동하는 대신, 단짠에서 예매를 진행하고 가입 시 수집한 네이버 아이디를 예매자 명단으로 전달하는 방안을 제안했습니다. 협력사의 역할과 일정상 제약을 확인한 뒤 팀과 범위를 정했습니다.",
+            "동일한 네이버 아이디로 양일을 예매해도 날짜별 입장 권한은 다를 수 있었습니다. 명단 처리 기준과 수정분 전달 범위를 확인하고 전체 명단을 대조하는 방식으로 합의했습니다. 가입 흐름에는 안내·입력란·개인정보 동의를 반영했습니다.",
+            "학과 학생들에게 실제 가입을 진행해보도록 요청하고 예매자 명단 추출을 시험했습니다. 봄축제에서 페이스사인 입장이 실제 운영됐으며, 저는 관리자 화면으로 예매 정보를 조회하고 현장에서 팔찌도 배부했습니다."
+          ],
+          "steps": [
+            {
+              "title": "단짠",
+              "text": "가입 시 네이버 아이디 수집 → 예매 진행"
+            },
+            {
+              "title": "전달 기준",
+              "text": "날짜별 입장 권한·명단 범위를 협의"
+            },
+            {
+              "title": "외부 입장",
+              "text": "예매자 명단 전달 → 페이스사인 입장 운영"
+            }
+          ],
+          "status": "봄축제 운영에 적용"
+        },
+        {
+          "title": "02. AI의 제안에서 사용자의 선택권을 다시 판단",
+          "paragraphs": [
+            "회원 탈퇴를 구현할 때 Codex는 미사용 티켓이 있으면 탈퇴를 막는 방안을 제안했습니다. 저는 티켓을 포기하고 탈퇴하려는 사용자는 선택할 수 있어야 한다고 판단해 정책을 수정했습니다.",
+            "탈퇴하면 보유 티켓을 사용할 수 없다는 안내를 제공하고, 티켓 포기 동의 후 최종 탈퇴 의사를 다시 확인하도록 흐름을 정했습니다. 구체적인 처리 대안과 코드 구현은 Codex의 도움을 받았습니다.",
+            "저는 테스트 계정을 직접 탈퇴하며 의도한 기능과 이용 흐름을 확인했습니다. AI에는 API 응답·인증 상태·재로그인·운영 수량까지 확인하도록 요청했습니다.",
+            "회원 탈퇴 기능은 운영 서비스에 배포됐고 실제 이용자의 탈퇴에 사용됐습니다."
+          ],
+          "steps": [
+            {
+              "title": "AI의 초기안",
+              "text": "미사용 티켓이 있으면 탈퇴 차단"
+            },
+            {
+              "title": "내 정책 판단",
+              "text": "티켓 포기 후 탈퇴 선택 허용"
+            },
+            {
+              "title": "이용 흐름",
+              "text": "결과 안내 → 포기 동의 → 최종 확인"
+            },
+            {
+              "title": "확인·운영",
+              "text": "테스트 계정 직접 확인 · 운영 배포와 실제 이용"
+            }
+          ],
+          "status": "운영 배포 · 실제 이용 확인"
+        },
+        {
+          "title": "03. DB 수작업을 운영자가 쓰는 권한 관리로",
+          "paragraphs": [
+            "초기 운영에서는 스태프에게 관리자 권한을 줄 때마다 제가 운영 DB를 직접 수정했습니다. 운영진이 바뀔 때마다 개발자를 거쳐야 했던 절차를 후속 개선 과제로 삼았습니다.",
+            "Notion의 접근 권한 방식에서 아이디어를 얻어 팀과 이메일 초대·관리자 역할만 두는 방식 등을 검토했습니다. 제가 중요하게 본 기준은 맡은 업무에 필요한 범위만 허용하는 것이었습니다. 팀은 최고관리자가 가입된 회원을 학번으로 찾아 매니저로 지정하고, 운영 관리와 티켓팅 권한을 나눠 부여하는 구조를 선택했습니다.",
+            "역할별 화면·기능 범위를 정하고 Codex에 계획 수립, 검수, 구현을 나눠 요청했습니다. 메뉴 표시뿐 아니라 서버 API에서도 권한을 확인하도록 구현했습니다. 축제 설정은 권한에 맞는 항목만 보여주되 저장 버튼은 하나로 통합했습니다.",
+            "운영진 지정과 업무별 권한 변경·회수 기능을 구현했습니다. 기존 서비스의 두 차례 축제 운영 경험을 바탕으로 추가한 기능이며, 고도화한 서비스는 졸업작품으로 배포·시연할 예정입니다."
+          ],
+          "steps": [
+            {
+              "title": "기존 운영",
+              "text": "스태프 변경 → 개발자 요청 → DB 수정"
+            },
+            {
+              "title": "구현한 흐름",
+              "text": "최고관리자가 회원 조회 → 업무별 권한 부여·회수"
+            },
+            {
+              "title": "현재 상태",
+              "text": "기능 구현 · 배포와 졸업작품 시연 준비"
+            }
+          ],
+          "status": "구현 완료 · 배포·시연 예정 (2026-10-07 기준)"
+        },
+        {
+          "title": "출시 전 점검에서 발견한 환경 차이",
+          "paragraphs": [
+            "학생용 화면은 아이폰 Safari와 갤럭시의 구글 앱 등에서 직접 확인했습니다. 관리자 화면은 총학생회가 요청한 노트북·태블릿 사용 비율을 고려해 제작하고 노트북의 Safari·Chrome·Edge·Firefox에서 점검했습니다.",
+            "당시 아이폰에서 홈 화면에 추가한 웹앱(PWA)을 실행했을 때는 Safari와 달리 당겨서 새로고침되지 않았습니다. 티켓팅 이용자가 직접 화면을 갱신할 수 있어야 한다고 판단해 별도 새로고침 버튼을 추가했습니다."
+          ]
+        },
+        {
+          "title": "운영 경험을 다음 개선과 팀의 자료로",
+          "paragraphs": [
+            "봄축제 팀 서비스는 가입자 6,063명과 티켓 3,500장 매진을 기록했습니다. 이후 가을축제도 운영했습니다. 예매와 페이스사인 연계는 봄축제에서 수행한 사례입니다.",
+            "현장에서는 직접 관리자 화면으로 예매 정보를 조회하고 팔찌를 배부했습니다. 구현한 흐름이 학생과 스태프의 실제 업무에 쓰이는 모습을 확인했고, 개발자가 직접 처리하던 운영진 권한 설정을 후속 기능으로 옮겼습니다.",
+            "개발환경의 로그인 문제를 추적한 뒤에는 기준 환경과 증상별 확인 항목, 쿠키·스토리지 점검 및 복구 절차를 문서로 공유했습니다. 이후 유사한 문제를 겪은 동료가 이 문서를 활용해 복구했습니다. 해결 과정을 팀이 다시 사용할 수 있는 자료로 남긴 경험입니다."
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/danzzan-ticketing.png",
+        "width": 941,
+        "height": 1672,
+        "label": "예매 서비스 화면",
+        "alt": "단짠의 날짜별 예매 상태와 예매 버튼 화면",
+        "caption": "날짜별 예매 상태와 신청 흐름을 확인하는 실제 서비스 화면입니다. 팀 공동 산출물입니다.",
+        "source_url": "",
+        "preview_layout": "phone-detail",
+        "preview_label": "예매 서비스 화면 일부"
+      },
+      "status": "실서비스 운영 · 권한 관리 고도화는 구현 후 배포·시연 준비 중"
+    },
+    {
+      "slug": "conquer-health",
+      "title": "Conquer Health",
+      "subtitle": "의료 AI 응답을 비교하고, 근거를 바탕으로 개선 방향을 정하다",
+      "period": "2026-08-21 – 2026-08-22",
+      "category": "ai",
+      "kind": "5인 팀 · 의료 AI 해커톤",
+      "summary": "루닛 L2-preview로 같은 의료·건강 질문에 답하고 품질을 비교하는 과제였습니다. 약 20시간 안에 구현안을 비교하고, 부분 평가의 한계를 검토하며 응답 지침의 공동 개선에 참여했습니다.",
+      "tech": [
+        "Python",
+        "LLM API",
+        "HealthBench",
+        "Docker"
+      ],
+      "outcome": "팀은 정식 평가 3라운드 평균 46.51점으로 평가 참여 14팀 중 1위를 기록하며 의료 특화 파운데이션 모델 해커톤 벤치마크상을 받았습니다.",
+      "links": [
+        {
+          "label": "프로젝트 저장소",
+          "url": "https://github.com/Hackathon-AIM/health-conquer-submission"
+        },
+        {
+          "label": "응답 규칙 변경 커밋",
+          "url": "https://github.com/Hackathon-AIM/health-conquer-submission/commit/52e79c8f5e2cb080466f9a299ee05b0afd9d0f69"
+        },
+        {
+          "label": "루닛 공식 수상 기사",
+          "url": "https://www.lunit.io/ko/media-hub/루닛-국가과제-ai-모델-활용-첫-해커톤-성료-개발자/"
+        }
+      ],
+      "role": "개발 중 비교 결과를 바탕으로 제출 방향에 집중하자고 제안하고, HealthBench 기준 분석과 응답 규칙 공동 개선에 참여했습니다.",
+      "sections": [
+        {
+          "title": "과제: 같은 질문에 더 적절한 의료 답변을 만들기",
+          "paragraphs": [
+            "루닛의 의료 특화 파운데이션 모델 해커톤에서 L2-preview를 활용한 의료 질의응답·건강관리 과제를 수행했습니다. 벤치마크에서는 공통 질문에 대한 팀별 답변의 품질을 비교했습니다.",
+            "모델을 재학습시키지 않고 외부 도구와 응답 지침으로 답변을 개선하는 과제였고, 약 20시간이 주어졌습니다. 5인 팀은 각자 구현을 실험한 뒤 정해진 시점부터 최고 대시보드 점수안을 함께 보완하기로 합의했습니다."
+          ]
+        },
+        {
+          "title": "부분 평가의 한계를 인정하며 방향을 제안",
+          "paragraphs": [
+            "점검 당시 가장 높은 대시보드 점수를 기록한 것은 외부 검색 없이 응답 지침을 적용한 구현이었습니다. 외부 검색을 더 발전시키자는 의견과 일부 문항의 점수에 맞추면 정식 평가에서 성능이 떨어질 수 있다는 우려가 나왔습니다.",
+            "저는 부분 점수로 정식 평가의 성능까지 단정할 수 없다는 점을 인정했습니다. 다만 남은 시간 안에 제출안을 완성하려면 현재 비교에서 가장 좋은 결과를 보인 구현을 출발점으로 삼자고 제안했습니다. 점수와 함께 의료 상담에 필요한 답변 요건도 검토해야 한다고 판단했습니다."
+          ],
+          "steps": [
+            {
+              "title": "비교한 구현",
+              "text": "외부 검색 활용안 / 응답 지침 중심안"
+            },
+            {
+              "title": "함께 본 제약",
+              "text": "남은 시간 · 부분 평가 편중 우려"
+            },
+            {
+              "title": "공동 보완",
+              "text": "현재 최고 점수안을 기준으로 의료 답변 요건 검토"
+            }
+          ]
+        },
+        {
+          "title": "평가 기준을 응답 행동으로 옮기기",
+          "paragraphs": [
+            "팀이 방향을 정한 뒤 HealthBench의 의료 대화 평가 기준을 살펴 응답 규칙을 함께 다듬었습니다. 질문의 모든 요구에 답하기, 위험 신호 안내하기, 판단에 필요한 사용자 정보 확인하기를 구체화했습니다.",
+            "정보가 부족해도 현재 제공할 수 있는 설명은 먼저 제시하도록 지침을 보완했습니다. 규칙은 기존 생성 요청에 반영해 별도 모델 호출을 늘리지 않았습니다. 응답 규칙 개선과 제출 구현은 팀이 함께 진행했습니다."
+          ]
+        },
+        {
+          "title": "최종 평가와 해석 범위",
+          "paragraphs": [
+            "팀은 최종 벤치마크 평가에서 3라운드 평균 46.51점으로 평가 참여 14팀 중 1위를 기록했고, AIM팀으로 벤치마크상을 받았습니다. 아래 수치는 최종 점수표의 팀 결과입니다.",
+            "최종 순위는 대회 전체 15팀 중 평가에 참여한 14팀의 점수표를 기준으로 합니다. 개발 중 사용한 부분 평가는 구현안 선택의 근거로, 최종 3라운드 평가는 제출 시스템의 성과로 제시했습니다."
+          ],
+          "metrics": [
+            {
+              "label": "1라운드",
+              "value": "46.17"
+            },
+            {
+              "label": "2라운드",
+              "value": "45.55"
+            },
+            {
+              "label": "3라운드",
+              "value": "47.82"
+            },
+            {
+              "label": "최종 평균",
+              "value": "46.51"
+            }
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/conquer-decision-flow.svg",
+        "width": 1200,
+        "height": 420,
+        "label": "구현안 비교와 공동 개선 과정",
+        "alt": "구현안 비교, 부분 평가 한계 검토, 응답 규칙 공동 개선, 최종 평가로 이어지는 과정",
+        "caption": "해커톤에서의 팀 작업과 제 판단 과정을 정리한 설명용 도식입니다. 실제 서비스 화면이나 모델 성능 그래프가 아닙니다.",
+        "source_url": ""
+      },
+      "status": "의료 대화 벤치마크 과제 / L2-preview 기반 응답 시스템 개선"
+    },
+    {
+      "slug": "olly",
+      "title": "OLLY",
+      "subtitle": "Kubernetes 기반 LLM 서비스 관측성 플랫폼",
+      "period": "2026-05 – 2026-06",
+      "category": "systems",
+      "kind": "4인 팀 · 로컬 MVP",
+      "summary": "로컬 Kubernetes(kind) 환경에서 LLM/RAG 서비스의 검색·모델 호출·오류를 요청 단위로 연결한 관측성 MVP입니다. 지표와 trace, 알림을 함께 확인해 지연과 실패 원인을 추적합니다.",
+      "tech": [
+        "Kubernetes (kind)",
+        "OpenTelemetry",
+        "Prometheus",
+        "Grafana",
+        "Jaeger",
+        "FastAPI",
+        "Docker",
+        "Ollama"
+      ],
+      "outcome": "팀은 5개 시나리오를 각 10회 실행해 주입한 지연과 오류가 해당 관측 구간에 나타나는 것을 확인했습니다.",
+      "links": [
+        {
+          "label": "프로젝트 저장소",
+          "url": "https://github.com/lee-y-ch/olly"
+        }
+      ],
+      "role": "문제 정의, 기존 솔루션 비교, 로컬 SLM 활용 검토와 검증 시나리오 설계를 맡았습니다. MVP 구현과 반복 실행 결과는 팀 공동 작업입니다.",
+      "sections": [
+        {
+          "title": "요청 안의 실행 단위를 추적",
+          "paragraphs": [
+            "전체 응답 시간만으로는 검색·모델 호출·후처리 중 어디에서 지연되는지 구분하기 어렵습니다.",
+            "팀은 Chat UI의 request_id와 trace_id를 대시보드·Jaeger·오류 알림에 연결해 한 요청의 실행 단위를 확인하는 MVP를 구현했습니다."
+          ],
+          "bullets": [
+            "검색과 모델 호출의 span 및 소요 시간 비교",
+            "요청별 토큰·비용 지표 확인",
+            "오류 상태를 유지한 추적과 Discord 알림 연결"
+          ]
+        },
+        {
+          "title": "반복 가능한 로컬 검증 범위 설정",
+          "paragraphs": [
+            "외부 API 비용과 호출 제한의 영향을 줄이는 개발 범위를 검토하며 로컬 SLM 활용안을 살폈습니다.",
+            "정상 흐름과 단계별 지연·토큰 증가·오류를 구분해 반복 실행하도록 검증 범위를 설계했습니다."
+          ],
+          "bullets": [
+            "지연을 주입한 단계의 span 증가 확인",
+            "시나리오별 지표 차이와 오류 요청 추적 확인",
+            "로컬 MVP 관측 흐름 검증이며 운영 환경 성능 개선율은 측정하지 않음"
+          ]
+        },
+        {
+          "title": "관측 데이터의 활용 경로",
+          "paragraphs": [
+            "FastAPI API 계측에서 수집한 요청 정보가 Prometheus 지표와 Jaeger 추적으로 이어지고, 실패 요청은 알림으로 연결됩니다.",
+            "팀은 단일 요청을 기준으로 지연·토큰·오류를 함께 확인하는 MVP를 구성했습니다. 제 기여는 문제 정의와 솔루션 비교, 개발 범위 검토 및 검증 시나리오 설계입니다."
+          ],
+          "bullets": [
+            "OpenTelemetry 기반 요청 흐름 계측",
+            "Prometheus·Grafana 지표와 Jaeger trace 결합",
+            "SLM·Discord 기반 알림 흐름 구성"
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/olly-architecture.png",
+        "width": 1920,
+        "height": 1080,
+        "label": "관측성 아키텍처",
+        "alt": "Chat UI부터 OpenTelemetry·Prometheus·Jaeger·Discord 알림으로 이어지는 OLLY 구조도",
+        "caption": "요청 처리를 관측 파이프라인과 분리하고 지표·trace·오류 알림을 연결한 구조입니다. 공개 최종 발표자료 6쪽의 팀 공동 산출물입니다.",
+        "source_url": "https://github.com/lee-y-ch/olly/blob/b0cdb00ade035b750ed7618bc401dd96ca013b85/presentation/OLLY_%EC%B5%9C%EC%A2%85%EB%B0%9C%ED%91%9C.pdf#page=6"
+      }
+    },
+    {
+      "slug": "sketch-to-spec",
+      "title": "SketchToSpec",
+      "subtitle": "손그림 입력에서 요구사항 명세와 화면 흐름을 생성하는 멀티모달 에이전트",
+      "period": "2025-11 – 2025-12",
+      "category": "ai",
+      "kind": "개인 프로젝트",
+      "summary": "손그림 UI·기능·텍스트 입력을 결합해 SRS 요구사항 명세서와 ASCII 화면 흐름을 생성하는 멀티모달 ReAct Agent 시스템입니다.",
+      "tech": [
+        "LangGraph",
+        "Streamlit",
+        "OpenCV",
+        "PyTorch",
+        "Qwen"
+      ],
+      "outcome": "UI 요소 감지와 LangGraph StateGraph 기반 계획 수정 루프를 포함한 멀티모달 ReAct Agent 파이프라인을 구축했습니다.",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/juhee0223/DEEPLEARNING_AI_AGENT"
+        }
+      ],
+      "role": "개인 프로젝트의 시스템 설계·구현",
+      "sections": [
+        {
+          "title": "입력에서 명세로",
+          "paragraphs": [
+            "손그림 UI, 기능 설명, 텍스트 입력을 함께 해석해 SRS 요구사항 명세와 ASCII 화면 흐름을 생성하도록 구성했습니다."
+          ],
+          "bullets": [
+            "OpenCV 기반 UI 요소 감지",
+            "멀티모달 입력 결합"
+          ]
+        },
+        {
+          "title": "계획 수정 루프",
+          "paragraphs": [
+            "LangGraph StateGraph 기반 Self-Healing(Plan Revision) 루프로 생성 결과를 바탕으로 계획을 수정하는 흐름을 구현했습니다."
+          ],
+          "bullets": [
+            "LangGraph 기반 ReAct Agent",
+            "Streamlit 기반 인터페이스",
+            "로컬 LLM Qwen 활용"
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/sketch-generated-srs.png",
+        "width": 971,
+        "height": 1054,
+        "label": "요구사항 생성 화면",
+        "alt": "SketchToSpec이 생성한 비기능 요구사항과 ASCII 화면 흐름",
+        "caption": "최종 보고서에 수록된 비기능 요구사항 명세와 ASCII 화면 흐름의 생성 예시입니다.",
+        "source_url": "",
+        "preview": {
+          "src": "assets/sketch-input-example.jpg",
+          "width": 745,
+          "height": 1168,
+          "alt": "SketchToSpec 저장소의 손그림 메시지 화면 입력 예시"
+        },
+        "preview_label": "손그림 UI 입력 예시",
+        "preview_layout": "sketch-detail"
+      }
+    },
+    {
+      "slug": "sun-date",
+      "title": "Sun(善)-Date",
+      "subtitle": "봉사와 만남을 연결하고 교내 범위로 구체화한 프로토타입",
+      "period": "2025-11",
+      "category": "service",
+      "kind": "팀 해커톤 · 프로토타입",
+      "summary": "봉사 인력 부족과 새로운 만남에 대한 수요를 연결한 소셜 네트워킹 아이디어를 제안하고, 교내를 대상으로 범위를 정해 구현·시연했습니다.",
+      "tech": [
+        "Django",
+        "Flutter",
+        "Java"
+      ],
+      "outcome": "팀이 프로토타입을 제작·시연해 EASYTHON 2025 우수상을 받았습니다.",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/day-e0n/sun_date"
+        }
+      ],
+      "role": "아이디어 제안, 팀원의 우려를 반영한 교내 대상 범위 조정, 기획서 반영과 프론트엔드 구현을 주로 맡았습니다.",
+      "sections": [
+        {
+          "title": "참여 동기와 신원 확인을 함께 고려",
+          "paragraphs": [
+            "봉사 인력 부족과 새로운 만남의 수요를 연결하는 서비스를 제안했습니다. 팀원들은 참여 동기와 신원 확인 문제를 우려했습니다.",
+            "저는 만남이 실제 봉사 참여로 이어질 수 있다는 기획 의도를 설명하고, 신원 확인과 구현 범위를 고려해 대상을 교내로 한정했습니다."
+          ]
+        },
+        {
+          "title": "기획에서 구현·시연까지",
+          "paragraphs": [
+            "논의한 내용을 기획서에 반영하고 프론트엔드 구현을 주로 맡았습니다. 팀은 프로토타입을 제작·시연해 EASYTHON 2025 우수상을 받았습니다.",
+            "결과는 해커톤 프로토타입과 수상이며, 실제 봉사 참여 증가나 운영 성과를 측정한 서비스는 아닙니다."
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/sundate-user-flow.png",
+        "width": 1440,
+        "height": 810,
+        "label": "사용자 흐름도",
+        "alt": "가입·상대방 선택·봉사 매칭·기관 전송으로 이어지는 Sun-Date 시나리오",
+        "caption": "EASYTHON 최종 발표자료의 사용자 시나리오입니다. 프로필 기반 상대방 선택부터 봉사 매칭과 기관 전송까지의 흐름을 담았습니다.",
+        "source_url": "https://github.com/day-e0n/sun_date"
+      }
+    },
+    {
+      "slug": "gamegc",
+      "title": "FTL Simulator / GameGC",
+      "subtitle": "Xilinx · Cosmos+ 기반 FTL·GC 성능 실험",
+      "period": "2025-10 – 2025-12",
+      "category": "systems",
+      "kind": "팀 프로젝트 · 연구",
+      "summary": "Xilinx·Cosmos+ 보드를 활용한 FTL 실험 프로젝트입니다. Greedy·Cost-Benefit GC 정책과 Incremental GC를 모방한 Pipeline 기반 GameGC 방식의 성능을 비교했습니다.",
+      "tech": [
+        "Xilinx",
+        "Cosmos+ OpenSSD",
+        "C",
+        "File I/O",
+        "Visualization"
+      ],
+      "outcome": "GC latency의 스파이크와 점진적 회수 패턴을 비교·분석했습니다.",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/day-e0n/ssp_team_project"
+        }
+      ],
+      "role": "팀 프로젝트",
+      "sections": [
+        {
+          "title": "GC 정책 구현과 비교",
+          "paragraphs": [
+            "C로 Greedy와 Cost-Benefit GC 정책을 구현하고, Incremental GC를 모방한 Pipeline 기반 GameGC와 성능을 비교했습니다."
+          ],
+          "bullets": [
+            "GC 정책별 동작 비교",
+            "파일 I/O 기반 실험"
+          ]
+        },
+        {
+          "title": "지연 패턴 분석",
+          "paragraphs": [
+            "GC latency에서 나타나는 스파이크와 점진적 회수 패턴을 시각화해 분석했습니다."
+          ],
+          "bullets": [
+            "성능 데이터 시각화",
+            "스토리지 GC 동작 탐구"
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/gamegc-xilinx-console.png",
+        "width": 2876,
+        "height": 1800,
+        "label": "Xilinx SDK 실험 화면",
+        "alt": "Xilinx SDK에서 Cost-Benefit GC의 victim 선택과 erase 로그를 확인하는 COSMOS+ 실험 화면",
+        "caption": "COSMOS+ 환경에서 Cost-Benefit GC의 실행 로그를 확인한 화면입니다. 저장소에 공개된 팀 실험 기록입니다.",
+        "source_url": "https://github.com/day-e0n/ssp_team_project/blob/main/cost_benefit_final_console.png"
+      }
+    },
+    {
+      "slug": "dacon",
+      "title": "DACON 고객 지원 등급 분류",
+      "subtitle": "고객 데이터 기반 지원 필요 수준 분류",
+      "period": "2025-09 – 2025-10",
+      "category": "ai",
+      "kind": "개인 프로젝트",
+      "summary": "고객 데이터를 기반으로 지원 필요 수준을 분류하고 feature engineering과 모델 성능 비교를 수행한 프로젝트입니다.",
+      "tech": [
+        "Python",
+        "scikit-learn",
+        "TensorFlow",
+        "XGBoost"
+      ],
+      "outcome": "F1 Score 상위 10%를 달성했습니다.",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/juhee0223/DACON-Customer-Support-Classification"
+        }
+      ],
+      "role": "개인 프로젝트의 데이터 전처리·모델 비교 실험",
+      "sections": [
+        {
+          "title": "분류 문제 구성",
+          "paragraphs": [
+            "고객 데이터에서 지원 필요 수준을 분류하는 AI 모델을 개발했습니다."
+          ],
+          "bullets": [
+            "Feature engineering",
+            "분류 모델 학습"
+          ]
+        },
+        {
+          "title": "모델 비교",
+          "paragraphs": [
+            "scikit-learn, TensorFlow, XGBoost 기반으로 모델별 성능을 비교했습니다."
+          ],
+          "bullets": [
+            "F1 Score 기준 평가",
+            "상위 10% 기록"
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/dacon-feature-heatmap.png",
+        "width": 2714,
+        "height": 2519,
+        "label": "고객 특성 상관관계 분석",
+        "alt": "나이·이용 기간·결제 간격 등 원본 고객 특성 간 상관계수 히트맵",
+        "caption": "원본 고객 특성 간 관계를 살펴본 탐색적 데이터 분석 결과입니다.",
+        "source_url": "https://github.com/juhee0223/DACON-Customer-Support-Classification"
+      }
+    },
+    {
+      "slug": "bird-repeller",
+      "title": "AI Bird Repeller",
+      "subtitle": "조류 탐지와 퇴치음 재생을 연결한 프로토타입",
+      "period": "2025-05",
+      "category": "ai",
+      "kind": "팀 해커톤 · 프로토타입",
+      "summary": "농작물에 피해를 주는 조류를 감지해 퇴치음을 재생하고, 웹에서 감지 이미지와 출력 기록을 확인하는 아이디어를 제안했습니다.",
+      "tech": [
+        "Python",
+        "Threading",
+        "YOLOv5",
+        "BirdNET"
+      ],
+      "outcome": "팀이 조류 탐지와 소리 재생을 연결한 프로토타입을 완성해 KHUTHON 2025 우수상을 받았습니다.",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/JustYOLO/Getout_Bird"
+        }
+      ],
+      "role": "아이디어 제안, 퇴치음 조사·음원 제작, API 요청에 따른 소리 재생 기능 구현, 발표자료 제작과 발표를 맡았습니다. 조류 탐지는 팀 공동 산출물입니다.",
+      "sections": [
+        {
+          "title": "농업 현장의 문제를 탐지·재생 흐름으로",
+          "paragraphs": [
+            "농업의 기술화를 주제로 한 해커톤에서 농작물을 먹는 유해조류 문제에 착안했습니다. 새를 감지하면 퇴치음을 재생하고 웹에서 감지 이미지와 출력 기록을 확인하는 방안을 제안했습니다."
+          ]
+        },
+        {
+          "title": "내가 맡은 소리 재생과 발표",
+          "paragraphs": [
+            "퇴치음을 조사하고 음원을 제작했으며 API 요청에 따라 소리를 재생하는 기능을 구현했습니다. 팀의 조류 탐지 결과와 재생 기능을 연결하고 발표자료 제작과 발표를 맡았습니다.",
+            "팀은 프로토타입을 완성해 KHUTHON 2025 우수상을 받았습니다. 실제 농가에서의 조류 피해 감소를 검증한 결과는 아닙니다."
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/bird-detection.jpg",
+        "width": 792,
+        "height": 448,
+        "label": "조류 탐지 결과",
+        "alt": "테스트 이미지에서 Magpie로 분류된 까치와 탐지 bounding box",
+        "caption": "저장소의 테스트 이미지에서 까치를 Magpie로 탐지한 출력 예시입니다.",
+        "source_url": "https://github.com/JustYOLO/Getout_Bird/blob/main/watchbird/test_image/frame_result_10.jpg"
+      }
+    },
+    {
+      "slug": "rocksdb",
+      "title": "RocksDB Compaction Analyzer",
+      "subtitle": "Compaction Style에 따른 저장 엔진 성능 변화 분석",
+      "period": "2025-01 – 2025-05",
+      "category": "systems",
+      "kind": "연구 프로젝트 · 논문 제1저자",
+      "summary": "RocksDB의 Leveled·Universal·FIFO Compaction Style에 따른 성능을 자동 측정·분석·시각화한 연구입니다.",
+      "tech": [
+        "RocksDB DBBench",
+        "Bash",
+        "Python"
+      ],
+      "outcome": "KCC 2025에서 제1저자로 논문을 발표했습니다.",
+      "links": [
+        {
+          "label": "KCC 2025",
+          "url": "https://www.kiise.or.kr/conference/kcc/2025/"
+        }
+      ],
+      "role": "비교 실험·통계 수집·분석, 논문 제1저자 작성 및 KCC 2025 발표",
+      "sections": [
+        {
+          "title": "동일 조건의 세 가지 Compaction Style 비교",
+          "paragraphs": [
+            "1천만 건, 값 4,096B, 랜덤 쓰기 후 랜덤 읽기 조건에서 Leveled·Universal·FIFO를 비교했습니다."
+          ],
+          "bullets": [
+            "db_bench와 statistics로 측정",
+            "처리율·Write Amplification Factor·조회 성공 횟수 함께 해석"
+          ]
+        },
+        {
+          "title": "처리율과 데이터 보존을 함께 해석",
+          "paragraphs": [
+            "Leveled는 Universal보다 읽기가 빨랐지만 쓰기 증폭이 컸고, Universal은 읽기와 쓰기의 절충안으로 해석했습니다. FIFO는 쓰기 부담이 작지만 조회 성공 횟수가 낮아 높은 읽기 처리율만으로 조회 성능이 좋다고 볼 수 없었습니다."
+          ],
+          "bullets": [
+            "Leveled: 읽기 84,097 ops/s · WAF 4.50 · Hit 7,134,622회",
+            "Universal: 읽기 64,667 ops/s · WAF 3.43 · Hit 7,005,533회",
+            "FIFO: 읽기 2,603,357 ops/s · WAF 1.56 · Hit 5,797회"
+          ]
+        }
+      ],
+      "visual": {
+        "src": "assets/rocksdb-read-hits.jpg",
+        "width": 1564,
+        "height": 863,
+        "label": "논문 실험 그래프",
+        "alt": "Leveled·Universal·FIFO 정책별 Get key 조회 성공 횟수를 비교한 로그 축 그래프",
+        "caption": "KCC 2025 논문 그림 5. 실제 조회 성공 횟수를 비교했습니다. FIFO는 오래된 데이터를 삭제하므로 처리율과 데이터 보존 특성을 함께 해석했습니다.",
+        "source_url": "https://www.kiise.or.kr/conference/kcc/2025/"
+      }
+    }
+  ],
+  "publications": [
+    {
+      "title": "OSTEP 교재 기반 임베딩 모델의 구조적 특성과 검색 증강 생성 성능 비교 연구",
+      "venue": "정보과학회 컴퓨팅의 실제 논문지",
+      "year": "2026-09-01",
+      "authors": "박주희 / 공동저자",
+      "description": "운영체제 교재의 개념이 임베딩 공간에 어떻게 표현되는지 분석하고, 모델·인덱스 선택에 따른 RAG 응답 품질과 저장 비용을 비교했습니다.",
+      "distinction": "국내 등재학술지 게재 / 제32권 제9호 / pp. 387–393",
+      "links": [
+        {
+          "label": "선행 WDSC 연구",
+          "url": "#publication-wdsc"
+        },
+        {
+          "label": "연구 저장소",
+          "url": "https://github.com/DKU-StarLab/OSTEP_RAG"
+        }
+      ],
+      "id": "publication-journal",
+      "abstract": [
+        {
+          "label": "연구의 확장",
+          "text": "WDSC 2025에서 우수논문상을 받은 벡터 공간 시각화 연구를 확장해, 임베딩 모델의 구조적 특성과 RAG 성능을 비교한 학술지 논문입니다. 아래 실험과 수치는 확장 논문의 공동연구 결과입니다."
+        },
+        {
+          "label": "연구 목적",
+          "text": "OSTEP의 가상화·병행성·영속성 개념이 벡터 공간에서 구분되는지, 이 구조가 검색과 답변 품질에 어떻게 연결되는지 살폈습니다."
+        },
+        {
+          "label": "실험 방법",
+          "text": "교재를 5문장 단위·20% 중첩 청크로 나누고 E5-Small·Base·Large를 PCA와 거리 분석으로 비교했습니다. ANNOY·FAISS(HNSW·IVF-Flat) 인덱스와 Llama-3.1-8B-Instruct를 조합해 10개 질의응답을 RAGAS로 평가했습니다."
+        },
+        {
+          "label": "주요 결과",
+          "text": "실험 범위에서 HNSW + E5-Large가 Faithfulness 0.897, Context Precision 0.852로 가장 높았습니다. 모델 규모가 커질수록 개념 군집이 뚜렷했지만, Large의 평균 인덱스 크기는 17.5MB로 Small(7.2MB)의 약 2.4배였습니다. 소규모 평가에서 품질과 저장 비용의 차이를 확인했습니다."
+        },
+        {
+          "label": "게재 정보",
+          "text": "한국정보과학회(Korean Institute of Information Scientists and Engineers), 2026-09-01 게재. ISSN 2383-6318(Print) / 2383-6326(Online)."
+        }
+      ]
+    },
+    {
+      "title": "운영체제 교재기반 RAG시스템 구축",
+      "venue": "글통",
+      "year": "2026",
+      "authors": "김보승, 박주희, 최종무, 전광일, 박민규",
+      "description": "운영체제 교재 텍스트를 바탕으로 RAG 시스템을 구축하는 과정을 다룬 교육용 저서입니다.",
+      "distinction": "공동저자 · 비매품 단행본 · ISBN 979-11-94546-10-8",
+      "links": [],
+      "id": "publication-rag-book"
+    },
+    {
+      "id": "publication-ksc",
+      "title": "SSD 병렬성을 활용한 할당 정책에 따른 Bandwidth 및 Latency 분석",
+      "venue": "KSC 2025",
+      "year": "2025",
+      "authors": "위다연, 박주희, 최건희, 이제연, 최종무",
+      "description": "실제 Cosmos+ OpenSSD에서 할당 정책에 따른 대역폭과 지연시간을 비교해, 순차 읽기·쓰기에 적합한 병렬 자원 활용 방식을 분석했습니다.",
+      "distinction": "공동저자 · KSC 2025 게재 · pp. 1704–1706",
+      "links": [],
+      "abstract": [
+        {
+          "label": "연구 목적",
+          "text": "SSD 내부의 Channel·Way·Page를 활용하는 순서에 따라 순차 읽기·쓰기 성능이 어떻게 달라지는지 살폈습니다. 동일한 하드웨어에서 워크로드별 할당 정책 선택의 근거를 제시하고자 했습니다."
+        },
+        {
+          "label": "실험 방법",
+          "text": "4개 Channel·2개 Way의 Cosmos+ OpenSSD에 Channel·Way·Page 우선 할당 정책을 적용했습니다. fio로 순차 읽기·쓰기를 수행하고 I/O Depth 1·2·4·8에서 대역폭과 지연시간을 비교했습니다."
+        },
+        {
+          "label": "주요 결과",
+          "text": "실험 범위에서 순차 쓰기는 Channel 우선, 순차 읽기는 Way 우선 정책이 가장 유리했습니다. Page 우선은 병렬성을 활용하지 못해 I/O Depth가 높아져도 대역폭 증가가 작고 지연이 커졌습니다. 워크로드에 따른 정책 선택이 필요하며, 동적 정책 전환은 후속 연구로 제안했습니다."
+        }
+      ]
+    },
+    {
+      "title": "벡터 공간 구조의 특성 시각화 및 의미론적 해석: OSTEP 교재 기반 사례 연구",
+      "venue": "WDSC 2025",
+      "year": "2025",
+      "authors": "김보승, 박주희, 유시환, 최종무, 박민규, 전광일",
+      "description": "OSTEP 교재의 임베딩 공간이 운영체제 개념 간 관계를 어떻게 나타내는지 살펴본 공동연구입니다. 키워드별 벡터 분포의 시각화와 의미 해석에 참여했습니다.",
+      "distinction": "공동연구 · WDSC 2025 우수논문상",
+      "links": [
+        {
+          "label": "학회",
+          "url": "https://sites.google.com/view/wdsc2025/"
+        },
+        {
+          "label": "연구 저장소",
+          "url": "https://github.com/DKU-StarLab/OSTEP_RAG"
+        },
+        {
+          "label": "확장 학술지 논문",
+          "url": "#publication-journal"
+        }
+      ],
+      "id": "publication-wdsc",
+      "abstract": [
+        {
+          "label": "연구 주제",
+          "text": "운영체제 교재의 개념이 임베딩 공간에 어떤 관계와 분포로 나타나는지 살폈습니다. 수치뿐 아니라 교재의 의미 구조와 연결해 결과를 해석하는 연구입니다."
+        },
+        {
+          "label": "개인 기여",
+          "text": "공동연구에서 구축한 RAG를 활용해 키워드별 벡터 분포를 시각화했습니다. 여러 영역을 잇는 개념과 특정 영역에 모이는 개념을 교재의 개념 구분과 비교해 해석하고 자료를 정리했습니다."
+        },
+        {
+          "label": "결과",
+          "text": "WDSC 2025 우수논문상을 받았습니다. 이후 임베딩 모델과 RAG 성능 비교로 연구를 확장했으며, 확장 논문은 2026년 9월 정보과학회 컴퓨팅의 실제 논문지에 게재되었습니다."
+        }
+      ]
+    },
+    {
+      "title": "RocksDB에서 Compaction Style에 따른 성능 변화 분석",
+      "venue": "KCC 2025",
+      "year": "2025",
+      "authors": "박주희, 신호진, Guangxun Zhao, 최종무",
+      "description": "RocksDB의 Leveled·Universal·FIFO Compaction을 비교하고, 처리율만으로는 드러나지 않는 쓰기 비용과 실제 데이터 조회 성공 여부를 함께 분석했습니다.",
+      "distinction": "제1저자 · KCC 2025 발표 · pp. 2500–2502",
+      "links": [
+        {
+          "label": "학회",
+          "url": "https://www.kiise.or.kr/conference/kcc/2025/"
+        },
+        {
+          "label": "RocksDB 프로젝트",
+          "url": "projects/rocksdb.html"
+        }
+      ],
+      "id": "publication-kcc",
+      "abstract": [
+        {
+          "label": "연구 목적",
+          "text": "SST 파일을 병합·정리하는 Compaction 방식이 읽기·쓰기 성능에 미치는 영향을 분석했습니다. 처리율과 지연시간뿐 아니라 쓰기 증폭(WAF), 쓰기 정체(Write Stall), 실제 조회 성공 횟수를 함께 확인해 정책별 장단점을 비교했습니다."
+        },
+        {
+          "label": "실험 방법",
+          "text": "Intel Core i7-1360P·메모리 15GB·Samsung 1TB SSD·Ubuntu 22.04.5 LTS 환경에서 RocksDB의 db_bench를 사용했습니다. 동일 조건으로 값 크기 4KB의 데이터 1,000만 건을 랜덤 쓰기한 뒤 랜덤 읽기를 수행하고, statistics 옵션으로 내부 지표를 수집했습니다."
+        },
+        {
+          "label": "쓰기 결과",
+          "text": "쓰기 작업 시간은 Leveled 1,608.1초, Universal 1,091초, FIFO 533.7초였고, WAF는 각각 4.50·3.43·1.56이었습니다. Universal은 Leveled보다 Compaction 시간이 약 39.8%, Write Stall 시간이 약 48.5% 짧았습니다. FIFO는 파일 병합·정렬을 하지 않아 쓰기 비용이 가장 낮았습니다."
+        },
+        {
+          "label": "읽기 결과",
+          "text": "Leveled의 읽기 처리율은 약 8.41만 ops/s로 Universal의 약 6.47만 ops/s보다 약 1.3배 높았습니다. FIFO는 약 260만 ops/s로 측정됐지만, 실제 조회 성공 횟수는 5,797회로 Leveled 7,134,622회·Universal 7,005,533회보다 약 99.92% 적었습니다. 오래된 데이터를 삭제하는 FIFO의 특성 때문에 높은 처리율을 실제 데이터 조회 성능으로 해석하기 어려웠습니다."
+        },
+        {
+          "label": "의미·한계",
+          "text": "읽기 중심 작업에서는 Leveled, 쓰기 비용과 읽기 성능의 균형에서는 Universal의 이점을 확인했습니다. FIFO는 데이터 보존 요구까지 고려해야 하며, 처리율·지연시간과 조회 성공 여부를 함께 평가해야 합니다. 계층별 정책을 조합하는 Tiered Compaction과 읽기·쓰기 혼합 워크로드 실험은 후속 연구로 제안했습니다."
+        }
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "date": "2026-08-22",
+      "title": "의료 특화 파운데이션 모델 해커톤 벤치마크상",
+      "organization": "루닛 (후원: 과학기술정보통신부 · NIPA)",
+      "project": "AIM팀 / Conquer Health",
+      "url": "projects/conquer-health.html",
+      "link_label": "프로젝트 읽기",
+      "summary": "의료 특화 모델의 건강 상담 응답 규칙과 HealthBench 평가 하네스 개선."
+    },
+    {
+      "date": "2025-11-22",
+      "title": "EASYTHON 2025 해커톤 우수상",
+      "organization": "단국대학교 SW중심사업단",
+      "project": "Sun(善)-Date",
+      "url": "projects/sun-date.html",
+      "link_label": "프로젝트 읽기",
+      "summary": "봉사와 만남을 연결한 아이디어를 교내 대상 프로토타입으로 구현·시연했습니다."
+    },
+    {
+      "date": "2025-08-20",
+      "title": "WDSC 2025 우수논문상",
+      "organization": "한국정보과학회 정보보안 및 고신뢰컴퓨팅연구회",
+      "project": "OSTEP 벡터 공간 분석 연구",
+      "url": "#publication-wdsc",
+      "link_label": "논문 요약 읽기",
+      "summary": "OSTEP 교재의 키워드별 벡터 분포를 시각화하고 운영체제 개념과 연결해 해석했습니다.",
+      "organization_source": "https://sites.google.com/view/wdsc2025/home"
+    },
+    {
+      "date": "2025-05-10",
+      "title": "KHUTHON 2025 해커톤 우수상",
+      "organization": "경희대학교 AI·SW 교육단 · 소프트웨어융합대학",
+      "project": "AI Bird Repeller",
+      "url": "projects/bird-repeller.html",
+      "link_label": "프로젝트 읽기",
+      "summary": "유해조류 탐지와 퇴치음 재생을 연결한 프로토타입을 제작·시연했습니다.",
+      "organization_source": "https://thon.khlug.org/about/2025"
+    }
+  ],
+  "activities": [
+    {
+      "title": "몰입본능",
+      "period": "2022-12 – 2025-04",
+      "role": "아르바이트",
+      "focus": "반복 안내 업무를 작은 실험으로 개선",
+      "bullets": [
+        "70명 이상 학생을 관리하며 안내 문구를 찾아 복사하는 반복 업무의 입력 지연과 오타를 발견했습니다.",
+        "매크로 키보드를 제안하고 개인 장비로 먼저 시험한 뒤 동료들과 공유했습니다.",
+        "회사는 당시 2개 지점에 도입한 뒤 확장된 전 지점에서도 사용했습니다. 제 기여는 개선 제안과 초기 시험·공유입니다."
+      ]
+    },
+    {
+      "title": "단국대학교 SW중심대학사업단 서포터즈",
+      "period": "2025-09 – 2026-08",
+      "role": "교내활동",
+      "focus": "학생이 찾아볼 정보를 기획하고 행사 운영을 지원",
+      "bullets": [
+        "학생 입장에서 궁금한 행사·장학 정보를 골라 카드뉴스를 제작하고 유용한 내용이 먼저 보이도록 구성했습니다.",
+        "실험 장비 대여와 교내 행사 운영을 지원하고 경진대회 발표장 MC를 맡았습니다.",
+        "활동 기간 계정 팔로워는 수십 명에서 약 450명으로 늘었습니다. 계정 전체의 성과입니다."
+      ]
+    },
+    {
+      "period": "2025-07 – 2026-02",
+      "title": "단국대학교 시스템소프트웨어 Lab",
+      "role": "학부연구생",
+      "focus": "RAG와 저장장치 공동연구",
+      "bullets": [
+        "운영체제 교재 기반 RAG 연구의 키워드 시각화와 결과 해석에 참여 · WDSC 2025 우수논문상",
+        "Cosmos+ OpenSSD의 할당 정책별 대역폭·지연시간 분석 공동연구 참여 · KSC 2025 논문 게재",
+        "BigQuery에서 받은 데이터를 Text-to-SQL 도구의 입력 형식에 맞춰 JSON으로 직접 전처리·가공"
+      ],
+      "links": [
+        {
+          "label": "WDSC 논문 요약",
+          "url": "#publication-wdsc"
+        },
+        {
+          "label": "KSC 논문 요약",
+          "url": "#publication-ksc"
+        }
+      ]
+    },
+    {
+      "period": "2025-01 – 2025-07",
+      "title": "단국대학교 시스템소프트웨어 Lab 스터디",
+      "role": "연구실 스터디",
+      "focus": "RocksDB 성능 비교와 KCC 2025 논문 발표",
+      "bullets": [
+        "스터디와 논문 지도를 받으며 Leveled·Universal·FIFO Compaction 비교",
+        "쓰기 증폭·읽기 처리율·실제 조회 성공 횟수를 함께 확인해 각 방식의 특성과 한계 분석",
+        "분석 결과를 논문으로 정리하고 KCC 2025에서 제1저자로 발표"
+      ],
+      "links": [
+        {
+          "label": "KCC 논문 요약",
+          "url": "#publication-kcc"
+        },
+        {
+          "label": "RocksDB 프로젝트",
+          "url": "projects/rocksdb.html"
+        }
+      ]
+    }
+  ],
+  "credentials": [
+    {
+      "category": "자격증",
+      "title": "정보처리기사",
+      "detail": "한국산업인력공단",
+      "date": "2026-09"
+    },
+    {
+      "category": "어학",
+      "title": "TOEIC 790점",
+      "detail": "영어 · 응시일",
+      "date": "2025-11-09"
+    }
+  ]
+}
