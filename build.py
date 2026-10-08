@@ -40,7 +40,7 @@ def highlighted(text, slug):
     if not pattern: return e(text)
     return re.sub(pattern, lambda match: f'<strong class="detail-highlight">{match.group()}</strong>', e(text))
 
-def shell(title, body, depth='', description='기획부터 풀스택 개발과 실제 운영까지. AI를 활용해 구현하고 사용자 흐름을 직접 확인하는 박주희의 모두닥 지원 포트폴리오.', canonical=''):
+def shell(title, body, depth='', description='서비스 기획과 개발, 배포·운영 경험부터 AI 응용과 시스템 연구까지. 박주희의 프로젝트와 문제 해결 과정을 소개하는 포트폴리오.', canonical=''):
     home = depth+'index.html' if depth else ''
     return f'''<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,11 +51,11 @@ def shell(title, body, depth='', description='기획부터 풀스택 개발과 �
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{depth}styles.css?v={STYLE_VERSION}"><script src="{depth}site.js?v={SCRIPT_VERSION}" defer></script></head>
 <body><a class="skip-link" href="#main">본문으로 바로가기</a>
-<header class="site-header"><div class="nav-wrap"><a class="brand" href="{depth}index.html" aria-label="박주희 포트폴리오 홈"><span>박주희</span><small>Full-stack Engineer</small></a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="{depth}index.html" aria-label="박주희 포트폴리오 홈"><span>박주희</span><small>Portfolio</small></a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">메뉴 <span aria-hidden="true">☰</span></button>
 <nav id="site-nav" aria-label="주요 메뉴"><a href="{home}#projects">프로젝트</a><a href="{home}#research">논문·출판</a><a href="{home}#awards">수상</a><a href="{home}#activities">활동</a><a href="{home}#credentials">자격증·어학</a><a class="nav-contact" href="{home}#contact">연락처</a></nav></div></header>
 {body}
-<footer class="site-footer"><div class="container footer-inner"><p>박주희 | Full-stack Engineer 포트폴리오<br><span>© 2026 Park Juhee</span></p><a href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#main">맨 위로 ↑</a></div></footer>
+<footer class="site-footer"><div class="container footer-inner"><p>박주희 | 포트폴리오<br><span>© 2026 Park Juhee</span></p><a href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#main">맨 위로 ↑</a></div></footer>
 </body></html>'''
 
 def project_image(v, depth=''):
@@ -89,7 +89,7 @@ def home():
         activities+=f'''<article class="activity"><div class="eyebrow">{role}{e(a['period'])}</div><h3>{e(a['title'])}</h3>{focus}<ul>{''.join(f'<li>{e(b)}</li>' for b in a['bullets'])}</ul>{related}</article>'''
     credentials=''.join(f'''<article class="credential"><p class="eyebrow">{e(c["category"])}</p><h3>{e(c["title"])}</h3><p class="credential-detail">{e(c["detail"])} · <time>{e(c["date"])}</time></p></article>''' for c in DATA["credentials"])
     return f'''<main id="main">
-<section class="hero container"><img class="hero-portrait" src="assets/juhee-portrait.jpg" alt="박주희 프로필 사진" width="1169" height="1712" fetchpriority="high"><p class="eyebrow">FULL-STACK ENGINEER · 모두닥 지원 포트폴리오</p><h1>만든 서비스가<br><span class="accent-text">실제로 쓰일 때까지.</span></h1><p class="hero-description">사용자와 운영자의 요구를 정리하고,<br>AI를 활용한 화면·서버 구현부터 배포와 운영 후 개선까지 이어갑니다.</p><div class="hero-actions"><a class="text-link" href="#projects">프로젝트 살펴보기 ↓</a><a class="text-link" href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></section>
+<section class="hero container"><img class="hero-portrait" src="assets/juhee-portrait.jpg" alt="박주희 프로필 사진" width="1169" height="1712" fetchpriority="high"><p class="eyebrow">박주희 포트폴리오</p><h1>만든 서비스가<br><span class="accent-text">실제로 쓰일 때까지.</span></h1><p class="hero-description">사용자와 운영자의 요구를 정리하고,<br>AI를 활용한 화면·서버 구현부터 배포와 운영 후 개선까지 이어갑니다.</p><div class="hero-actions"><a class="text-link" href="#projects">프로젝트 살펴보기 ↓</a><a class="text-link" href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></section>
 <section id="projects" class="section container"><div class="section-heading"><div><h2>프로젝트 <span class="section-count">9</span></h2></div><p>서비스를 완성한 경험과 근거를 바탕으로 판단한 경험.<br>단짠과 의료 AI 해커톤을 대표 사례로 소개합니다.</p></div><div class="filter-row"><div class="filters" role="group" aria-label="프로젝트 분야 필터"><button type="button" data-filter="all" class="active" aria-pressed="true">전체 <span>9</span></button><button type="button" data-filter="service" aria-pressed="false">서비스</button><button type="button" data-filter="ai" aria-pressed="false">AI 응용</button><button type="button" data-filter="systems" aria-pressed="false">시스템 연구</button></div><p class="project-count" role="status" aria-live="polite">9개의 프로젝트</p></div><div class="project-group"><h3 class="project-group-title">대표 프로젝트 <span>서비스 완성과 문제 해결</span></h3><div class="project-grid featured-grid">{featured_html}</div></div><div class="project-group"><h3 class="project-group-title">더 살펴볼 경험 <span>관측성 · AI 응용 · 시스템 실험</span></h3><div class="project-grid supporting-grid">{supporting_html}</div></div></section>
 <section id="research" class="section research-section"><div class="container"><div class="section-heading"><div><h2>논문 · 출판 <span class="section-count">{len(DATA["publications"])}</span></h2></div><p>스토리지 성능 분석과 텍스트 임베딩 연구,<br>그리고 운영체제 교재 기반 RAG 저서.</p></div><div class="publication-list">{pubs}</div></div></section>
 <section id="awards" class="section container"><div class="section-heading"><div><h2>수상 <span class="section-count">4</span></h2></div><p>해커톤에서의 실행과 연구의 성과.</p></div><div class="award-list">{awards}</div></section>
@@ -118,7 +118,7 @@ def detail(p,i):
     nxt=DATA['projects'][(i+1)%len(DATA['projects'])]
     return f'''<main id="main"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><div><p class="eyebrow">{e(CATS[p['category']])}</p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(p['subtitle'])}</p><div class="case-meta"><span>{e(p['period'])}</span><span>{e(p['kind'])}</span></div>{award_summary}<p class="case-summary">{e(p['summary'])}</p>{status}<div class="pub-links">{links(p.get('primary_links', p['links']))}</div></div></section><div class="case-overview"><div><span class="eyebrow">기여와 역할</span><p>{e(p['role'])}</p></div><div><span class="eyebrow">결과</span><p>{highlighted(p['outcome'],p['slug'])}</p></div><div><span class="eyebrow">사용 기술</span><div class="tech-tags">{tags(p['tech'])}</div></div></div><div class="case-layout"><aside class="case-toc"><span class="eyebrow">목차</span>{nav}<a href="#evidence">관련 자료</a></aside><div class="case-body">{project_visual(p)}{body_sections}{gallery}<section id="evidence" class="case-evidence"><p class="eyebrow">관련 자료</p><h2>프로젝트 자료 및 구현 근거</h2><div class="evidence-links">{links(p['links'])}</div></section></div></div><nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
 
-(ROOT/'index.html').write_text(shell('Full-stack Engineer Portfolio', home()))
+(ROOT/'index.html').write_text(shell('포트폴리오', home()))
 (ROOT/'projects').mkdir(exist_ok=True)
 for i,p in enumerate(DATA['projects']):
     (ROOT/'projects'/f'{p["slug"]}.html').write_text(shell(p['title'],detail(p,i),'../',p['summary'],f'projects/{p["slug"]}.html'))

@@ -1,6 +1,6 @@
-# Park Juhee · Full-stack Engineer Portfolio
+# Park Juhee · Portfolio
 
-[모두닥 지원 포트폴리오](https://juhee0223.github.io/modoodoc-portfolio/)
+[박주희 포트폴리오](https://juhee0223.github.io/modoodoc-portfolio/)
 
 기획·풀스택 개발·실서비스 운영, AI 도구를 활용한 구현과 직접 확인 경험을 소개합니다.
 단짠과 의료 AI 해커톤을 대표 사례로 구성했습니다.
