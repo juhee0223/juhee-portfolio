@@ -5,6 +5,7 @@ from html import escape
 import json
 import re
 from hashlib import sha256
+from decimal import Decimal
 
 ROOT = Path(__file__).parent
 DATA = json.loads((ROOT / 'content.json').read_text())
@@ -107,7 +108,11 @@ def detail(p,i):
         status = f'<p class="case-status">{e(s["status"])}</p>' if s.get('status') else ''
         flow = '<div class="decision-flow" aria-label="과정 설명">'+''.join(f'<div><span class="flow-index">{k+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p></div>' for k,step in enumerate(s['steps']))+'</div>' if s.get('steps') else ''
         metrics = '<dl class="result-metrics">'+''.join(f'<div><dt>{e(m["label"])}</dt><dd>{e(m["value"])}</dd></div>' for m in s['metrics'])+'</dl>' if s.get('metrics') else ''
-        body_sections+=f'<section class="case-section" id="section-{j}"><div><h2>{e(s["title"])}</h2>{status}{paragraphs}{bullets}{flow}{metrics}</div></section>'
+        comparison = ''
+        if s.get('score_comparison'):
+            rows = ''.join(f'<tr><th scope="row">{e(row["round"])}</th><td class="aim-score">{e(row["aim"])}</td><td>{e(row["runner_up"])}</td><td>{Decimal(row["aim"]) - Decimal(row["runner_up"]):+.2f}</td></tr>' for row in s['score_comparison'])
+            comparison = f'<div class="score-comparison"><table><caption>최종 상위 2팀의 라운드별 점수 (점)</caption><thead><tr><th scope="col">평가</th><th scope="col">AIM · 1위</th><th scope="col">2위 팀</th><th scope="col">차이</th></tr></thead><tbody>{rows}</tbody></table><p class="score-note">{e(s["score_note"])}</p></div>'
+        body_sections+=f'<section class="case-section" id="section-{j}"><div><h2>{e(s["title"])}</h2>{status}{paragraphs}{bullets}{flow}{metrics}{comparison}</div></section>'
     gallery=''
     if p['slug']=='danzzan':
         gallery='''<section class="case-gallery"><div class="eyebrow">서비스 화면</div><h2>예매 안내와 동의 확인</h2><div class="phone-gallery"><figure><a href="../assets/danzzan-consent.png" target="_blank" rel="noopener"><img src="../assets/danzzan-consent.png" alt="단짠 예매 안내와 필수 동의 확인 화면" loading="lazy" width="941" height="1672"></a><figcaption>예매 안내와 필수 동의 확인 · 팀 공동 산출물</figcaption></figure></div></section>'''

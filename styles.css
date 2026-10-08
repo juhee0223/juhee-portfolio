@@ -312,3 +312,18 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
   .case-award { display: grid; grid-template-columns: auto minmax(0, 1fr); }
   .case-award time { grid-column: 2; }
 }
+
+/* Final benchmark comparison: rankings refer to the final average. */
+.score-comparison { margin-top: 28px; }
+.score-comparison table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.score-comparison caption { text-align: left; margin-bottom: 12px; font-weight: 600; }
+.score-comparison th, .score-comparison td { padding: 12px 10px; border-bottom: 1px solid var(--line); text-align: right; }
+.score-comparison th:first-child { text-align: left; }
+.score-comparison thead { color: var(--muted); }
+.score-comparison .aim-score { color: var(--accent); font-weight: 700; }
+.score-comparison tbody tr:last-child { background: #eff6fc; font-weight: 700; }
+.score-comparison .score-note { font-size: 12px; color: var(--muted); line-height: 1.8; margin-top: 12px; }
+@media (max-width: 600px) {
+  .score-comparison table { font-size: 12px; }
+  .score-comparison th, .score-comparison td { padding: 10px 5px; }
+}
