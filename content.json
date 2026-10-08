@@ -214,7 +214,8 @@
           "label": "기존 운영 URL (현재 운영 종료)",
           "url": "https://danfesta2026.yaaksok.com/"
         }
-      ]
+      ],
+      "hero_highlight": "봄축제 팀 성과 / 가입자 6,063명 · 티켓 3,500장 매진"
     },
     {
       "slug": "conquer-health",
@@ -340,7 +341,20 @@
         "caption": "해커톤의 구현안 비교, 개선 방향 제안과 팀 공동 작업을 정리한 설명용 도식입니다.",
         "source_url": ""
       },
-      "status": "의료 대화 벤치마크 과제 / L2-preview 기반 응답 시스템 개선"
+      "hero_highlight": "최종 평가 14팀 중 1위 · 평균 46.51점",
+      "hero_subtitle": "의료 AI 응답 규칙 개선과 평가",
+      "hero_summary": "루닛 L2-preview 기반 의료 응답의 품질을 비교하고, 평가 기준을 검토해 응답 지침을 공동 개선했습니다.",
+      "hero_period": "2026.08",
+      "primary_links": [
+        {
+          "label": "프로젝트 저장소",
+          "url": "https://github.com/Hackathon-AIM/health-conquer-submission"
+        },
+        {
+          "label": "루닛 공식 수상 기사",
+          "url": "https://www.lunit.io/ko/media-hub/루닛-국가과제-ai-모델-활용-첫-해커톤-성료-개발자/"
+        }
+      ]
     },
     {
       "slug": "olly",
@@ -414,7 +428,8 @@
         "alt": "Chat UI부터 OpenTelemetry·Prometheus·Jaeger·Discord 알림으로 이어지는 OLLY 구조도",
         "caption": "요청 처리를 관측 파이프라인과 분리하고 지표·trace·오류 알림을 연결한 구조입니다. 공개 최종 발표자료 6쪽의 팀 공동 산출물입니다.",
         "source_url": "https://github.com/lee-y-ch/olly/blob/b0cdb00ade035b750ed7618bc401dd96ca013b85/presentation/OLLY_%EC%B5%9C%EC%A2%85%EB%B0%9C%ED%91%9C.pdf#page=6"
-      }
+      },
+      "hero_highlight": "지연·오류 등 5개 시나리오, 각 10회 검증"
     },
     {
       "slug": "sketch-to-spec",
@@ -478,7 +493,8 @@
         },
         "preview_label": "손그림 UI 입력 예시",
         "preview_layout": "sketch-detail"
-      }
+      },
+      "hero_highlight": "UI 요소 감지와 계획 수정 루프를 포함한 Agent 구현"
     },
     {
       "slug": "sun-date",
@@ -525,7 +541,8 @@
         "alt": "가입·상대방 선택·봉사 매칭·기관 전송으로 이어지는 Sun-Date 시나리오",
         "caption": "EASYTHON 최종 발표자료의 사용자 시나리오입니다. 프로필 기반 상대방 선택부터 봉사 매칭과 기관 전송까지의 흐름을 담았습니다.",
         "source_url": "https://github.com/day-e0n/sun_date"
-      }
+      },
+      "hero_highlight": "봉사와 만남을 연결한 프로토타입 제작·시연"
     },
     {
       "slug": "gamegc",
@@ -580,7 +597,8 @@
         "alt": "Xilinx SDK에서 Cost-Benefit GC의 victim 선택과 erase 로그를 확인하는 COSMOS+ 실험 화면",
         "caption": "COSMOS+ 환경에서 Cost-Benefit GC의 실행 로그를 확인한 화면입니다. 저장소에 공개된 팀 실험 기록입니다.",
         "source_url": "https://github.com/day-e0n/ssp_team_project/blob/main/cost_benefit_final_console.png"
-      }
+      },
+      "hero_highlight": "GC 지연시간의 스파이크와 점진적 회수 패턴 비교"
     },
     {
       "slug": "dacon",
@@ -634,7 +652,8 @@
         "alt": "나이·이용 기간·결제 간격 등 원본 고객 특성 간 상관계수 히트맵",
         "caption": "원본 고객 특성 간 관계를 살펴본 탐색적 데이터 분석 결과입니다.",
         "source_url": "https://github.com/juhee0223/DACON-Customer-Support-Classification"
-      }
+      },
+      "hero_highlight": "F1 Score 상위 10% 달성"
     },
     {
       "slug": "bird-repeller",
@@ -681,7 +700,8 @@
         "alt": "테스트 이미지에서 Magpie로 분류된 까치와 탐지 bounding box",
         "caption": "저장소의 테스트 이미지에서 까치를 Magpie로 탐지한 출력 예시입니다.",
         "source_url": "https://github.com/JustYOLO/Getout_Bird/blob/main/watchbird/test_image/frame_result_10.jpg"
-      }
+      },
+      "hero_highlight": "조류 탐지와 퇴치음 재생을 연결한 프로토타입 구현"
     },
     {
       "slug": "rocksdb",
@@ -743,7 +763,8 @@
         "alt": "Leveled·Universal·FIFO 정책별 Get key 조회 성공 횟수를 비교한 로그 축 그래프",
         "caption": "KCC 2025 논문 그림 5. 실제 조회 성공 횟수를 비교했습니다. FIFO는 오래된 데이터를 삭제하므로 처리율과 데이터 보존 특성을 함께 해석했습니다.",
         "source_url": "https://www.kiise.or.kr/conference/kcc/2025/"
-      }
+      },
+      "hero_highlight": "KCC 2025 논문 제1저자 발표"
     }
   ],
   "publications": [

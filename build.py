@@ -67,7 +67,7 @@ def project_visual(p):
     if not v:
         return ''
     source = f'<a class="text-link" href="{e(v["source_url"])}" target="_blank" rel="noopener noreferrer">자료 출처 ↗</a>' if v.get('source_url') else ''
-    return f'''<figure id="visual" class="case-visual"><a class="visual-open" href="../{e(v['src'])}" target="_blank" rel="noopener" aria-label="{e(p['title'])} 대표 자료 크게 보기">{project_image(v, '../')}</a><figcaption><strong>{e(v['label'])}</strong><p>{e(v['caption'])}</p><div class="visual-links"><a class="text-link" href="../{e(v['src'])}" target="_blank" rel="noopener">크게 보기 ↗</a>{source}</div></figcaption></figure>'''
+    return f'''<figure id="visual" class="case-visual"><div class="visual-frame">{project_image(v, '../')}</div><figcaption><strong>{e(v['label'])}</strong><p>{e(v['caption'])}</p><div class="visual-links">{source}</div></figcaption></figure>'''
 
 def card(p, i):
     v = p.get('visual')
@@ -100,7 +100,7 @@ def home():
 
 def detail(p,i):
     project_awards = [a for a in DATA['awards'] if a['url'] == f"projects/{p['slug']}.html"]
-    award_summary = ''.join(f'<p class="case-award"><span class="award-label">수상</span><strong>{e(a["title"])}</strong><time datetime="{e(a["date"])}">{e(a["date"])}</time></p>' for a in project_awards)
+    award_summary = ''.join(f'<p class="case-award"><span class="award-label">수상</span><strong>{e(a["title"])}</strong></p>' for a in project_awards)
     body_sections=''
     for j,s in enumerate(p['sections']):
         paragraphs=''.join(f'<p>{highlighted(t,p["slug"])}</p>' for t in s.get('paragraphs',[]))
@@ -115,13 +115,15 @@ def detail(p,i):
         body_sections+=f'<section class="case-section" id="section-{j}"><div><h2>{e(s["title"])}</h2>{status}{paragraphs}{bullets}{flow}{metrics}{comparison}</div></section>'
     gallery=''
     if p['slug']=='danzzan':
-        gallery='''<section class="case-gallery"><div class="eyebrow">서비스 화면</div><h2>예매 안내와 동의 확인</h2><div class="phone-gallery"><figure><a href="../assets/danzzan-consent.png" target="_blank" rel="noopener"><img src="../assets/danzzan-consent.png" alt="단짠 예매 안내와 필수 동의 확인 화면" loading="lazy" width="941" height="1672"></a><figcaption>예매 안내와 필수 동의 확인 · 팀 공동 산출물</figcaption></figure></div></section>'''
+        gallery='''<section class="case-gallery"><div class="eyebrow">서비스 화면</div><h2>예매 안내와 동의 확인</h2><div class="phone-gallery"><figure><img src="../assets/danzzan-consent.png" alt="단짠 예매 안내와 필수 동의 확인 화면" loading="lazy" width="941" height="1672"><figcaption>예매 안내와 필수 동의 확인 · 팀 공동 산출물</figcaption></figure></div></section>'''
     elif p['slug']=='olly':
-        gallery='''<section class="case-gallery"><div class="eyebrow">로컬 MVP 데모</div><h2>오류 요청도 추적할 수 있도록</h2><figure><a href="../assets/olly-error.png" target="_blank" rel="noopener"><img class="wide-image" src="../assets/olly-error.png" alt="의도적으로 오류를 발생시킨 OLLY 데모에서 요청 ID, trace ID, 오류 상태가 함께 표시된 화면" width="1336" height="676" loading="lazy"></a><figcaption>실패 요청의 ID와 오류 상태를 유지하는 데모 화면 · 팀 공동 산출물</figcaption></figure></section>'''
+        gallery='''<section class="case-gallery"><div class="eyebrow">로컬 MVP 데모</div><h2>오류 요청도 추적할 수 있도록</h2><figure><img class="wide-image" src="../assets/olly-error.png" alt="의도적으로 오류를 발생시킨 OLLY 데모에서 요청 ID, trace ID, 오류 상태가 함께 표시된 화면" width="1336" height="676" loading="lazy"><figcaption>실패 요청의 ID와 오류 상태를 유지하는 데모 화면 · 팀 공동 산출물</figcaption></figure></section>'''
     nav=('<a href="#visual">대표 자료</a>' if p.get('visual') else '') + ''.join(f'<a href="#section-{j}">{e(s["title"])}</a>' for j,s in enumerate(p['sections']))
     status = f'<p class="case-status">{e(p["status"])}</p>' if p.get('status') else ''
+    hero_period = p.get('hero_period', p['period'].replace('-', '.'))
+    hero_kind = p['kind'].split(' · ')[0]
     nxt=DATA['projects'][(i+1)%len(DATA['projects'])]
-    return f'''<main id="main"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><div><p class="eyebrow">{e(CATS[p['category']])}</p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(p['subtitle'])}</p><div class="case-meta"><span>{e(p['period'])}</span><span>{e(p['kind'])}</span></div>{award_summary}<p class="case-summary">{e(p['summary'])}</p>{status}<div class="pub-links">{links(p.get('primary_links', p['links']))}</div></div></section><div class="case-overview"><div><span class="eyebrow">기여와 역할</span><p>{e(p['role'])}</p></div><div><span class="eyebrow">결과</span><p>{highlighted(p['outcome'],p['slug'])}</p></div><div><span class="eyebrow">사용 기술</span><div class="tech-tags">{tags(p['tech'])}</div></div></div><div class="case-layout"><aside class="case-toc"><span class="eyebrow">목차</span>{nav}<a href="#evidence">관련 자료</a></aside><div class="case-body">{project_visual(p)}{body_sections}{gallery}<section id="evidence" class="case-evidence"><p class="eyebrow">관련 자료</p><h2>프로젝트 자료 및 구현 근거</h2><div class="evidence-links">{links(p['links'])}</div></section></div></div><nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
+    return f'''<main id="main"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><div><p class="case-meta"><span>{e(CATS[p['category']])}</span><span>{e(hero_period)}</span><span>{e(hero_kind)}</span></p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(p.get('hero_subtitle', p['subtitle']))}</p>{award_summary}<p class="case-summary">{e(p.get('hero_summary', p['summary']))}</p><p class="case-highlight">{e(p['hero_highlight'])}</p>{status}<div class="pub-links">{links(p.get('primary_links', p['links'])[:2])}</div></div></section><div class="case-overview"><div><span class="eyebrow">기여와 역할</span><p>{e(p['role'])}</p><p class="case-project-details">{e(p['period'])}<br>{e(p['kind'])}</p></div><div><span class="eyebrow">결과</span><p>{highlighted(p['outcome'],p['slug'])}</p></div><div><span class="eyebrow">사용 기술</span><div class="tech-tags">{tags(p['tech'])}</div></div></div><div class="case-layout"><aside class="case-toc"><span class="eyebrow">목차</span>{nav}<a href="#evidence">관련 자료</a></aside><div class="case-body">{project_visual(p)}{body_sections}{gallery}<section id="evidence" class="case-evidence"><p class="eyebrow">관련 자료</p><h2>프로젝트 자료 및 구현 근거</h2><div class="evidence-links">{links(p['links'])}</div></section></div></div><nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
 
 (ROOT/'index.html').write_text(shell('포트폴리오', home()))
 (ROOT/'projects').mkdir(exist_ok=True)

@@ -127,10 +127,13 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 .footer-inner { display: flex; align-items: center; gap: 25px; padding-block: 28px; font-size: 11px; color: var(--muted); }
 .footer-inner > a:nth-last-child(2) { margin-left: auto; }
 .back-link { display: inline-block; margin-top: 34px; color: var(--muted); font-size: 12px; }
-.case-hero { margin-block: 44px 38px; max-width: 780px; }
-.case-hero h1 { color: var(--accent); font-size: 42px; font-weight: 600; margin-top: 14px; }
-.case-subtitle { font-size: 20px; line-height: 1.7; margin-top: 12px; }
-.case-meta { display: flex; gap: 20px; font-size: 11px; color: var(--muted); margin-top: 20px; }
+.case-hero { margin-block: 32px; max-width: 780px; }
+.case-hero h1 { color: var(--ink); font-size: 36px; font-weight: 600; margin-top: 14px; }
+.case-subtitle { font-size: 18px; line-height: 1.65; margin-top: 8px; }
+.case-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 11px; color: var(--muted); }
+.case-meta span + span::before { content: "/"; margin-right: 10px; color: var(--line); }
+.case-highlight { margin-top: 16px; color: var(--accent); font-size: 15px; font-weight: 600; }
+.case-overview .case-project-details { color: var(--muted); font-size: 11px; }
 .case-summary { font-size: 14px; color: var(--muted); line-height: 1.95; margin-top: 22px; }
 .case-overview { display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 35px; padding-block: 26px; border-block: 1px solid var(--line); }
 .case-overview .eyebrow { font-size: 11px; letter-spacing: 0; color: var(--accent); }
@@ -149,9 +152,8 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 .case-section ul { font-size: 13px; color: #525960; line-height: 2.05; margin-top: 20px; padding-left: 20px; }
 .case-section li + li { margin-top: 10px; }
 .case-visual { margin: 0 0 42px; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
-.visual-open { display: block; padding: 18px; background: #fafbfc; border: 1px solid var(--line); border-radius: 6px; }
-.visual-open:hover { border-color: var(--accent); }
-.visual-open img { width: 100%; max-height: 480px; object-fit: contain; }
+.visual-frame { display: block; padding: 18px; background: #fafbfc; border: 1px solid var(--line); border-radius: 6px; }
+.visual-frame img { width: 100%; max-height: 480px; object-fit: contain; }
 .case-visual figcaption { margin-top: 14px; font-size: 12px; line-height: 1.9; color: var(--muted); }
 .case-visual figcaption strong { font-weight: 500; color: var(--ink); }
 .case-visual figcaption p { margin-top: 5px; }
@@ -230,7 +232,7 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
   .project-grid, .activity-grid, .credential-grid { grid-template-columns: minmax(0, 1fr); }
   .card-body { padding: 22px; }
   .card-media { margin-inline: -22px; margin-top: -22px; height: 165px; padding: 12px; }
-  .visual-open { padding: 10px; }
+  .visual-frame { padding: 10px; }
   .card-body h3 { font-size: 22px; }
   .card-meta { font-size: 10px; }
   .publication { grid-template-columns: minmax(0, 1fr); gap: 12px; padding-block: 25px; }
@@ -304,13 +306,11 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 }
 
 /* Awards are sourced from the same records as the homepage award list. */
-.case-award { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-top: 18px; padding: 13px 16px; border-radius: 4px; background: #eff6fc; color: #0057a3; }
+.case-award { display: flex; align-items: baseline; gap: 10px; margin-top: 16px; color: var(--accent); }
 .case-award .award-label { font-size: 12px; font-weight: 600; }
-.case-award strong { font-size: 15px; line-height: 1.7; }
-.case-award time { font-size: 12px; color: #51575f; white-space: nowrap; }
+.case-award strong { font-size: 13px; line-height: 1.7; font-weight: 600; }
 @media (max-width: 600px) {
   .case-award { display: grid; grid-template-columns: auto minmax(0, 1fr); }
-  .case-award time { grid-column: 2; }
 }
 
 /* Final benchmark comparison: rankings refer to the final average. */
@@ -327,3 +327,5 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
   .score-comparison table { font-size: 12px; }
   .score-comparison th, .score-comparison td { padding: 10px 5px; }
 }
+
+.case-hero .case-status { background: none; padding: 0; border-radius: 0; color: var(--muted) !important; margin-top: 12px; }
