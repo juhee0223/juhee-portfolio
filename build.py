@@ -123,6 +123,8 @@ def detail(p,i):
     collaboration = f'<p class="collaboration-tools"><span class="eyebrow">협업 도구</span><br>{e(p["collaboration"])}</p>' if p.get('collaboration') else ''
     if p.get('collaboration_method'):
         collaboration += f'<p class="collaboration-method"><span class="eyebrow">협업 방식</span><br>{e(p["collaboration_method"])}</p>'
+    if p.get('branch_strategy'):
+        collaboration += f'<p class="branch-strategy"><span class="eyebrow">브랜치 전략</span><br>{e(p["branch_strategy"])}</p>'
     hero_period = p.get('hero_period', p['period'].replace('-', '.'))
     hero_kind = p['kind'].split(' · ')[0]
     nxt=DATA['projects'][(i+1)%len(DATA['projects'])]

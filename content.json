@@ -217,7 +217,8 @@
       ],
       "hero_highlight": "봄축제 팀 성과 / 가입자 6,063명 · 티켓 3,500장 매진",
       "collaboration": "Jira",
-      "collaboration_method": "Agile / Scrum — 스프린트 기반 개발 및 데일리 스크럼 진행"
+      "collaboration_method": "Agile / Scrum — 스프린트 기반 개발 및 데일리 스크럼 진행",
+      "branch_strategy": "GitHub Flow"
     },
     {
       "slug": "conquer-health",
