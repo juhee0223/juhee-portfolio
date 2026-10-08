@@ -8,7 +8,7 @@ from hashlib import sha256
 
 ROOT = Path(__file__).parent
 DATA = json.loads((ROOT / 'content.json').read_text())
-BASE = 'https://juhee0223.github.io/modoodoc-portfolio'
+BASE = 'https://juhee0223.github.io/juhee-portfolio'
 STYLE_VERSION = sha256((ROOT / 'styles.css').read_bytes()).hexdigest()[:10]
 SCRIPT_VERSION = sha256((ROOT / 'site.js').read_bytes()).hexdigest()[:10]
 CATS = {'service':'서비스 개발·운영','ai':'AI 응용','systems':'시스템 연구'}
