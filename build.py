@@ -121,6 +121,8 @@ def detail(p,i):
     nav=('<a href="#visual">대표 자료</a>' if p.get('visual') else '') + ''.join(f'<a href="#section-{j}">{e(s["title"])}</a>' for j,s in enumerate(p['sections']))
     status = f'<p class="case-status">{e(p["status"])}</p>' if p.get('status') else ''
     collaboration = f'<p class="collaboration-tools"><span class="eyebrow">협업 도구</span><br>{e(p["collaboration"])}</p>' if p.get('collaboration') else ''
+    if p.get('collaboration_method'):
+        collaboration += f'<p class="collaboration-method"><span class="eyebrow">협업 방식</span><br>{e(p["collaboration_method"])}</p>'
     hero_period = p.get('hero_period', p['period'].replace('-', '.'))
     hero_kind = p['kind'].split(' · ')[0]
     nxt=DATA['projects'][(i+1)%len(DATA['projects'])]
