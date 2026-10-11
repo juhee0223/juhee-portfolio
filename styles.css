@@ -657,3 +657,15 @@ html:has(.case-study) {
   .evidence-table { font-size: 13px; }
   .evidence-table th, .evidence-table td { padding: 10px 12px; }
 }
+
+/* Lead case studies with ownership, then actions and attributable outcomes. */
+.contribution-scope .info-row:first-child { border-left: 3px solid var(--accent); padding: 18px 20px; margin-bottom: 20px; background: #f4f8fc; }
+.contribution-scope .info-row:first-child dt { color: var(--accent); }
+.contribution-result { padding: 24px 0; border-top: 1px solid var(--line); }
+.contribution-result h3, .context-stack-title { font-size: 18px; margin-bottom: 18px; font-weight: 700; }
+.contribution-result + .case-story { margin-top: 60px; }
+.context-stack-title { margin-top: 0; }
+#implementation .tech-tags { margin-bottom: 46px; }
+.anchor-alias { display: block; scroll-margin-top: calc(var(--site-header-height, 92px) + var(--case-toc-height, 64px) + 20px); }
+.contribution-sources { display: flex; flex-wrap: wrap; gap: 16px 24px; margin-top: 30px; }
+.contribution-sources .text-link { font-size: 13px; }

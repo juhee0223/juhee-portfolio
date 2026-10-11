@@ -191,7 +191,8 @@ def section_extras(p, s):
     if s.get('score_comparison'):
         rows = ''.join(f'<tr><th scope="row">{e(row["round"])}</th><td class="aim-score">{e(row["aim"])}</td><td>{e(row["runner_up"])}</td><td>{Decimal(row["aim"]) - Decimal(row["runner_up"]):+.2f}</td></tr>' for row in s['score_comparison'])
         comparison = f'<div class="score-comparison"><table><caption>최종 상위 2팀의 라운드별 점수 (점)</caption><thead><tr><th scope="col">평가</th><th scope="col">AIM · 1위</th><th scope="col">2위 팀</th><th scope="col">차이</th></tr></thead><tbody>{rows}</tbody></table><p class="score-note">{e(s["score_note"])}</p></div>'
-    return status, bullets+metrics+comparison+evidence_table(s.get('evidence_table'))
+    sources='<div class="contribution-sources">'+links(s['links'])+'</div>' if s.get('links') else ''
+    return status, bullets+metrics+comparison+evidence_table(s.get('evidence_table'))+sources
 
 def case_band(label, title, body, anchor):
     number, rail_title = label.split(' / ', 1)
@@ -224,46 +225,53 @@ def case_section(p, index, story=None):
     return f'<article class="case-story" id="section-{index}"><h3>{e(title)}</h3>{status}{media}<div class="story-rows">{rows}</div>{extras}</article>'
 
 def detail(p,i):
-    plan=p['case_story']
+    plan=p['contribution_story']
     awards=[a for a in DATA['awards'] if a['url']==f"projects/{p['slug']}.html"]
-    award_summary=''.join(f'<p class="case-award"><span class="award-label">수상</span><strong>{e(a["title"])}</strong></p>' for a in awards)
-    overview=info_row('기간',e(p['period']))+info_row('팀 구성',e(p['kind']))+info_row('담당 역할',phrase_list(p['role_items'],p['slug']))
-    overview+=info_row('서비스·과제',e(p['intro_phrase']))
+    award_label='팀 수상' if plan.get('team_scope_items') else '수상'
+    award_summary=''.join(f'<p class="case-award"><span class="award-label">{award_label}</span><strong>{e(a["title"])}</strong></p>' for a in awards)
+    scope_label='직접 담당' if plan['contribution_sections'] else '참여 범위'
+    overview=info_row(scope_label,phrase_list(plan['scope_items'],p['slug']))
+    if plan.get('team_scope_items'):
+        overview+=info_row('팀·협업 범위',phrase_list(plan['team_scope_items'],p['slug']))
+    overview+=info_row('프로젝트',e(p['intro_phrase']))
+    overview+=info_row('기간·구성',e(p['period']+' · '+p['kind']))
     if p.get('operation_history'):
-        operations = ''.join(
-            f'<li><strong>{e(item["period"])} · {e(item["title"])}:</strong> {e(item["detail"])}</li>'
-            for item in p['operation_history']
-        )
-        overview+=info_row('실제 운영', f'<ul class="operation-history">{operations}</ul>')
+        operations=''.join(f'<li><strong>{e(item["period"])} · {e(item["title"])}:</strong> {e(item["detail"])}</li>' for item in p['operation_history'])
+        overview+=info_row('실제 운영',f'<ul class="operation-history">{operations}</ul>')
     if p.get('context_items'): overview+=info_row('연구 범위',phrase_list(p['context_items']))
     if p.get('status'): overview+=info_row('현재 상태',e(p['status']))
-    overview=case_band('01 / 프로젝트 개요','프로젝트 개요','<dl class="case-info">'+overview+'</dl>','overview')
-    stack='<div class="tech-tags">'+tags(p['tech'])+'</div>'
+    overview=case_band('01 / 담당 범위','담당 범위와 프로젝트 맥락','<dl class="case-info contribution-scope">'+overview+'</dl>','overview')
+    contributions='<span id="problem-solving" class="anchor-alias" aria-hidden="true"></span>'
+    if p['slug'] in ('sketch-to-spec', 'dacon'): contributions+=project_diagram(p)
+    contributions+=''.join(case_section(p,story['section'],story) for story in plan['contribution_sections'])
+    contributions=case_band('02 / 핵심 기여','판단·구현·검증으로 이어진 기여',contributions,'contributions') if plan['contribution_sections'] else ''
+    results=''
+    if plan.get('personal_results'):
+        results+='<div class="contribution-result"><h3>개인 작업 결과</h3>'+phrase_list(plan['personal_results'],p['slug'])+'</div>'
+    if plan.get('team_results'):
+        results+='<div class="contribution-result team-result"><h3>팀 공동 성과</h3>'+phrase_list(plan['team_results'],p['slug'])+'</div>'
+    results+=''.join(case_section(p,story['section'],story) for story in plan['result_sections'])
+    if p.get('metrics_source'): results+='<div class="visual-links">'+links([p['metrics_source']])+'</div>'
+    if p['slug']=='olly': results+='<figure class="case-inline-image"><img src="../assets/olly-error.png" alt="OLLY 오류 요청 ID와 trace ID, 오류 상태를 함께 확인하는 데모 화면" width="1336" height="676" loading="lazy"><figcaption>팀 공동 산출물 · 실패 요청의 ID와 오류 상태를 유지하는 로컬 MVP 데모</figcaption></figure>'
+    result_title='개인 작업의 결과' if not plan.get('team_scope_items') else '개인 결과와 공동 성과'
+    results=case_band('03 / 결과',result_title,results,'results')
+    context='<span id="stack" class="anchor-alias" aria-hidden="true"></span><h3 class="context-stack-title">사용 기술</h3><div class="tech-tags">'+tags(p['tech'])+'</div>'
     collaboration=''
     for key,label in [('collaboration','협업 도구'),('collaboration_method','협업 방식'),('branch_strategy','브랜치 전략')]:
         if p.get(key): collaboration+=info_row(label,e(p[key]))
-    if collaboration: stack+='<dl class="case-info collaboration-info">'+collaboration+'</dl>'
-    stack=case_band('02 / 사용 기술','사용 기술과 협업',stack,'stack')
-    feature=project_diagram(p) if p['slug']!='danzzan' else ''
-    feature+=project_visual(p)
-    feature+=''.join(case_section(p,index) for index in plan['feature_sections'])
-    feature=case_band('03 / 핵심 구현','핵심 기능과 구현 방식',feature,'implementation')
-    stories=''.join(case_section(p,story['section'],story) for story in plan['stories'])
-    stories=case_band('04 / 문제 해결','문제 해결과 검증',stories,'problem-solving') if stories else ''
-    results=''
-    if p.get('card_metrics'):
-        results='<dl class="case-result-metrics">'+''.join(info_row(m['label'],e(m['value'])) for m in p['card_metrics'])+'</dl>'
-    results+=phrase_list(p['outcome_items'],p['slug'])
-    if p.get('metrics_source'): results+='<div class="visual-links">'+links([p['metrics_source']])+'</div>'
-    if p['slug']=='olly': results+='<figure class="case-inline-image"><img src="../assets/olly-error.png" alt="OLLY 오류 요청 ID와 trace ID, 오류 상태를 함께 확인하는 데모 화면" width="1336" height="676" loading="lazy"><figcaption>실패 요청의 ID와 오류 상태를 유지하는 로컬 MVP 데모 · 팀 공동 산출물</figcaption></figure>'
-    if p['slug']!='danzzan': results+=''.join(case_gallery_item(item) for item in p.get('gallery',[]))
-    results=case_band('05 / 성과','성과와 확인 범위',results,'results')
-    evidence=case_band('06 / 자료 근거','자료 및 구현 근거','<div class="evidence-links">'+links(p['links'])+'</div>','evidence')
-    nav='<a href="#overview">개요</a><a href="#stack">사용 기술</a><a href="#implementation">핵심 구현</a>'
-    if stories: nav+='<a href="#problem-solving">문제 해결</a>'
-    nav+='<a href="#results">성과</a><a href="#evidence">자료</a>'
+    if collaboration: context+='<dl class="case-info collaboration-info">'+collaboration+'</dl>'
+    if p['slug'] not in ('danzzan', 'sketch-to-spec', 'dacon'): context+=project_diagram(p)
+    context+=project_visual(p)
+    context+=''.join(case_section(p,index) for index in plan['context_sections'])
+    if p['slug']!='danzzan': context+=''.join(case_gallery_item(item) for item in p.get('gallery',[]))
+    if not plan['contribution_sections']: context='<span id="problem-solving" class="anchor-alias" aria-hidden="true"></span>'+context
+    context=case_band('04 / 기술 맥락','기여를 이해하기 위한 구조와 자료',context,'implementation')
+    evidence=case_band('05 / 근거','작업 및 프로젝트 근거','<div class="evidence-links">'+links(p['links'])+'</div>','evidence')
+    nav='<a href="#overview">담당 범위</a>'
+    if plan['contribution_sections']: nav+='<a href="#contributions">핵심 기여</a>'
+    nav+='<a href="#results">결과</a><a href="#implementation">기술 맥락</a><a href="#evidence">근거</a>'
     nxt=DATA['projects'][(i+1)%len(DATA['projects'])]
-    return f'''<main id="main" class="case-study"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><p class="eyebrow">{e(CATS[p['category']])}</p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(plan['headline'])}</p>{award_summary}<div class="pub-links">{links(p.get('primary_links',p['links'])[:2])}</div></section><nav class="case-toc" aria-label="프로젝트 상세 목차">{nav}</nav>{overview}{stack}{feature}{stories}{results}{evidence}<nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
+    return f'''<main id="main" class="case-study"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><p class="eyebrow">{e(CATS[p['category']])}</p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(plan['headline'])}</p>{award_summary}<div class="pub-links">{links(p.get('primary_links',p['links'])[:2])}</div></section><nav class="case-toc" aria-label="프로젝트 상세 목차">{nav}</nav>{overview}{contributions}{results}{context}{evidence}<nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
 
 (ROOT/'index.html').write_text(shell('포트폴리오', home()))
 (ROOT/'projects').mkdir(exist_ok=True)

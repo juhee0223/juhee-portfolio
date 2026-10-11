@@ -546,136 +546,6 @@
         "봄축제 팀 서비스 성과: 가입자 6,063명 · 티켓 3,500장 매진",
         "현재 서버 운영 종료 · 고도화 후 2026년 11월 재배포 예정"
       ],
-      "case_story": {
-        "headline": "2026년 봄·가을축제, 두 차례 실제 운영한 서비스",
-        "feature_sections": [
-          0,
-          1
-        ],
-        "stories": [
-          {
-            "section": 6,
-            "title": "번역 누락 복구: 로그·DB·영어 화면으로 확인",
-            "groups": [
-              {
-                "label": "문제",
-                "row_indices": [
-                  0
-                ]
-              },
-              {
-                "label": "접근",
-                "row_indices": [
-                  1
-                ]
-              },
-              {
-                "label": "결과",
-                "row_indices": [
-                  2
-                ]
-              }
-            ]
-          },
-          {
-            "section": 2,
-            "title": "티켓 포기 후 탈퇴할 수 있도록 정책 조정",
-            "groups": [
-              {
-                "label": "문제",
-                "row_indices": [
-                  0
-                ]
-              },
-              {
-                "label": "접근",
-                "row_indices": [
-                  1
-                ]
-              },
-              {
-                "label": "검증",
-                "row_indices": [
-                  2
-                ]
-              },
-              {
-                "label": "결과",
-                "row_indices": [
-                  3
-                ]
-              }
-            ]
-          },
-          {
-            "section": 3,
-            "title": "DB 직접 수정에서 업무별 권한 관리로",
-            "groups": [
-              {
-                "label": "문제",
-                "row_indices": [
-                  0
-                ]
-              },
-              {
-                "label": "접근",
-                "row_indices": [
-                  1,
-                  2
-                ]
-              },
-              {
-                "label": "결과·현재 상태",
-                "row_indices": [
-                  3
-                ]
-              }
-            ]
-          },
-          {
-            "section": 4,
-            "title": "기기별 검증에서 발견한 화면 갱신 문제 보완",
-            "groups": [
-              {
-                "label": "검증 환경",
-                "row_indices": [
-                  0
-                ]
-              },
-              {
-                "label": "문제·접근",
-                "row_indices": [
-                  1
-                ]
-              }
-            ]
-          },
-          {
-            "section": 5,
-            "title": "두 차례 축제 운영과 복구 절차 공유",
-            "groups": [
-              {
-                "label": "팀 서비스 성과",
-                "row_indices": [
-                  0
-                ]
-              },
-              {
-                "label": "현장 경험",
-                "row_indices": [
-                  1
-                ]
-              },
-              {
-                "label": "문제 해결·공유",
-                "row_indices": [
-                  2
-                ]
-              }
-            ]
-          }
-        ]
-      },
       "translation_screens": [
         {
           "src": "assets/danzzan-translation-user-ko.png",
@@ -728,7 +598,194 @@
           "title": "가을축제",
           "detail": "영어 지원 도입 · 번역 누락 복구 및 운영 검증"
         }
-      ]
+      ],
+      "contribution_story": {
+        "headline": "요구사항 조율부터 기능 개선·배포·현장 운영까지",
+        "scope_items": [
+          "초기 요구사항 정리 · 기능 단위 개발 · 배포·운영 모니터링 참여",
+          "네이버페이 협업 범위·명단 전달 기준 조율 및 가입 흐름 반영 참여",
+          "회원 탈퇴 흐름의 정책 판단 · 테스트 계정 검증",
+          "운영진 권한 관리 · 기기·브라우저 출시 전 검증",
+          "번역 누락 원인 추적 · DB 정리 · 영어 화면 검증"
+        ],
+        "team_scope_items": [
+          "4인 팀 · 화면과 서버 기능을 역할별로 병행 개발",
+          "총학생회·네이버페이 협업 범위와 입장 연계는 팀 공동 협의",
+          "봄축제 예매·페이스사인 연계 · 가을축제 운영은 팀 서비스 운영"
+        ],
+        "context_sections": [
+          0
+        ],
+        "contribution_sections": [
+          {
+            "section": 1,
+            "title": "기존 예매를 유지하는 네이버페이 입장 연계 제안",
+            "groups": [
+              {
+                "label": "협업 과제",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "범위 제안·합의",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "연계 기준 조율",
+                "row_indices": [
+                  2
+                ]
+              },
+              {
+                "label": "검증·현장 참여",
+                "row_indices": [
+                  3
+                ]
+              }
+            ]
+          },
+          {
+            "section": 6,
+            "title": "번역 누락 복구와 화면 검증",
+            "groups": [
+              {
+                "label": "복구 담당 배경",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "로그·DB 원인 추적",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "DB·영어 화면 검증",
+                "row_indices": [
+                  2
+                ]
+              }
+            ]
+          },
+          {
+            "section": 2,
+            "title": "회원 탈퇴 흐름의 정책 판단과 검증",
+            "groups": [
+              {
+                "label": "정책 판단",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "이용 흐름 설계",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "직접 검증",
+                "row_indices": [
+                  2
+                ]
+              },
+              {
+                "label": "운영 적용",
+                "row_indices": [
+                  3
+                ]
+              }
+            ]
+          },
+          {
+            "section": 3,
+            "title": "운영진 권한 관리 기능 고도화",
+            "groups": [
+              {
+                "label": "개선 과제",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "대안 검토·팀 결정",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "구현·검수",
+                "row_indices": [
+                  2
+                ]
+              },
+              {
+                "label": "후속 고도화",
+                "row_indices": [
+                  3
+                ]
+              }
+            ]
+          },
+          {
+            "section": 4,
+            "title": "기기·브라우저별 출시 전 검증",
+            "groups": [
+              {
+                "label": "직접 점검",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "발견·개선 판단",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 5,
+            "title": "실서비스 운영 경험과 해결 자료 축적",
+            "groups": [
+              {
+                "label": "팀 서비스 운영",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "직접 현장 참여",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "직접 문제 해결·공유",
+                "row_indices": [
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "result_sections": [],
+        "personal_results": [
+          "운영 중 발견한 번역 누락: 미번역 대상 0건 확인 · 영어 화면 표시까지 검증",
+          "PWA 화면 갱신 제약 확인 후 수동 새로고침 버튼 추가",
+          "회원 탈퇴 정책 수정 · 테스트 계정 직접 탈퇴 확인 → 팀 운영 서비스에 적용"
+        ],
+        "team_results": [
+          "2026년 5월 봄축제 · 9월 가을축제, 두 차례 실제 운영",
+          "봄축제 팀 서비스: 가입자 6,063명 · 티켓 3,500장 매진",
+          "봄축제에서 예매·페이스사인 입장 연계 운영"
+        ]
+      }
     },
     {
       "slug": "conquer-health",
@@ -995,24 +1052,33 @@
         "팀 성과: 정식 평가 3라운드 평균 46.51점 · 평가 참여 14팀 중 1위",
         "의료 특화 파운데이션 모델 해커톤 벤치마크상 수상"
       ],
-      "case_story": {
-        "headline": "평가 근거로 의료 AI 응답 규칙 개선",
-        "feature_sections": [
+      "contribution_story": {
+        "headline": "평가 결과를 검토하고 제출 방향·응답 규칙 개선에 참여",
+        "scope_items": [
+          "구현안 비교 결과 검토 · 현재 최고 구현안 중심의 제출 방향 제안",
+          "부분 평가의 한계를 인정하고 점수·의료 상담 요건을 함께 검토",
+          "HealthBench 기준 분석 · 응답 규칙 공동 개선 참여"
+        ],
+        "team_scope_items": [
+          "5인 팀 · 개별 구현 실험 후 최고 점수안 공동 보완",
+          "HealthBench 기준 분석 · 응답 규칙 개선 · 제출 구현은 팀 공동 작업"
+        ],
+        "context_sections": [
           0
         ],
-        "stories": [
+        "contribution_sections": [
           {
             "section": 1,
-            "title": "부분 점수의 한계를 고려한 제출 방향 제안",
+            "title": "부분 평가 결과 검토와 제출 방향 제안",
             "groups": [
               {
-                "label": "문제",
+                "label": "비교 결과·우려",
                 "row_indices": [
                   0
                 ]
               },
               {
-                "label": "접근",
+                "label": "판단·제안",
                 "row_indices": [
                   1
                 ]
@@ -1021,41 +1087,48 @@
           },
           {
             "section": 2,
-            "title": "HealthBench 기준을 의료 응답 규칙으로 구체화",
+            "title": "팀 공동 응답 규칙 개선",
             "groups": [
               {
-                "label": "개선 기준",
+                "label": "공동 개선 기준",
                 "row_indices": [
                   0
                 ]
               },
               {
-                "label": "접근·공동 구현",
-                "row_indices": [
-                  1
-                ]
-              }
-            ]
-          },
-          {
-            "section": 3,
-            "title": "정식 평가 3라운드 평균 1위",
-            "groups": [
-              {
-                "label": "팀 결과",
-                "row_indices": [
-                  0
-                ]
-              },
-              {
-                "label": "해석 범위",
+                "label": "공동 구현 범위",
                 "row_indices": [
                   1
                 ]
               }
             ]
           }
-        ]
+        ],
+        "result_sections": [
+          {
+            "section": 3,
+            "title": "팀 최종 평가 결과",
+            "groups": [
+              {
+                "label": "팀 성과",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "점수 해석 범위",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "personal_results": [
+          "남은 시간 내 제출안 완성을 위한 방향 제안",
+          "질문 누락·위험 신호·사용자 정보 확인을 위한 응답 규칙 공동 개선 참여"
+        ],
+        "team_results": []
       }
     },
     {
@@ -1144,6 +1217,12 @@
               ]
             },
             {
+              "label": "직접 실행",
+              "items": [
+                "로컬 SLM 검토 및 검증 시나리오 직접 실행"
+              ]
+            },
+            {
               "label": "팀 검증 결과",
               "items": [
                 "AI 에이전트 활용 MVP 구현 · 각 시나리오 10회 · 총 50개 요청 연결 점검"
@@ -1213,7 +1292,7 @@
             {
               "label": "개인 기여",
               "items": [
-                "문제 정의 · 기존 솔루션 비교 · 로컬 SLM 검토 · 검증 시나리오 설계"
+                "문제 정의 · 기존 솔루션 비교 · 로컬 SLM 검토 · 검증 시나리오 설계 · 로컬 시나리오 직접 실행"
               ]
             }
           ],
@@ -1256,62 +1335,86 @@
             "text": "status=error 유지 · Discord 알림 · trace 추적"
           }
         ],
-        "note": "개인 담당: 문제 정의, 기존 솔루션 비교, 로컬 SLM 활용 검토, 5개 검증 시나리오 설계. MVP 계측 구현과 반복 실행 결과는 팀 공동 작업입니다.",
+        "note": "개인 담당: 문제 정의, 기존 솔루션 비교, 로컬 SLM 활용 검토, 검증 시나리오 설계 및 직접 실행. MVP 계측 구현과 50회 반복 검증의 집계 결과는 팀 공동 작업입니다.",
         "label": "관측 경로"
       },
       "card_intro": "로컬 Kubernetes(kind)에서 LLM/RAG 요청의 지표·trace·알림을 연결한 관측성 MVP입니다.",
       "card_outcome": "팀 공동 검증: 5개 시나리오 × 10회 실행으로 지연·오류 관측 확인",
       "intro_phrase": "로컬 Kubernetes(kind)에서 LLM/RAG 요청의 지표·trace·알림을 연결한 관측성 MVP",
       "role_items": [
-        "문제 정의 · 기존 솔루션 비교 · 로컬 SLM 활용 검토 · 검증 시나리오 설계",
-        "MVP 구현 및 반복 실행 결과는 팀 공동 작업"
+        "문제 정의 · 기존 솔루션 비교 · 로컬 SLM 활용 검토 · 검증 시나리오 설계 · 로컬 검증 시나리오 직접 실행",
+        "MVP 계측·구현과 50회 반복 검증 결과는 팀 공동 작업"
       ],
       "outcome_items": [
         "팀 검증: 5개 시나리오 × 각 10회 실행",
         "주입한 지연·오류가 해당 관측 구간에 나타나는 것 확인"
       ],
-      "case_story": {
-        "headline": "Kubernetes 기반 요청 단위 LLM 관측성",
-        "feature_sections": [
-          2
+      "contribution_story": {
+        "headline": "로컬 SLM을 검토하고 관측 검증 시나리오를 설계·실행",
+        "scope_items": [
+          "지연·오류 원인 추적 문제 정의",
+          "기존 솔루션 비교 및 개발 범위 검토",
+          "로컬 SLM 활용 검토",
+          "5개 검증 시나리오 설계 · 로컬 검증 시나리오 직접 실행"
         ],
-        "stories": [
+        "team_scope_items": [
+          "요청 단위 관측성 MVP 계측·구현",
+          "시나리오별 반복 실행 및 관측 신호 점검"
+        ],
+        "context_sections": [
+          0
+        ],
+        "contribution_sections": [
           {
-            "section": 0,
-            "title": "전체 응답 시간에서 지연 발생 구간으로",
+            "section": 1,
+            "title": "반복 가능한 로컬 검증 조건 설계와 실행",
             "groups": [
               {
-                "label": "문제",
+                "label": "직접 설계",
                 "row_indices": [
                   0
                 ]
               },
               {
-                "label": "접근·팀 구현",
+                "label": "직접 실행",
                 "row_indices": [
                   1
                 ]
+              },
+              {
+                "label": "팀 집계 결과",
+                "row_indices": [
+                  2
+                ]
               }
             ]
-          },
+          }
+        ],
+        "result_sections": [
           {
-            "section": 1,
-            "title": "5개 시나리오로 관측 결과 반복 검증",
+            "section": 2,
+            "title": "설계한 검증 기준을 팀 관측 흐름에 적용",
             "groups": [
               {
-                "label": "개인 검증 설계",
+                "label": "팀 MVP",
                 "row_indices": [
                   0
                 ]
               },
               {
-                "label": "팀 검증 결과",
+                "label": "담당 범위",
                 "row_indices": [
                   1
                 ]
               }
             ]
           }
+        ],
+        "personal_results": [
+          "로컬 SLM 활용 검토 · 검증 시나리오 설계 및 직접 실행"
+        ],
+        "team_results": [
+          "5개 시나리오 × 각 10회 실행으로 지연·오류 관측 신호 확인"
         ]
       }
     },
@@ -1470,38 +1573,6 @@
         "UI 요소 감지 · LangGraph StateGraph 기반 계획 수정 루프 구현",
         "멀티모달 ReAct Agent 파이프라인 구축"
       ],
-      "case_story": {
-        "headline": "손그림에서 요구사항 명세와 화면 흐름 생성",
-        "feature_sections": [
-          0
-        ],
-        "stories": [
-          {
-            "section": 1,
-            "title": "출력 오류를 다음 계획에 반영하는 루프",
-            "groups": [
-              {
-                "label": "출력 복구",
-                "row_indices": [
-                  0
-                ]
-              },
-              {
-                "label": "계획 수정",
-                "row_indices": [
-                  1
-                ]
-              },
-              {
-                "label": "검증 범위",
-                "row_indices": [
-                  2
-                ]
-              }
-            ]
-          }
-        ]
-      },
       "diagram": {
         "label": "생성 흐름",
         "title": "손그림 입력에서 요구사항 명세까지",
@@ -1526,6 +1597,67 @@
         ],
         "feedback": "Observation Log·오류 → Plan Revision → 다음 계획과 생성 단계에 반영",
         "note": "개인 프로젝트 · 시스템 설계 및 구현. 소개팅 앱·학과 커뮤니티 앱 시나리오로 생성 흐름을 수동 확인했습니다."
+      },
+      "contribution_story": {
+        "headline": "손그림을 요구사항 명세로 변환하는 흐름을 설계·구현하다",
+        "scope_items": [
+          "멀티모달 입력·출력 구조 설계",
+          "OpenCV 기반 UI 요소 감지",
+          "RequirementState·LangGraph 상태 흐름 구현",
+          "SRS·ASCII 화면 흐름 생성 및 수동 확인"
+        ],
+        "team_scope_items": [],
+        "context_sections": [],
+        "contribution_sections": [
+          {
+            "section": 0,
+            "title": "손그림·기능·텍스트를 하나의 명세 입력으로 구조화",
+            "groups": [
+              {
+                "label": "설계 목표",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "구조화 구현",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 1,
+            "title": "생성 오류를 다음 계획에 반영하는 흐름 구현",
+            "groups": [
+              {
+                "label": "출력 복구",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "계획 수정",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "수동 확인",
+                "row_indices": [
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "result_sections": [],
+        "personal_results": [
+          "SRS Markdown·ASCII 화면 흐름 생성 파이프라인 구현",
+          "소개팅 앱·학과 커뮤니티 앱 시나리오 수동 실행 확인"
+        ],
+        "team_results": []
       }
     },
     {
@@ -1546,6 +1678,22 @@
         {
           "label": "GitHub",
           "url": "https://github.com/day-e0n/sun_date"
+        },
+        {
+          "label": "개인 커밋: 온보딩 입력·검증",
+          "url": "https://github.com/day-e0n/sun_date/commit/63c58b9503c261bb6388a735784b76ced31e7817"
+        },
+        {
+          "label": "개인 커밋: 학번·MBTI·지역 입력",
+          "url": "https://github.com/day-e0n/sun_date/commit/e67f2b58c12c4fe2cfc942f96f9e57202dff1aba"
+        },
+        {
+          "label": "개인 커밋: 매칭 후보·필터 UI",
+          "url": "https://github.com/day-e0n/sun_date/commit/ec61e47ab20686d7b5e04f9dd49a4a93857708ea"
+        },
+        {
+          "label": "개인 커밋: 질문함·화면 연결",
+          "url": "https://github.com/day-e0n/sun_date/commit/9d8dee1d2601b768b5dd1514880f13c99a83d14d"
         }
       ],
       "role": "아이디어 제안, 팀원의 우려를 반영한 교내 대상 범위 조정, 기획서 반영과 프론트엔드 구현을 주로 맡았습니다.",
@@ -1589,10 +1737,16 @@
           ],
           "phrase_rows": [
             {
-              "label": "기여·팀 성과",
+              "label": "개인 기여",
               "items": [
-                "논의 결과를 기획서에 반영 · 프론트엔드 구현을 주로 담당",
-                "팀 프로토타입 제작·시연 · EASYTHON 2025 우수상"
+                "논의 결과를 기획서에 반영 · 프론트엔드 구현을 주로 담당"
+              ]
+            },
+            {
+              "label": "팀 성과",
+              "items": [
+                "팀 프로토타입 제작·시연 · EASYTHON 2025 우수상",
+                "팀 시연: 회원가입·재학증명서 PDF OCR 학생 인증·로그인·봉사활동 목록 신청"
               ]
             },
             {
@@ -1601,6 +1755,55 @@
                 "결과 범위: 해커톤 프로토타입 및 수상",
                 "실제 봉사 참여 증가·운영 성과를 측정한 서비스는 아님"
               ]
+            }
+          ]
+        },
+        {
+          "title": "온보딩 입력 검증과 매칭 화면 연결",
+          "phrase_rows": [
+            {
+              "label": "가입·프로필",
+              "items": [
+                "8자리 학번 형식 검증 · 재학증명서 파일 선택 및 필수 입력 검증",
+                "MBTI 선택 · 지역 목록 · 선호 봉사 카테고리 입력 흐름 보완"
+              ]
+            },
+            {
+              "label": "매칭 UI",
+              "items": [
+                "선호 봉사 카테고리 필터 · 후보 카드 선택 · 매칭 요청 UI 구현"
+              ]
+            },
+            {
+              "label": "화면 연결",
+              "items": [
+                "Q&A 스레드·질문함 화면 보완 · 로그인·온보딩·매칭 라우팅 연결 참여"
+              ]
+            },
+            {
+              "label": "구현 경계",
+              "items": [
+                "클라이언트 입력·화면 작업 · 일부 mock API 기반 흐름 포함",
+                "OCR·서버 학생 검증·봉사활동 신청 API는 개인 구현으로 표기하지 않음"
+              ]
+            }
+          ],
+          "links": [
+            {
+              "label": "개인 커밋: 온보딩 입력·검증",
+              "url": "https://github.com/day-e0n/sun_date/commit/63c58b9503c261bb6388a735784b76ced31e7817"
+            },
+            {
+              "label": "개인 커밋: 학번·MBTI·지역 입력",
+              "url": "https://github.com/day-e0n/sun_date/commit/e67f2b58c12c4fe2cfc942f96f9e57202dff1aba"
+            },
+            {
+              "label": "개인 커밋: 매칭 후보·필터 UI",
+              "url": "https://github.com/day-e0n/sun_date/commit/ec61e47ab20686d7b5e04f9dd49a4a93857708ea"
+            },
+            {
+              "label": "개인 커밋: 질문함·화면 연결",
+              "url": "https://github.com/day-e0n/sun_date/commit/9d8dee1d2601b768b5dd1514880f13c99a83d14d"
             }
           ]
         }
@@ -1620,77 +1823,134 @@
       "card_outcome": "EASYTHON 2025 우수상 · 팀 프로토타입 성과",
       "intro_phrase": "봉사와 만남을 연결하는 아이디어를 교내 대상으로 구현·시연한 프로토타입",
       "role_items": [
-        "아이디어 제안 · 팀원 우려를 반영한 교내 대상 범위 조정",
-        "기획서 반영 및 프론트엔드 구현을 주로 담당"
+        "아이디어 제안 · 교내 대상 범위 조정 · 기획서 반영",
+        "온보딩 입력·검증: 학번 형식, 재학증명서 파일 선택, MBTI·지역·선호 봉사",
+        "매칭 후보·카테고리 필터·요청 UI 및 질문함 화면",
+        "로그인·온보딩·매칭 화면의 라우팅 연결 참여"
       ],
       "outcome_items": [
         "팀 프로토타입 제작·시연 · EASYTHON 2025 우수상"
       ],
-      "case_story": {
-        "headline": "봉사와 만남을 연결한 교내 서비스 프로토타입",
-        "feature_sections": [],
-        "stories": [
+      "diagram": {
+        "label": "팀 시연 범위",
+        "title": "회원가입에서 봉사활동 신청까지",
+        "description": "해커톤에서 실제 시연한 팀 프로토타입의 흐름입니다.",
+        "steps": [
+          {
+            "title": "회원가입",
+            "text": "가입 정보 · 재학증명서 PDF 입력"
+          },
+          {
+            "title": "학생 인증",
+            "text": "PDF OCR 기반 재학생 검증"
+          },
+          {
+            "title": "로그인",
+            "text": "계정 로그인 · 서비스 화면 진입"
+          },
+          {
+            "title": "봉사활동 신청",
+            "text": "봉사활동 목록 확인 · 신청"
+          }
+        ],
+        "note": "개인 코드 기여: 온보딩 입력·검증, 매칭 후보·질문함 화면, 라우팅 연결. OCR·서버 검증·신청 API는 팀 시연 범위이며 개인 구현으로 표기하지 않습니다."
+      },
+      "contribution_story": {
+        "headline": "서비스 범위를 조정하고 온보딩·매칭 화면을 구현",
+        "scope_items": [
+          "아이디어 제안 · 교내 대상 범위 조정 · 기획서 반영",
+          "온보딩 입력·검증: 학번 형식, 재학증명서 파일 선택, MBTI·지역·선호 봉사",
+          "매칭 후보·카테고리 필터·요청 UI 및 질문함 화면",
+          "로그인·온보딩·매칭 화면의 라우팅 연결 참여"
+        ],
+        "team_scope_items": [
+          "회원가입·재학증명서 PDF OCR 학생 인증·로그인·봉사활동 목록 신청 시연",
+          "PDF OCR·서버 검증은 개인 구현 범위에 포함하지 않음"
+        ],
+        "context_sections": [],
+        "contribution_sections": [
           {
             "section": 0,
-            "title": "참여 동기와 신원 확인을 고려한 서비스 범위 조정",
+            "title": "참여 동기와 신원 확인 우려를 서비스 범위에 반영",
             "groups": [
               {
-                "label": "문제",
+                "label": "아이디어 제안",
                 "row_indices": [
                   0
                 ]
               },
               {
-                "label": "접근",
+                "label": "범위 조정",
                 "row_indices": [
                   1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 2,
+            "title": "온보딩 입력 검증과 매칭 화면 연결",
+            "groups": [
+              {
+                "label": "가입·프로필",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "매칭 UI",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "화면 연결",
+                "row_indices": [
+                  2
+                ]
+              },
+              {
+                "label": "구현 경계",
+                "row_indices": [
+                  3
                 ]
               }
             ]
           },
           {
             "section": 1,
-            "title": "기획을 프론트엔드 구현과 시연으로 연결",
+            "title": "기획안을 프론트엔드 구현과 팀 시연으로 연결",
             "groups": [
               {
-                "label": "기여·팀 결과",
+                "label": "개인 구현",
                 "row_indices": [
                   0
                 ]
               },
               {
-                "label": "검증·한계",
+                "label": "팀 시연·수상",
                 "row_indices": [
                   1
+                ]
+              },
+              {
+                "label": "확인 범위",
+                "row_indices": [
+                  2
                 ]
               }
             ]
           }
-        ]
-      },
-      "diagram": {
-        "label": "기획·시연 흐름",
-        "title": "프로필과 선호를 바탕으로 봉사 매칭을 제안하는 사용자 흐름",
-        "description": "발표자료의 프로토타입 화면·기획 흐름. 기관 전송은 제안된 후속 단계이며 실제 운영 여부는 확인되지 않았습니다.",
-        "steps": [
-          {
-            "title": "회원가입·프로필 입력",
-            "text": "닉네임 · 학번 · MBTI · 활동 지역 · 선호 봉사 유형/시간 · 사전 Q&A"
-          },
-          {
-            "title": "상대방 선택",
-            "text": "프로필과 선호 정보를 바탕으로 상대방 선택"
-          },
-          {
-            "title": "봉사 매칭",
-            "text": "함께 참여할 봉사활동 매칭 시나리오"
-          },
-          {
-            "title": "기관 전송",
-            "text": "발표자료에 제시된 후속 연계 단계"
-          }
         ],
-        "note": "개인 기여: 아이디어 제안, 교내 대상 범위 조정, 기획서 반영과 프론트엔드 구현. 프로토타입 제작·시연과 수상은 팀 성과입니다."
+        "result_sections": [],
+        "personal_results": [
+          "교내 대상 서비스 기획안 반영",
+          "온보딩 입력 검증 · 매칭 후보·질문함 화면 및 라우팅 연결"
+        ],
+        "team_results": [
+          "회원가입·학생 인증·로그인·봉사활동 신청 프로토타입 시연",
+          "EASYTHON 2025 우수상"
+        ]
       }
     },
     {
@@ -1717,6 +1977,22 @@
         {
           "label": "GC 상태 전이 코드 (검증 기준 커밋)",
           "url": "https://github.com/day-e0n/ssp_team_project/blob/d4cc5587ab3834e34eddf840992bbfd3753584cf/garbage_collection.c"
+        },
+        {
+          "label": "개인 커밋: GC 정책 변형 구현",
+          "url": "https://github.com/day-e0n/ssp_team_project/commit/36d8a07dfb137a24bf6fe0d1fa3506006a2c0455"
+        },
+        {
+          "label": "개인 커밋: GameGC·Greedy 통합",
+          "url": "https://github.com/day-e0n/ssp_team_project/commit/b9040288c17e90ab3c243d624add6e442e57f9c6"
+        },
+        {
+          "label": "개인 커밋: Cost-Benefit 디버그·검증 로그",
+          "url": "https://github.com/day-e0n/ssp_team_project/commit/4cb4171fc561a60cf644c9d8203faf9f9ffab77e"
+        },
+        {
+          "label": "개인 커밋: Cost-Benefit 빌드 경계 보완",
+          "url": "https://github.com/day-e0n/ssp_team_project/commit/f1134febf6cd4856308353d28a099efa9df9f761"
         }
       ],
       "role": "팀 프로젝트",
@@ -1797,6 +2073,60 @@
             "성능 데이터 시각화",
             "스토리지 GC 동작 탐구"
           ]
+        },
+        {
+          "title": "GC 정책 통합 및 진행 제어",
+          "phrase_rows": [
+            {
+              "label": "정책 통합",
+              "items": [
+                "Greedy·Cost-Benefit·CAT 정책 변형의 구현·통합 변경 반영"
+              ]
+            },
+            {
+              "label": "진행 제어",
+              "items": [
+                "GameGC·Greedy 통합 · 스케줄링 주기·free block 조건·페이지 처리 한도 반영"
+              ]
+            }
+          ],
+          "links": [
+            {
+              "label": "개인 커밋: GC 정책 변형 구현",
+              "url": "https://github.com/day-e0n/ssp_team_project/commit/36d8a07dfb137a24bf6fe0d1fa3506006a2c0455"
+            },
+            {
+              "label": "개인 커밋: GameGC·Greedy 통합",
+              "url": "https://github.com/day-e0n/ssp_team_project/commit/b9040288c17e90ab3c243d624add6e442e57f9c6"
+            }
+          ]
+        },
+        {
+          "title": "실행 상태 점검과 빌드 호환성",
+          "phrase_rows": [
+            {
+              "label": "검증 로그",
+              "items": [
+                "Cost-Benefit 후보 선정·erase 후 상태 확인용 디버그·검증 로그 보완"
+              ]
+            },
+            {
+              "label": "빌드 보완",
+              "items": [
+                "Cost-Benefit 변형의 빌드 경계 및 심볼 호환성 보완"
+              ]
+            }
+          ],
+          "links": [
+            {
+              "label": "개인 커밋: Cost-Benefit 디버그·검증 로그",
+              "url": "https://github.com/day-e0n/ssp_team_project/commit/4cb4171fc561a60cf644c9d8203faf9f9ffab77e"
+            },
+            {
+              "label": "개인 커밋: Cost-Benefit 빌드 경계 보완",
+              "url": "https://github.com/day-e0n/ssp_team_project/commit/f1134febf6cd4856308353d28a099efa9df9f761"
+            }
+          ]
         }
       ],
       "visual": {
@@ -1814,31 +2144,13 @@
       "card_outcome": "GC 지연시간의 스파이크와 점진적 회수 패턴 비교·분석",
       "intro_phrase": "Xilinx·Cosmos+ 보드에서 GC 정책별 성능을 비교한 FTL 실험 프로젝트",
       "role_items": [
-        "팀 프로젝트"
+        "GC 정책 변형 구현·통합 참여",
+        "GameGC·Greedy 통합: 스케줄링·free block 조건·페이지 진행 제어",
+        "Cost-Benefit 디버그·검증 로그 및 빌드 호환성 보완"
       ],
       "outcome_items": [
         "GC latency의 스파이크 및 점진적 회수 패턴 비교·분석"
       ],
-      "case_story": {
-        "headline": "Xilinx · Cosmos+ 기반 FTL·GC 성능 비교",
-        "feature_sections": [
-          0
-        ],
-        "stories": [
-          {
-            "section": 1,
-            "title": "GC 지연 스파이크와 점진적 회수 패턴 분석",
-            "groups": [
-              {
-                "label": "분석 항목",
-                "row_indices": [
-                  0
-                ]
-              }
-            ]
-          }
-        ]
-      },
       "diagram": {
         "label": "GC 상태 전이",
         "title": "Victim 선택·페이지 이동·erase를 나누는 GameGC 상태 전이",
@@ -1862,7 +2174,69 @@
           }
         ],
         "feedback": "남은 페이지는 다음 스케줄링 주기에 이어서 처리",
-        "note": "공개 팀 코드의 GC 상태 전이와 디버그 로그를 기준으로 정리했습니다. 개인 구현 범위는 현재 공개 근거로 구분할 수 없어 팀 프로젝트 참여로만 표기합니다."
+        "note": "팀 시스템의 상태 전이 구조. 개인 코드 기여: GC 정책 통합, GameGC 진행 제어, Cost-Benefit 디버그·빌드 호환성 보완. 보드 측정 결과와 성능 비교는 팀 프로젝트 범위입니다."
+      },
+      "contribution_story": {
+        "headline": "GC 정책을 통합하고 실행 상태 점검 코드 보완",
+        "scope_items": [
+          "GC 정책 변형 구현·통합 참여",
+          "GameGC·Greedy 통합: 스케줄링·free block 조건·페이지 진행 제어",
+          "Cost-Benefit 디버그·검증 로그 및 빌드 호환성 보완"
+        ],
+        "team_scope_items": [
+          "Cosmos+ OpenSSD 보드 기반 GC 정책 실험·성능 비교",
+          "GC latency의 스파이크·점진적 회수 패턴 분석"
+        ],
+        "context_sections": [
+          0,
+          1
+        ],
+        "contribution_sections": [
+          {
+            "section": 2,
+            "title": "GC 정책 통합 및 진행 제어",
+            "groups": [
+              {
+                "label": "정책 통합",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "진행 제어",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 3,
+            "title": "실행 상태 점검과 빌드 호환성",
+            "groups": [
+              {
+                "label": "검증 로그",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "빌드 보완",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "result_sections": [],
+        "personal_results": [
+          "GC 정책 통합·진행 제어 및 디버그 코드 보완",
+          "Cost-Benefit 빌드·심볼 호환성 변경 반영"
+        ],
+        "team_results": [
+          "Cosmos+ OpenSSD 기반 정책별 동작·지연 패턴 비교·분석"
+        ]
       }
     },
     {
@@ -2051,15 +2425,67 @@
       "outcome_items": [
         "F1 Score 상위 10% 달성"
       ],
-      "case_story": {
-        "headline": "고객 데이터로 지원 필요 수준 분류",
-        "feature_sections": [
-          0
+      "diagram": {
+        "label": "실험 설계",
+        "title": "고객 데이터에서 분류 모델 비교까지",
+        "description": "개인 프로젝트에서 데이터 전처리와 파생 변수 설계, 교차검증, 모델·불균형 처리 비교를 수행한 흐름입니다.",
+        "steps": [
+          {
+            "title": "데이터 점검",
+            "text": "고객 특성 탐색 · 결측·분포 확인"
+          },
+          {
+            "title": "파생 변수",
+            "text": "비율 · 위험도 · 구간화 특성 생성"
+          },
+          {
+            "title": "교차검증",
+            "text": "StratifiedKFold 5-fold · Macro F1"
+          },
+          {
+            "title": "실험 비교",
+            "text": "CatBoost · Random Forest · 불균형 처리"
+          }
         ],
-        "stories": [
+        "note": "개인 프로젝트의 실험 설계입니다. 공개 리더보드 점수와 교차검증 점수는 다른 조건일 수 있어 직접 비교하지 않습니다."
+      },
+      "contribution_story": {
+        "headline": "고객 행동 특성을 설계하고 분류 실험을 비교하다",
+        "scope_items": [
+          "고객 데이터 전처리·탐색",
+          "행동 패턴 파생 변수 설계",
+          "교차검증 및 모델·불균형 처리 비교"
+        ],
+        "team_scope_items": [],
+        "context_sections": [],
+        "contribution_sections": [
+          {
+            "section": 0,
+            "title": "지원 필요 수준을 분류할 데이터·검증 기준 설계",
+            "groups": [
+              {
+                "label": "분류 목표",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "실험 설계",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "파생 변수",
+                "row_indices": [
+                  2
+                ]
+              }
+            ]
+          },
           {
             "section": 1,
-            "title": "모델·불균형 처리 실험",
+            "title": "모델·튜닝·불균형 처리 전략 비교",
             "groups": [
               {
                 "label": "비교 프레임워크",
@@ -2087,31 +2513,12 @@
               }
             ]
           }
-        ]
-      },
-      "diagram": {
-        "label": "실험 설계",
-        "title": "고객 데이터에서 분류 모델 비교까지",
-        "description": "개인 프로젝트에서 데이터 전처리와 파생 변수 설계, 교차검증, 모델·불균형 처리 비교를 수행한 흐름입니다.",
-        "steps": [
-          {
-            "title": "데이터 점검",
-            "text": "고객 특성 탐색 · 결측·분포 확인"
-          },
-          {
-            "title": "파생 변수",
-            "text": "비율 · 위험도 · 구간화 특성 생성"
-          },
-          {
-            "title": "교차검증",
-            "text": "StratifiedKFold 5-fold · Macro F1"
-          },
-          {
-            "title": "실험 비교",
-            "text": "CatBoost · Random Forest · 불균형 처리"
-          }
         ],
-        "note": "개인 프로젝트의 실험 설계입니다. 공개 리더보드 점수와 교차검증 점수는 다른 조건일 수 있어 직접 비교하지 않습니다."
+        "result_sections": [],
+        "personal_results": [
+          "F1 Score 상위 10% 기록"
+        ],
+        "team_results": []
       }
     },
     {
@@ -2206,32 +2613,6 @@
         "팀 결과: 조류 탐지·소리 재생 연계 프로토타입 완성",
         "KHUTHON 2025 우수상 수상"
       ],
-      "case_story": {
-        "headline": "조류 탐지와 퇴치음 재생을 연결한 프로토타입",
-        "feature_sections": [
-          0
-        ],
-        "stories": [
-          {
-            "section": 1,
-            "title": "탐지 결과를 API 기반 소리 재생으로 연결",
-            "groups": [
-              {
-                "label": "구현·발표",
-                "row_indices": [
-                  0
-                ]
-              },
-              {
-                "label": "팀 결과·한계",
-                "row_indices": [
-                  1
-                ]
-              }
-            ]
-          }
-        ]
-      },
       "diagram": {
         "label": "팀 시스템·개인 담당",
         "title": "조류 탐지 결과를 API 요청과 퇴치음 재생으로 연결",
@@ -2251,6 +2632,62 @@
           }
         ],
         "note": "개인 기여는 기피음 조사·음원 제작·재생 연계와 발표이며, 조류 탐지 모델은 팀 공동 산출물입니다. 탐지 정확도나 농가 피해 감소 성과는 확인된 범위가 아닙니다."
+      },
+      "contribution_story": {
+        "headline": "탐지 결과를 기피음 재생 경험으로 연결하다",
+        "scope_items": [
+          "유해조류 문제 기반 서비스 아이디어 제안",
+          "퇴치음 조사·음원 제작",
+          "API 요청 기반 소리 재생 기능 구현",
+          "발표자료 제작 및 발표"
+        ],
+        "team_scope_items": [
+          "조류 탐지 모델·탐지 결과 산출",
+          "탐지·소리 재생 연계 프로토타입 완성",
+          "KHUTHON 2025 우수상 수상"
+        ],
+        "context_sections": [],
+        "contribution_sections": [
+          {
+            "section": 0,
+            "title": "유해조류 탐지 후 필요한 사용자 경험을 제안",
+            "groups": [
+              {
+                "label": "아이디어 제안",
+                "row_indices": [
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "section": 1,
+            "title": "탐지 결과를 API 기반 기피음 재생으로 연결",
+            "groups": [
+              {
+                "label": "직접 구현·발표",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "팀 결과·검증 범위",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "result_sections": [],
+        "personal_results": [
+          "API 요청에 따른 기피음 재생 기능 구현",
+          "발표자료 제작 및 발표"
+        ],
+        "team_results": [
+          "조류 탐지·소리 재생 연계 프로토타입 완성",
+          "KHUTHON 2025 우수상"
+        ]
       }
     },
     {
@@ -2423,18 +2860,27 @@
       "context_items": [
         "정책별 성능 자동 측정 및 분석·시각화"
       ],
-      "case_story": {
-        "headline": "처리율과 데이터 보존을 함께 본 RocksDB 분석",
-        "feature_sections": [
+      "contribution_story": {
+        "headline": "처리율과 데이터 보존을 함께 해석해 논문으로 정리한 기여",
+        "scope_items": [
+          "팀 실험 결과를 표·그래프로 정리",
+          "데이터 유지 특성과 읽기·쓰기 성능 관계 분석",
+          "논문 작성·첨삭 반영 · KCC 2025 제1저자 발표"
+        ],
+        "team_scope_items": [
+          "동일 조건에서 Leveled·Universal·FIFO 정책 비교",
+          "db_bench·statistics 기반 처리율·WAF·조회 성공 횟수 측정"
+        ],
+        "context_sections": [
           0
         ],
-        "stories": [
+        "contribution_sections": [
           {
             "section": 1,
-            "title": "높은 처리율과 실제 조회 성공 횟수 함께 해석",
+            "title": "처리율과 데이터 보존을 함께 해석",
             "groups": [
               {
-                "label": "분석 결과",
+                "label": "분석 관점",
                 "row_indices": [
                   0
                 ]
@@ -2443,10 +2889,10 @@
           },
           {
             "section": 2,
-            "title": "실험 결과의 논문 작성과 학술대회 발표",
+            "title": "분석 결과의 논문 작성과 발표",
             "groups": [
               {
-                "label": "담당 역할",
+                "label": "직접 담당",
                 "row_indices": [
                   0
                 ]
@@ -2459,6 +2905,15 @@
               }
             ]
           }
+        ],
+        "result_sections": [],
+        "personal_results": [
+          "실험 결과 표·그래프화 · 데이터 유지 특성과 성능 관계 분석",
+          "KCC 2025 논문 작성 · 제1저자 발표"
+        ],
+        "team_results": [
+          "세 Compaction 정책의 동일 조건 비교 실험",
+          "처리율·Write Amplification Factor·조회 성공 횟수의 교차 해석"
         ]
       }
     }
