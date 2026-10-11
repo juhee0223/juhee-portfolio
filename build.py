@@ -132,7 +132,7 @@ def home():
 <section id="awards" class="section container"><div class="section-heading"><div><h2>수상 <span class="section-count">4</span></h2></div><p>해커톤에서의 실행과 연구의 성과.</p></div><div class="award-list">{awards}</div></section>
 <section id="activities" class="section activities-section"><div class="container"><div class="section-heading"><div><h2>활동 <span class="section-count">{len(DATA["activities"])}</span></h2></div><p>현장의 반복 업무 개선부터 연구·정보 전달까지,<br>개발 밖에서 문제를 보고 실행한 경험입니다.</p></div><div class="activity-grid">{activities}</div></div></section>
 <section id="credentials" class="section container"><div class="section-heading"><h2>자격증 · 어학</h2></div><div class="credential-grid">{credentials}</div></section>
-<section id="contact" class="section container contact-section"><div><h2>연락처</h2><p>단국대학교 소프트웨어학과 4학년</p></div><div class="contact-links"><a class="contact-email" href="mailto:pjuhee23@dankook.ac.kr">pjuhee23@dankook.ac.kr <span>↗</span></a><div><a class="text-link" href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></section></main>'''
+<section id="contact" class="section container contact-section"><div class="section-heading"><h2>연락처</h2></div><div><p>단국대학교 소프트웨어학과 4학년</p></div><div class="contact-links"><a class="contact-email" href="mailto:pjuhee23@dankook.ac.kr">pjuhee23@dankook.ac.kr <span>↗</span></a><div><a class="text-link" href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></section></main>'''
 
 def detail(p,i):
     project_awards = [a for a in DATA['awards'] if a['url'] == f"projects/{p['slug']}.html"]
