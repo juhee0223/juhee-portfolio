@@ -8,6 +8,14 @@ Original screenshots, presentation figures, and experimental plots are used to i
 - Context: 날짜별 예매 상태와 신청 흐름을 확인하는 실제 서비스 화면입니다. 팀 공동 산출물입니다.
 - Source: existing approved portfolio service screenshot. The card shows a crop; the detail page retains the full image.
 
+### 가을축제 공지 화면 — 2026-10-11 교체
+
+- `assets/danzzan-autumn-notice-ko.png`: https://github.com/user-attachments/assets/e3576ab8-2327-47a9-a5cd-e7652c4c1c60
+- `assets/danzzan-autumn-notice-en.png`: https://github.com/user-attachments/assets/04af38cb-3413-403d-8e7c-0d402c92e3de
+- Source: https://github.com/DKU-Dan-Zzan — 한국어·영어 전환 및 콘텐츠 번역 섹션.
+- GitHub에 교체된 원본 이미지를 그대로 사용. 팀 공동 산출물이며 개인 단독 구현의 증거로 사용하지 않음.
+- 홈·부스맵·팔찌 배부·관리자 번역 화면·협업 로고는 최신 공개 파일과 바이트 단위로 동일함을 확인.
+
 ## Conquer Health
 
 - Asset: `assets/conquer-decision-flow.svg`

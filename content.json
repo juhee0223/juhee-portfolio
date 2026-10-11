@@ -548,19 +548,19 @@
       ],
       "translation_screens": [
         {
-          "src": "assets/danzzan-translation-user-ko.png",
-          "width": 1696,
-          "height": 2528,
+          "src": "assets/danzzan-autumn-notice-ko.png",
+          "width": 1024,
+          "height": 1536,
           "alt": "가을축제 공지 상세 한국어 화면",
-          "source_url": "https://github.com/user-attachments/assets/a7cebf0c-edf2-4fe4-8630-71c113e0246c",
+          "source_url": "https://github.com/user-attachments/assets/e3576ab8-2327-47a9-a5cd-e7652c4c1c60",
           "label": "한국어 공지"
         },
         {
-          "src": "assets/danzzan-translation-user-en.png",
-          "width": 1696,
-          "height": 2528,
+          "src": "assets/danzzan-autumn-notice-en.png",
+          "width": 1024,
+          "height": 1536,
           "alt": "동일한 가을축제 공지 상세 영어 화면",
-          "source_url": "https://github.com/user-attachments/assets/5ceaa3a8-a8fd-4d2d-bdf9-11a0d79a0abc",
+          "source_url": "https://github.com/user-attachments/assets/04af38cb-3413-403d-8e7c-0d402c92e3de",
           "label": "영어 공지"
         },
         {
