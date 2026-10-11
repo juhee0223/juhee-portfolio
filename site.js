@@ -95,6 +95,24 @@
     updateHeaderCurrent();
     scheduleHeaderNavigation = scheduleHeaderCurrent;
   }
+  const publicationDetails = [...document.querySelectorAll('.pub-details')];
+  function revealLinkedPublication() {
+    const publication = document.getElementById(window.location.hash.slice(1));
+    if (!publication?.matches('.publication')) return;
+    const details = publication.querySelector('.pub-details');
+    if (details) details.open = true;
+  }
+  publicationDetails.forEach(details => details.addEventListener('toggle', scheduleHeaderNavigation));
+  window.addEventListener('hashchange', revealLinkedPublication);
+  revealLinkedPublication();
+  let closedBeforePrint = [];
+  window.addEventListener('beforeprint', () => {
+    closedBeforePrint = publicationDetails.filter(details => !details.open);
+    closedBeforePrint.forEach(details => { details.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    closedBeforePrint.forEach(details => { details.open = false; });
+  });
   const buttons = document.querySelectorAll('[data-filter]');
   const cards = document.querySelectorAll('.project-card');
   buttons.forEach(button => button.addEventListener('click', () => {

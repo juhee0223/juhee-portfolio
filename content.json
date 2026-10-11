@@ -218,7 +218,31 @@
       "hero_highlight": "봄축제 팀 성과 / 가입자 6,063명 · 티켓 3,500장 매진",
       "collaboration": "Jira",
       "collaboration_method": "Agile / Scrum — 스프린트 기반 개발 및 데일리 스크럼 진행",
-      "branch_strategy": "GitHub Flow"
+      "branch_strategy": "GitHub Flow",
+      "card_role": "요구사항 조율 · 기능 단위 개발 · 배포·현장 운영",
+      "diagram": {
+        "title": "예매와 현장 업무가 연결되는 흐름",
+        "description": "봄축제에서 운영한 팀 공동 서비스 흐름입니다. 명단 연계와 현장 업무를 함께 표시했습니다.",
+        "steps": [
+          {
+            "title": "정보 탐색·가입·예매",
+            "text": "학생이 축제 정보를 확인하고 가입 후 날짜별 예매 진행"
+          },
+          {
+            "title": "날짜별 명단 협의·전달",
+            "text": "날짜별 입장 권한과 예매자 명단 처리 기준을 협의"
+          },
+          {
+            "title": "현장 입장·배부",
+            "text": "예매자 정보를 바탕으로 협력사와 운영진이 현장 업무 수행",
+            "branches": [
+              "협력사 · FaceSign 입장",
+              "운영진 · 관리자 조회·팔찌 배부"
+            ]
+          }
+        ],
+        "note": "개인 참여: 요구사항 조율, 기능 단위 화면·서버 개발, NHN Cloud 배포·운영·모니터링, 현장 팔찌 배부. 현재 서버 운영은 종료했으며, 고도화 후 2026년 11월 재배포를 준비하고 있습니다."
+      }
     },
     {
       "slug": "conquer-health",
@@ -357,7 +381,31 @@
           "label": "루닛 공식 수상 기사",
           "url": "https://www.lunit.io/ko/media-hub/루닛-국가과제-ai-모델-활용-첫-해커톤-성료-개발자/"
         }
-      ]
+      ],
+      "card_role": "비교 결과 검토 · 개선 방향 제안 · 응답 규칙 공동 개선",
+      "diagram": {
+        "title": "응답 규칙 적용과 최종 평가 흐름",
+        "description": "HealthBench 기준을 참고해 응답 규칙을 공동 보완하고, 제출 시스템은 대회 최종 벤치마크에서 평가받았습니다.",
+        "steps": [
+          {
+            "title": "질문·응답 규칙 입력",
+            "text": "의료·건강 질문과 공동 보완한 응답 규칙을 생성 요청에 반영"
+          },
+          {
+            "title": "L2-preview 생성",
+            "text": "추가 모델 호출 없이 기존 생성 요청으로 답변 생성"
+          },
+          {
+            "title": "의료 답변 출력",
+            "text": "질문의 요구·위험 신호·추가 정보 확인을 고려하도록 응답 지침 보완"
+          },
+          {
+            "title": "최종 평가",
+            "text": "대회 최종 3라운드 평균 46.51점 · 평가 참여 14팀 중 1위"
+          }
+        ],
+        "note": "개인 참여: 비교 결과 검토, 개선 방향 제안, HealthBench 기준 분석과 응답 규칙 공동 개선. 응답 규칙과 제출 구현은 팀 공동 산출물이며, 규칙 보완으로 별도 모델 호출을 추가하지 않았습니다."
+      }
     },
     {
       "slug": "olly",
@@ -432,7 +480,32 @@
         "caption": "요청 처리를 관측 파이프라인과 분리하고 지표·trace·오류 알림을 연결한 구조입니다. 공개 최종 발표자료 6쪽의 팀 공동 산출물입니다.",
         "source_url": "https://github.com/lee-y-ch/olly/blob/b0cdb00ade035b750ed7618bc401dd96ca013b85/presentation/OLLY_%EC%B5%9C%EC%A2%85%EB%B0%9C%ED%91%9C.pdf#page=6"
       },
-      "hero_highlight": "지연·오류 등 5개 시나리오, 각 10회 검증"
+      "hero_highlight": "지연·오류 등 5개 시나리오, 각 10회 검증",
+      "card_role": "문제 정의 · 솔루션 비교 · 검증 시나리오 설계",
+      "diagram": {
+        "title": "요청 단위 관측과 오류 알림 경로",
+        "description": "로컬 Kubernetes 환경에서 LLM/RAG 요청을 계측하고, 지표·trace·오류 알림을 연결한 팀 공동 관측성 MVP의 흐름입니다.",
+        "steps": [
+          {
+            "title": "요청 처리",
+            "text": "로컬 Kubernetes(kind) 환경에서 LLM/RAG 요청 실행"
+          },
+          {
+            "title": "FastAPI 계측",
+            "text": "요청의 검색·모델 호출·오류 정보를 실행 단위로 수집"
+          },
+          {
+            "title": "관측 정보 연결",
+            "text": "request_id · trace_id를 기준으로 같은 요청 확인",
+            "branches": [
+              "Prometheus · Grafana → 지표",
+              "Jaeger → 실행 추적",
+              "실패 요청 → Discord 알림"
+            ]
+          }
+        ],
+        "note": "개인 담당: 문제 정의, 기존 솔루션 비교, 로컬 SLM 활용 검토, 5개 검증 시나리오 설계. MVP 계측 구현과 반복 실행 결과는 팀 공동 작업입니다."
+      }
     },
     {
       "slug": "sketch-to-spec",
@@ -497,7 +570,8 @@
         "preview_label": "손그림 UI 입력 예시",
         "preview_layout": "sketch-detail"
       },
-      "hero_highlight": "UI 요소 감지와 계획 수정 루프를 포함한 Agent 구현"
+      "hero_highlight": "UI 요소 감지와 계획 수정 루프를 포함한 Agent 구현",
+      "card_role": "개인 프로젝트 · 시스템 설계·구현"
     },
     {
       "slug": "sun-date",
@@ -545,7 +619,8 @@
         "caption": "EASYTHON 최종 발표자료의 사용자 시나리오입니다. 프로필 기반 상대방 선택부터 봉사 매칭과 기관 전송까지의 흐름을 담았습니다.",
         "source_url": "https://github.com/day-e0n/sun_date"
       },
-      "hero_highlight": "봉사와 만남을 연결한 프로토타입 제작·시연"
+      "hero_highlight": "봉사와 만남을 연결한 프로토타입 제작·시연",
+      "card_role": "아이디어·서비스 범위 조정 · 프론트엔드 구현"
     },
     {
       "slug": "gamegc",
@@ -601,7 +676,8 @@
         "caption": "COSMOS+ 환경에서 Cost-Benefit GC의 실행 로그를 확인한 화면입니다. 저장소에 공개된 팀 실험 기록입니다.",
         "source_url": "https://github.com/day-e0n/ssp_team_project/blob/main/cost_benefit_final_console.png"
       },
-      "hero_highlight": "GC 지연시간의 스파이크와 점진적 회수 패턴 비교"
+      "hero_highlight": "GC 지연시간의 스파이크와 점진적 회수 패턴 비교",
+      "card_role": "팀 프로젝트 참여"
     },
     {
       "slug": "dacon",
@@ -656,7 +732,8 @@
         "caption": "원본 고객 특성 간 관계를 살펴본 탐색적 데이터 분석 결과입니다.",
         "source_url": "https://github.com/juhee0223/DACON-Customer-Support-Classification"
       },
-      "hero_highlight": "F1 Score 상위 10% 달성"
+      "hero_highlight": "F1 Score 상위 10% 달성",
+      "card_role": "개인 프로젝트 · 데이터 전처리·모델 비교 실험"
     },
     {
       "slug": "bird-repeller",
@@ -704,7 +781,8 @@
         "caption": "저장소의 테스트 이미지에서 까치를 Magpie로 탐지한 출력 예시입니다.",
         "source_url": "https://github.com/JustYOLO/Getout_Bird/blob/main/watchbird/test_image/frame_result_10.jpg"
       },
-      "hero_highlight": "조류 탐지와 퇴치음 재생을 연결한 프로토타입 구현"
+      "hero_highlight": "조류 탐지와 퇴치음 재생을 연결한 프로토타입 구현",
+      "card_role": "아이디어 제안 · 퇴치음 제작·재생 기능 · 발표"
     },
     {
       "slug": "rocksdb",
@@ -767,7 +845,8 @@
         "caption": "KCC 2025 논문 그림 5. 실제 조회 성공 횟수를 비교했습니다. FIFO는 오래된 데이터를 삭제하므로 처리율과 데이터 보존 특성을 함께 해석했습니다.",
         "source_url": "https://www.kiise.or.kr/conference/kcc/2025/"
       },
-      "hero_highlight": "KCC 2025 논문 제1저자 발표"
+      "hero_highlight": "KCC 2025 논문 제1저자 발표",
+      "card_role": "비교 실험·분석 · 제1저자 논문 작성·발표"
     }
   ],
   "publications": [
@@ -810,7 +889,8 @@
           "label": "게재 정보",
           "text": "한국정보과학회(Korean Institute of Information Scientists and Engineers), 2026-09-01 게재. ISSN 2383-6318(Print) / 2383-6326(Online)."
         }
-      ]
+      ],
+      "key_finding": "임베딩 모델과 인덱스 구성을 비교해 검색·응답 품질과 저장 비용의 차이를 분석했습니다."
     },
     {
       "title": "운영체제 교재기반 RAG시스템 구축",
@@ -844,7 +924,8 @@
           "label": "주요 결과",
           "text": "실험 범위에서 순차 쓰기는 채널 간 데이터 분산을 활용한 Channel 우선, 순차 읽기는 Way 파이프라이닝을 활용한 Way 우선 정책이 가장 유리했습니다. Page 우선은 병렬성을 충분히 활용하지 못해 I/O Depth가 높아져도 대역폭 증가가 작고 지연이 커졌습니다. 워크로드를 감지해 FTL에서 정책을 동적으로 전환하는 방법을 후속 연구로 제안했습니다."
         }
-      ]
+      ],
+      "key_finding": "순차 쓰기에는 Channel 우선, 순차 읽기에는 Way 우선 할당이 유리했습니다."
     },
     {
       "title": "벡터 공간 구조의 특성 시각화 및 의미론적 해석: OSTEP 교재 기반 사례 연구",
@@ -881,7 +962,8 @@
           "label": "결과",
           "text": "WDSC 2025 우수논문상을 받았습니다. 이후 임베딩 모델과 RAG 성능 비교로 연구를 확장했으며, 확장 논문은 2026년 9월 정보과학회 컴퓨팅의 실제 논문지에 게재되었습니다."
         }
-      ]
+      ],
+      "key_finding": "운영체제 개념의 벡터 분포를 시각화하고, 교재의 개념적 관계와 비교해 해석했습니다."
     },
     {
       "title": "RocksDB에서 Compaction Style에 따른 성능 변화 분석",
@@ -922,7 +1004,8 @@
           "label": "의미·한계",
           "text": "읽기 중심 작업에서는 Leveled, 쓰기 비용과 읽기 성능의 균형에서는 Universal의 이점을 확인했습니다. FIFO는 데이터 보존 요구까지 고려해야 하며, 처리율·지연시간과 조회 성공 여부를 함께 평가해야 합니다. 계층별 정책을 조합하는 Tiered Compaction과 읽기·쓰기 혼합 워크로드 실험은 후속 연구로 제안했습니다."
         }
-      ]
+      ],
+      "key_finding": "FIFO의 높은 읽기 처리율과 낮은 실제 조회 성공 횟수를 함께 확인해, 처리율만으로 성능을 판단하기 어려움을 분석했습니다."
     }
   ],
   "awards": [
@@ -1043,6 +1126,90 @@
       "title": "TOEIC 790점",
       "detail": "영어 · 응시일",
       "date": "2025-11-09"
+    }
+  ],
+  "skills": [
+    {
+      "title": "서비스 개발",
+      "tech": [
+        "Java",
+        "Spring Boot",
+        "React",
+        "TypeScript",
+        "MySQL",
+        "Redis",
+        "Kafka"
+      ],
+      "context": "학생용 화면과 관리자 기능, 서버 API 구현",
+      "links": [
+        {
+          "label": "단짠",
+          "url": "projects/danzzan.html"
+        }
+      ]
+    },
+    {
+      "title": "AI 응용·데이터",
+      "tech": [
+        "Python",
+        "LLM / RAG",
+        "LangGraph",
+        "Codex",
+        "PyTorch",
+        "OpenCV",
+        "scikit-learn"
+      ],
+      "context": "AI를 활용한 개발과 의료 응답·에이전트 실험",
+      "links": [
+        {
+          "label": "Conquer Health",
+          "url": "projects/conquer-health.html"
+        },
+        {
+          "label": "SketchToSpec",
+          "url": "projects/sketch-to-spec.html"
+        }
+      ]
+    },
+    {
+      "title": "배포·운영",
+      "tech": [
+        "NHN Cloud",
+        "Docker",
+        "Kubernetes",
+        "Linux",
+        "Git"
+      ],
+      "context": "클라우드 서비스 운영과 로컬 관측성 MVP 검증",
+      "links": [
+        {
+          "label": "단짠",
+          "url": "projects/danzzan.html"
+        },
+        {
+          "label": "OLLY",
+          "url": "projects/olly.html"
+        }
+      ]
+    },
+    {
+      "title": "시스템 연구",
+      "tech": [
+        "C / C++",
+        "RocksDB",
+        "Cosmos+ OpenSSD"
+      ],
+      "context": "스토리지 정책별 성능 비교·분석",
+      "links": [
+        {
+          "label": "RocksDB",
+          "url": "projects/rocksdb.html"
+        },
+        {
+          "label": "FTL Simulator",
+          "url": "projects/gamegc.html"
+        }
+      ]
     }
   ]
 }
