@@ -75,11 +75,12 @@ def project_diagram(p):
     diagram = p.get('diagram')
     if not diagram:
         return ''
-    steps = ''
-    for i, step in enumerate(diagram['steps']):
-        branches = '<ul class="diagram-branches">'+''.join(f'<li>{e(branch)}</li>' for branch in step['branches'])+'</ul>' if step.get('branches') else ''
-        steps += f'<li><span class="diagram-index">{i+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p>{branches}</li>'
-    return f'<figure id="flow" class="project-diagram"><figcaption><p class="eyebrow">흐름 한눈에 보기 · 팀 공동 산출물</p><h2>{e(diagram["title"])}</h2><p>{e(diagram["description"])}</p></figcaption><ol class="diagram-steps diagram-steps-{len(diagram["steps"])}">{steps}</ol><p class="diagram-note">{e(diagram["note"])}</p></figure>'
+    labels = {'danzzan':'서비스 연계', 'conquer-health':'응답·평가 흐름', 'olly':'관측 경로'}
+    nodes = ''
+    for step in diagram['steps']:
+        branches = '<ul class="system-branches">'+''.join(f'<li>{e(branch)}</li>' for branch in step['branches'])+'</ul>' if step.get('branches') else ''
+        nodes += f'<li class="system-node"><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p>{branches}</li>'
+    return f'<figure id="flow" class="system-diagram"><figcaption><span class="flow-label">{e(labels[p["slug"]])}</span><div><h2>{e(diagram["title"])}</h2><p>{e(diagram["description"])}</p></div></figcaption><ol class="system-graph system-graph-{len(diagram["steps"])}" aria-label="{e(diagram["title"])}">{nodes}</ol><div class="flow-attribution"><span>참여 범위</span><p>{e(diagram["note"])}</p></div></figure>'
 
 def phrase_list(items, slug=None):
     render = (lambda value: highlighted(value, slug)) if slug else e
@@ -168,13 +169,12 @@ def home():
 def section_extras(p, s):
     bullets = phrase_list(s.get('display_bullets', s.get('bullets', [])), p['slug']) if s.get('display_bullets', s.get('bullets')) else ''
     status = f'<p class="case-status">{e(s["status"])}</p>' if s.get('status') else ''
-    flow = '<div class="decision-flow" aria-label="과정 설명">'+''.join(f'<div><span class="flow-index">{k+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p></div>' for k,step in enumerate(s['steps']))+'</div>' if s.get('steps') else ''
     metrics = '<dl class="info-list result-metrics">'+''.join(info_row(m['label'], f'<strong class="metric-value">{e(m["value"])}</strong>') for m in s['metrics'])+'</dl>' if s.get('metrics') else ''
     comparison = ''
     if s.get('score_comparison'):
         rows = ''.join(f'<tr><th scope="row">{e(row["round"])}</th><td class="aim-score">{e(row["aim"])}</td><td>{e(row["runner_up"])}</td><td>{Decimal(row["aim"]) - Decimal(row["runner_up"]):+.2f}</td></tr>' for row in s['score_comparison'])
         comparison = f'<div class="score-comparison"><table><caption>최종 상위 2팀의 라운드별 점수 (점)</caption><thead><tr><th scope="col">평가</th><th scope="col">AIM · 1위</th><th scope="col">2위 팀</th><th scope="col">차이</th></tr></thead><tbody>{rows}</tbody></table><p class="score-note">{e(s["score_note"])}</p></div>'
-    return status, bullets+flow+metrics+comparison
+    return status, bullets+metrics+comparison
 
 def case_band(label, title, body, anchor):
     return f'<section class="case-band" id="{e(anchor)}"><div class="case-rail">{e(label)}</div><div class="case-content"><h2 class="case-band-title">{e(title)}</h2>{body}</div></section>'
@@ -196,7 +196,7 @@ def case_section(p, index, story=None):
         partner=p.get('partnership')
         if partner:
             media=f'<div class="partner-feature">{project_image(partner,"../")}<p class="partner-kicker">네이버페이 페이스사인 협업 · 봄축제 입장 연계</p><p>단짠 예매 유지 → 날짜별 예매자 명단 전달 → 페이스사인 현장 입장</p><small>개인 참여: 협업 범위·명단 전달 기준 조율 및 가입 흐름 반영 · 얼굴 인증은 협력사 담당</small></div>'
-        extras+=project_diagram(p)
+        media+=project_diagram(p)
         extras+=''.join(case_gallery_item(item) for item in p.get('gallery',[]))
         extras+='<figure class="case-inline-image consent-image"><div class="visual-frame"><img src="../assets/danzzan-consent.png" alt="단짠 예매 안내와 필수 동의 확인 화면" loading="lazy" width="941" height="1672"></div><figcaption>예매 안내와 필수 동의 확인 · 팀 공동 산출물</figcaption></figure>'
     if p['slug']=='danzzan' and index==6 and p.get('translation_screens'):
@@ -219,8 +219,8 @@ def detail(p,i):
         if p.get(key): collaboration+=info_row(label,e(p[key]))
     if collaboration: stack+='<dl class="case-info collaboration-info">'+collaboration+'</dl>'
     stack=case_band('02 / Stack','사용 기술과 협업',stack,'stack')
-    feature=project_visual(p)
-    if p['slug']!='danzzan': feature+=project_diagram(p)
+    feature=project_diagram(p) if p['slug']!='danzzan' else ''
+    feature+=project_visual(p)
     feature+=''.join(case_section(p,index) for index in plan['feature_sections'])
     feature=case_band('03 / Implementation','핵심 기능과 구현 방식',feature,'implementation')
     stories=''.join(case_section(p,story['section'],story) for story in plan['stories'])
