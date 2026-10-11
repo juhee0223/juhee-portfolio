@@ -81,14 +81,35 @@ def project_diagram(p):
         steps += f'<li><span class="diagram-index">{i+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p>{branches}</li>'
     return f'<figure id="flow" class="project-diagram"><figcaption><p class="eyebrow">흐름 한눈에 보기 · 팀 공동 산출물</p><h2>{e(diagram["title"])}</h2><p>{e(diagram["description"])}</p></figcaption><ol class="diagram-steps diagram-steps-{len(diagram["steps"])}">{steps}</ol><p class="diagram-note">{e(diagram["note"])}</p></figure>'
 
+def info_row(label, value):
+    return f'<div class="info-row"><dt>{e(label)}</dt><dd>{value}</dd></div>'
+
+def project_facts(p, detail=False):
+    rows = info_row('담당', highlighted(p['role'], p['slug']) if detail else e(p['card_role']))
+    if detail:
+        rows += info_row('기간·구성', e(p['period']+' · '+p['kind']))
+    for metric in p.get('card_metrics', []):
+        rows += info_row(metric['label'], f'<strong class="metric-value">{e(metric["value"])}</strong>')
+    # Numeric results appear in their own rows; the outcome row retains team context.
+    outcome = p.get('card_outcome', p['outcome']) if not detail or p.get('card_metrics') else p['outcome']
+    rows += info_row('성과', highlighted(outcome, p['slug']))
+    status = p.get('status') if detail else p.get('card_status')
+    if status:
+        rows += info_row('운영 상태', e(status))
+    if detail and p.get('metrics_source'):
+        rows += info_row('성과 근거', links([p['metrics_source']]))
+    rows += info_row('사용 기술', '<div class="tech-tags">'+tags(p['tech'] if detail else p['tech'][:5])+'</div>')
+    if detail:
+        for key, label in [('collaboration', '협업 도구'), ('collaboration_method', '협업 방식'), ('branch_strategy', '브랜치 전략')]:
+            if p.get(key): rows += info_row(label, e(p[key]))
+    return f'<dl class="info-list {"case-overview" if detail else "card-facts"}">{rows}</dl>'
+
 def card(p, i):
     v = p.get('visual')
     preview = (''.join(project_image(item) for item in v["images"]) if v.get("images") else project_image(v.get("preview", v))) if v else ''
     layout = "screen-strip" if v and v.get("images") else v.get("preview_layout", "") if v else ""
     media = f'<div class="card-media-wrap"><div class="card-media {e(layout)}">{preview}</div><p class="card-media-label">{e(v.get("preview_label", v["label"]))}</p></div>' if v else ''
-    metrics = '<dl class="card-metrics">'+''.join(f'<div><dt>{e(m["label"])}</dt><dd>{e(m["value"])}</dd></div>' for m in p['card_metrics'])+'</dl>' if p.get('card_metrics') else ''
-    status = f'<p class="card-status">{e(p["card_status"])}</p>' if p.get('card_status') else ''
-    return f'''<article class="project-card {"featured-card" if i < 2 else "supporting-card"}" data-category="{e(p['category'])}"><a class="card-body" href="projects/{e(p['slug'])}.html" aria-labelledby="project-{e(p['slug'])}">{media}<div class="card-copy"><div class="card-meta"><span>{e(p['kind'])}</span><span>{e(p['period'])}</span></div><h3 id="project-{e(p['slug'])}">{e(p['title'])}<span aria-hidden="true">↗</span></h3><p class="card-subtitle">{e(p.get('card_intro',p['subtitle']))}</p><p class="card-role"><span>담당</span>{e(p["card_role"])}</p>{metrics}<p class="card-result">{e(p.get('card_outcome',p['outcome']))}</p>{status}<div class="tech-tags">{tags(p['tech'][:5])}</div><span class="card-cta">프로젝트 읽기 <span aria-hidden="true">→</span></span></div></a></article>'''
+    return f'''<article class="project-card {"featured-card" if i < 2 else "supporting-card"}" data-category="{e(p['category'])}"><a class="card-body" href="projects/{e(p['slug'])}.html" aria-labelledby="project-{e(p['slug'])}">{media}<div class="card-copy"><div class="card-meta"><span>{e(p['kind'])}</span><span>{e(p['period'])}</span></div><h3 id="project-{e(p['slug'])}">{e(p['title'])}<span aria-hidden="true">↗</span></h3><p class="card-subtitle">{e(p.get('card_intro',p['subtitle']))}</p>{project_facts(p)}<span class="card-cta">프로젝트 읽기 <span aria-hidden="true">→</span></span></div></a></article>'''
 
 def publication_abstract(p):
     rows = p.get('display_abstract', p.get('abstract', []))
@@ -143,11 +164,11 @@ def detail(p,i):
         labels = s.get('paragraph_labels', [])
         for k,t in enumerate(s.get('paragraphs', [])):
             label = f'<h3>{e(labels[k])}</h3>' if k < len(labels) and labels[k] else ''
-            paragraphs += f'<div class="case-paragraph">{label}<p>{highlighted(t,p["slug"])}</p></div>'
+            paragraphs += f'<div class="case-paragraph{" has-label" if label else ""}">{label}<p>{highlighted(t,p["slug"])}</p></div>'
         bullets='<ul>'+''.join(f'<li>{highlighted(t,p["slug"])}</li>' for t in s.get('bullets',[]))+'</ul>' if s.get('bullets') else ''
         status = f'<p class="case-status">{e(s["status"])}</p>' if s.get('status') else ''
         flow = '<div class="decision-flow" aria-label="과정 설명">'+''.join(f'<div><span class="flow-index">{k+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p></div>' for k,step in enumerate(s['steps']))+'</div>' if s.get('steps') else ''
-        metrics = '<dl class="result-metrics">'+''.join(f'<div><dt>{e(m["label"])}</dt><dd>{e(m["value"])}</dd></div>' for m in s['metrics'])+'</dl>' if s.get('metrics') else ''
+        metrics = '<dl class="info-list result-metrics">'+''.join(info_row(m['label'], f'<strong class="metric-value">{e(m["value"])}</strong>') for m in s['metrics'])+'</dl>' if s.get('metrics') else ''
         comparison = ''
         if s.get('score_comparison'):
             rows = ''.join(f'<tr><th scope="row">{e(row["round"])}</th><td class="aim-score">{e(row["aim"])}</td><td>{e(row["runner_up"])}</td><td>{Decimal(row["aim"]) - Decimal(row["runner_up"]):+.2f}</td></tr>' for row in s['score_comparison'])
@@ -161,17 +182,11 @@ def detail(p,i):
     for item in p.get('gallery', []):
         gallery += f'<section class="case-gallery"><h2>{e(item["label"])}</h2><figure class="supplementary-visual"><div class="visual-frame">{project_image(item, "../")}</div><figcaption>{e(item["caption"])}</figcaption></figure><div class="visual-links">{links([{"label":"자료 출처", "url":item["source_url"]}])}</div></section>'
     nav=('<a href="#visual">대표 자료</a>' if p.get('visual') else '') + ('<a href="#flow">흐름 한눈에 보기</a>' if p.get('diagram') else '') + ''.join(f'<a href="#section-{j}">{e(s.get("display_title",s["title"]))}</a>' for j,s in enumerate(p['sections']))
-    status = f'<p class="case-status">{e(p["status"])}</p>' if p.get('status') else ''
-    collaboration = f'<p class="collaboration-tools"><span class="eyebrow">협업 도구</span><br>{e(p["collaboration"])}</p>' if p.get('collaboration') else ''
-    if p.get('collaboration_method'):
-        collaboration += f'<p class="collaboration-method"><span class="eyebrow">협업 방식</span><br>{e(p["collaboration_method"])}</p>'
-    if p.get('branch_strategy'):
-        collaboration += f'<p class="branch-strategy"><span class="eyebrow">브랜치 전략</span><br>{e(p["branch_strategy"])}</p>'
     hero_period = p.get('hero_period', p['period'].replace('-', '.'))
     hero_kind = p['kind'].split(' · ')[0]
     context = f'<p class="case-context">{e(p["detail_context"])}</p>' if p.get('detail_context') else ''
     nxt=DATA['projects'][(i+1)%len(DATA['projects'])]
-    return f'''<main id="main"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><div><p class="case-meta"><span>{e(CATS[p['category']])}</span><span>{e(hero_period)}</span><span>{e(hero_kind)}</span></p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(p.get('card_intro', p['subtitle']))}</p>{award_summary}{context}{status}<div class="pub-links">{links(p.get('primary_links', p['links'])[:2])}</div></div></section><div class="case-overview"><div><span class="eyebrow">기여와 역할</span><p>{e(p['role'])}</p><p class="case-project-details">{e(p['period'])}<br>{e(p['kind'])}</p></div><div><span class="eyebrow">결과</span><p>{highlighted(p['outcome'],p['slug'])}</p></div><div><span class="eyebrow">사용 기술</span><div class="tech-tags">{tags(p['tech'])}</div>{collaboration}</div></div><div class="case-layout"><aside class="case-toc"><span class="eyebrow">목차</span>{nav}<a href="#evidence">관련 자료</a></aside><div class="case-body">{project_visual(p)}{project_diagram(p)}{body_sections}{gallery}<section id="evidence" class="case-evidence"><p class="eyebrow">관련 자료</p><h2>프로젝트 자료 및 구현 근거</h2><div class="evidence-links">{links(p['links'])}</div></section></div></div><nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
+    return f'''<main id="main"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><div><p class="case-meta"><span>{e(CATS[p['category']])}</span><span>{e(hero_period)}</span><span>{e(hero_kind)}</span></p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(p.get('card_intro', p['subtitle']))}</p>{award_summary}{context}<div class="pub-links">{links(p.get('primary_links', p['links'])[:2])}</div></div></section>{project_facts(p, detail=True)}<div class="case-layout"><aside class="case-toc"><span class="eyebrow">목차</span>{nav}<a href="#evidence">관련 자료</a></aside><div class="case-body">{project_visual(p)}{project_diagram(p)}{body_sections}{gallery}<section id="evidence" class="case-evidence"><p class="eyebrow">관련 자료</p><h2>프로젝트 자료 및 구현 근거</h2><div class="evidence-links">{links(p['links'])}</div></section></div></div><nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
 
 (ROOT/'index.html').write_text(shell('포트폴리오', home()))
 (ROOT/'projects').mkdir(exist_ok=True)
