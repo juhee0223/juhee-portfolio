@@ -165,42 +165,80 @@ def home():
 <section id="credentials" class="section container"><div class="section-heading"><h2>자격증 · 어학</h2></div><div class="credential-grid">{credentials}</div></section>
 <section id="contact" class="section container contact-section"><div class="section-heading"><h2>연락처</h2></div><div><p>단국대학교 소프트웨어학과 4학년</p></div><div class="contact-links"><a class="contact-email" href="mailto:pjuhee23@dankook.ac.kr">pjuhee23@dankook.ac.kr <span>↗</span></a><div><a class="text-link" href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></section></main>'''
 
+def section_extras(p, s):
+    bullets = phrase_list(s.get('display_bullets', s.get('bullets', [])), p['slug']) if s.get('display_bullets', s.get('bullets')) else ''
+    status = f'<p class="case-status">{e(s["status"])}</p>' if s.get('status') else ''
+    flow = '<div class="decision-flow" aria-label="과정 설명">'+''.join(f'<div><span class="flow-index">{k+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p></div>' for k,step in enumerate(s['steps']))+'</div>' if s.get('steps') else ''
+    metrics = '<dl class="info-list result-metrics">'+''.join(info_row(m['label'], f'<strong class="metric-value">{e(m["value"])}</strong>') for m in s['metrics'])+'</dl>' if s.get('metrics') else ''
+    comparison = ''
+    if s.get('score_comparison'):
+        rows = ''.join(f'<tr><th scope="row">{e(row["round"])}</th><td class="aim-score">{e(row["aim"])}</td><td>{e(row["runner_up"])}</td><td>{Decimal(row["aim"]) - Decimal(row["runner_up"]):+.2f}</td></tr>' for row in s['score_comparison'])
+        comparison = f'<div class="score-comparison"><table><caption>최종 상위 2팀의 라운드별 점수 (점)</caption><thead><tr><th scope="col">평가</th><th scope="col">AIM · 1위</th><th scope="col">2위 팀</th><th scope="col">차이</th></tr></thead><tbody>{rows}</tbody></table><p class="score-note">{e(s["score_note"])}</p></div>'
+    return status, bullets+flow+metrics+comparison
+
+def case_band(label, title, body, anchor):
+    return f'<section class="case-band" id="{e(anchor)}"><div class="case-rail">{e(label)}</div><div class="case-content"><h2 class="case-band-title">{e(title)}</h2>{body}</div></section>'
+
+def case_gallery_item(item):
+    return f'<figure class="case-inline-image"><div class="visual-frame">{project_image(item, "../")}</div><figcaption><strong>{e(item["label"])}</strong><p>{e(item["caption"])}</p>{links([{"label":"자료 출처", "url":item["source_url"]}])}</figcaption></figure>'
+
+def case_section(p, index, story=None):
+    s=p['sections'][index]
+    status, extras=section_extras(p,s)
+    groups=story['groups'] if story else [{'label':r['label'],'row_indices':[i]} for i,r in enumerate(s['phrase_rows'])]
+    rows=''
+    for group in groups:
+        items=[item for i in group['row_indices'] for item in s['phrase_rows'][i]['items']]
+        rows+=f'<div class="story-row"><h4>{e(group["label"])}</h4>{phrase_list(items,p["slug"])}</div>'
+    title=story['title'] if story else s.get('display_title',s['title'])
+    media=''
+    if p['slug']=='danzzan' and index==1:
+        partner=p.get('partnership')
+        if partner:
+            media=f'<div class="partner-feature">{project_image(partner,"../")}<p class="partner-kicker">네이버페이 페이스사인 협업 · 봄축제 입장 연계</p><p>단짠 예매 유지 → 날짜별 예매자 명단 전달 → 페이스사인 현장 입장</p><small>개인 참여: 협업 범위·명단 전달 기준 조율 및 가입 흐름 반영 · 얼굴 인증은 협력사 담당</small></div>'
+        extras+=project_diagram(p)
+        extras+=''.join(case_gallery_item(item) for item in p.get('gallery',[]))
+        extras+='<figure class="case-inline-image consent-image"><div class="visual-frame"><img src="../assets/danzzan-consent.png" alt="단짠 예매 안내와 필수 동의 확인 화면" loading="lazy" width="941" height="1672"></div><figcaption>예매 안내와 필수 동의 확인 · 팀 공동 산출물</figcaption></figure>'
+    if p['slug']=='danzzan' and index==6 and p.get('translation_screens'):
+        shots=''.join(f'<figure>{project_image(item,"../")}<figcaption>{e(item["label"])}</figcaption></figure>' for item in p['translation_screens'])
+        extras+=f'<div class="recovery-result"><span>복구 검증</span><strong>미번역 대상 0건</strong><p>실제 번역 대상 조건의 SQL 조회로 확인 · 새 공지의 번역·저장·영어 화면 표시 검증</p></div><div class="translation-gallery" id="translation-screens">{shots}</div><p class="media-note">가을축제 번역 화면 · 팀 공동 산출물. 개인 기여는 운영 중 번역 누락의 원인 분석·복구 및 저장·화면 검증.</p><div class="visual-links">{links([{"label":"팀 공개 화면 자료","url":"https://github.com/DKU-Dan-Zzan"}])}</div>'
+    return f'<article class="case-story" id="section-{index}"><h3>{e(title)}</h3>{status}{media}<div class="story-rows">{rows}</div>{extras}</article>'
+
 def detail(p,i):
-    project_awards = [a for a in DATA['awards'] if a['url'] == f"projects/{p['slug']}.html"]
-    award_summary = ''.join(f'<p class="case-award"><span class="award-label">수상</span><strong>{e(a["title"])}</strong></p>' for a in project_awards)
-    body_sections=''
-    for j,s in enumerate(p['sections']):
-        paragraphs = ''
-        labels = s.get('paragraph_labels', [])
-        if s.get('phrase_rows'):
-            for row in s['phrase_rows']:
-                paragraphs += f'<div class="case-paragraph has-label"><h3>{e(row["label"])}</h3>{phrase_list(row["items"], p["slug"])}</div>'
-        else:
-            for k,t in enumerate(s.get('paragraphs', [])):
-                label = f'<h3>{e(labels[k])}</h3>' if k < len(labels) and labels[k] else ''
-                paragraphs += f'<div class="case-paragraph{" has-label" if label else ""}">{label}<p>{highlighted(t,p["slug"])}</p></div>'
-        bullets = phrase_list(s.get('display_bullets', s.get('bullets', [])), p['slug']) if s.get('display_bullets', s.get('bullets')) else ''
-        status = f'<p class="case-status">{e(s["status"])}</p>' if s.get('status') else ''
-        flow = '<div class="decision-flow" aria-label="과정 설명">'+''.join(f'<div><span class="flow-index">{k+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p></div>' for k,step in enumerate(s['steps']))+'</div>' if s.get('steps') else ''
-        metrics = '<dl class="info-list result-metrics">'+''.join(info_row(m['label'], f'<strong class="metric-value">{e(m["value"])}</strong>') for m in s['metrics'])+'</dl>' if s.get('metrics') else ''
-        comparison = ''
-        if s.get('score_comparison'):
-            rows = ''.join(f'<tr><th scope="row">{e(row["round"])}</th><td class="aim-score">{e(row["aim"])}</td><td>{e(row["runner_up"])}</td><td>{Decimal(row["aim"]) - Decimal(row["runner_up"]):+.2f}</td></tr>' for row in s['score_comparison'])
-            comparison = f'<div class="score-comparison"><table><caption>최종 상위 2팀의 라운드별 점수 (점)</caption><thead><tr><th scope="col">평가</th><th scope="col">AIM · 1위</th><th scope="col">2위 팀</th><th scope="col">차이</th></tr></thead><tbody>{rows}</tbody></table><p class="score-note">{e(s["score_note"])}</p></div>'
-        body_sections+=f'<section class="case-section" id="section-{j}"><div><h2>{e(s.get("display_title",s["title"]))}</h2>{status}{paragraphs}{bullets}{flow}{metrics}{comparison}</div></section>'
-    gallery=''
-    if p['slug']=='danzzan':
-        gallery='''<section class="case-gallery"><div class="eyebrow">서비스 화면</div><h2>예매 안내와 동의 확인</h2><div class="phone-gallery"><figure><img src="../assets/danzzan-consent.png" alt="단짠 예매 안내와 필수 동의 확인 화면" loading="lazy" width="941" height="1672"><figcaption>예매 안내와 필수 동의 확인 · 팀 공동 산출물</figcaption></figure></div></section>'''
-    elif p['slug']=='olly':
-        gallery='''<section class="case-gallery"><div class="eyebrow">로컬 MVP 데모</div><h2>오류 요청도 추적할 수 있도록</h2><figure><img class="wide-image" src="../assets/olly-error.png" alt="의도적으로 오류를 발생시킨 OLLY 데모에서 요청 ID, trace ID, 오류 상태가 함께 표시된 화면" width="1336" height="676" loading="lazy"><figcaption>실패 요청의 ID와 오류 상태를 유지하는 데모 화면 · 팀 공동 산출물</figcaption></figure></section>'''
-    for item in p.get('gallery', []):
-        gallery += f'<section class="case-gallery"><h2>{e(item["label"])}</h2><figure class="supplementary-visual"><div class="visual-frame">{project_image(item, "../")}</div><figcaption>{e(item["caption"])}</figcaption></figure><div class="visual-links">{links([{"label":"자료 출처", "url":item["source_url"]}])}</div></section>'
-    nav=('<a href="#visual">대표 자료</a>' if p.get('visual') else '') + ('<a href="#flow">흐름 한눈에 보기</a>' if p.get('diagram') else '') + ''.join(f'<a href="#section-{j}">{e(s.get("display_title",s["title"]))}</a>' for j,s in enumerate(p['sections']))
-    hero_period = p.get('hero_period', p['period'].replace('-', '.'))
-    hero_kind = p['kind'].split(' · ')[0]
-    context = '<div class="case-context">'+phrase_list(p['context_items'])+'</div>' if p.get('context_items') else f'<p class="case-context">{e(p["detail_context"])}</p>' if p.get('detail_context') else ''
+    plan=p['case_story']
+    awards=[a for a in DATA['awards'] if a['url']==f"projects/{p['slug']}.html"]
+    award_summary=''.join(f'<p class="case-award"><span class="award-label">수상</span><strong>{e(a["title"])}</strong></p>' for a in awards)
+    overview=info_row('기간',e(p['period']))+info_row('팀 구성',e(p['kind']))+info_row('담당 역할',phrase_list(p['role_items'],p['slug']))
+    overview+=info_row('서비스·과제',e(p['intro_phrase']))
+    if p.get('context_items'): overview+=info_row('연구 범위',phrase_list(p['context_items']))
+    if p.get('status'): overview+=info_row('현재 상태',e(p['status']))
+    overview=case_band('01 / Overview','프로젝트 개요','<dl class="case-info">'+overview+'</dl>','overview')
+    stack='<div class="tech-tags">'+tags(p['tech'])+'</div>'
+    collaboration=''
+    for key,label in [('collaboration','협업 도구'),('collaboration_method','협업 방식'),('branch_strategy','브랜치 전략')]:
+        if p.get(key): collaboration+=info_row(label,e(p[key]))
+    if collaboration: stack+='<dl class="case-info collaboration-info">'+collaboration+'</dl>'
+    stack=case_band('02 / Stack','사용 기술과 협업',stack,'stack')
+    feature=project_visual(p)
+    if p['slug']!='danzzan': feature+=project_diagram(p)
+    feature+=''.join(case_section(p,index) for index in plan['feature_sections'])
+    feature=case_band('03 / Implementation','핵심 기능과 구현 방식',feature,'implementation')
+    stories=''.join(case_section(p,story['section'],story) for story in plan['stories'])
+    stories=case_band('04 / Problem solving','문제 해결과 검증',stories,'problem-solving') if stories else ''
+    results=''
+    if p.get('card_metrics'):
+        results='<dl class="case-result-metrics">'+''.join(info_row(m['label'],e(m['value'])) for m in p['card_metrics'])+'</dl>'
+    results+=phrase_list(p['outcome_items'],p['slug'])
+    if p.get('metrics_source'): results+='<div class="visual-links">'+links([p['metrics_source']])+'</div>'
+    if p['slug']=='olly': results+='<figure class="case-inline-image"><img src="../assets/olly-error.png" alt="OLLY 오류 요청 ID와 trace ID, 오류 상태를 함께 확인하는 데모 화면" width="1336" height="676" loading="lazy"><figcaption>실패 요청의 ID와 오류 상태를 유지하는 로컬 MVP 데모 · 팀 공동 산출물</figcaption></figure>'
+    if p['slug']!='danzzan': results+=''.join(case_gallery_item(item) for item in p.get('gallery',[]))
+    results=case_band('Results','성과와 확인 범위',results,'results')
+    evidence=case_band('Evidence','자료 및 구현 근거','<div class="evidence-links">'+links(p['links'])+'</div>','evidence')
+    nav='<a href="#overview">개요</a><a href="#stack">사용 기술</a><a href="#implementation">핵심 구현</a>'
+    if stories: nav+='<a href="#problem-solving">문제 해결</a>'
+    nav+='<a href="#results">성과</a>'
     nxt=DATA['projects'][(i+1)%len(DATA['projects'])]
-    return f'''<main id="main"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><div><p class="case-meta"><span>{e(CATS[p['category']])}</span><span>{e(hero_period)}</span><span>{e(hero_kind)}</span></p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(p.get('intro_phrase', p.get('card_intro', p['subtitle'])))}</p>{award_summary}{context}<div class="pub-links">{links(p.get('primary_links', p['links'])[:2])}</div></div></section>{project_facts(p, detail=True)}<div class="case-layout"><aside class="case-toc"><span class="eyebrow">목차</span>{nav}<a href="#evidence">관련 자료</a></aside><div class="case-body">{project_visual(p)}{project_diagram(p)}{body_sections}{gallery}<section id="evidence" class="case-evidence"><p class="eyebrow">관련 자료</p><h2>프로젝트 자료 및 구현 근거</h2><div class="evidence-links">{links(p['links'])}</div></section></div></div><nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
+    return f'''<main id="main" class="case-study"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><p class="eyebrow">{e(CATS[p['category']])}</p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(plan['headline'])}</p>{award_summary}<div class="pub-links">{links(p.get('primary_links',p['links'])[:2])}</div></section><nav class="case-toc" aria-label="프로젝트 상세 목차">{nav}</nav>{overview}{stack}{feature}{stories}{results}{evidence}<nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
 
 (ROOT/'index.html').write_text(shell('포트폴리오', home()))
 (ROOT/'projects').mkdir(exist_ok=True)

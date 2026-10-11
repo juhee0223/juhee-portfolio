@@ -544,7 +544,178 @@
       "outcome_items": [
         "봄축제 팀 서비스 성과: 가입자 6,063명 · 티켓 3,500장 매진",
         "현재 서버 운영 종료 · 고도화 후 2026년 11월 재배포 예정"
-      ]
+      ],
+      "case_story": {
+        "headline": "축제 예매부터 현장 입장까지 연결한 서비스",
+        "feature_sections": [
+          0,
+          1
+        ],
+        "stories": [
+          {
+            "section": 6,
+            "title": "번역 누락 복구: 로그·DB·영어 화면으로 확인",
+            "groups": [
+              {
+                "label": "문제",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "접근",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "결과",
+                "row_indices": [
+                  2
+                ]
+              }
+            ]
+          },
+          {
+            "section": 2,
+            "title": "티켓 포기 후 탈퇴할 수 있도록 정책 조정",
+            "groups": [
+              {
+                "label": "문제",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "접근",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "검증",
+                "row_indices": [
+                  2
+                ]
+              },
+              {
+                "label": "결과",
+                "row_indices": [
+                  3
+                ]
+              }
+            ]
+          },
+          {
+            "section": 3,
+            "title": "DB 직접 수정에서 업무별 권한 관리로",
+            "groups": [
+              {
+                "label": "문제",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "접근",
+                "row_indices": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "label": "결과·현재 상태",
+                "row_indices": [
+                  3
+                ]
+              }
+            ]
+          },
+          {
+            "section": 4,
+            "title": "기기별 검증에서 발견한 화면 갱신 문제 보완",
+            "groups": [
+              {
+                "label": "검증 환경",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "문제·접근",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 5,
+            "title": "두 차례 축제 운영과 복구 절차 공유",
+            "groups": [
+              {
+                "label": "팀 서비스 성과",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "현장 경험",
+                "row_indices": [
+                  1
+                ]
+              },
+              {
+                "label": "문제 해결·공유",
+                "row_indices": [
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "translation_screens": [
+        {
+          "src": "assets/danzzan-translation-user-ko.png",
+          "width": 1696,
+          "height": 2528,
+          "alt": "가을축제 공지 상세 한국어 화면",
+          "source_url": "https://github.com/user-attachments/assets/a7cebf0c-edf2-4fe4-8630-71c113e0246c",
+          "label": "한국어 공지"
+        },
+        {
+          "src": "assets/danzzan-translation-user-en.png",
+          "width": 1696,
+          "height": 2528,
+          "alt": "동일한 가을축제 공지 상세 영어 화면",
+          "source_url": "https://github.com/user-attachments/assets/5ceaa3a8-a8fd-4d2d-bdf9-11a0d79a0abc",
+          "label": "영어 공지"
+        },
+        {
+          "src": "assets/danzzan-translation-admin-ko.png",
+          "width": 3164,
+          "height": 1966,
+          "alt": "관리자 페이지의 한국어 부스 정보 입력 화면",
+          "source_url": "https://github.com/user-attachments/assets/f34e37c8-f589-47b5-b911-e459c68a7611",
+          "label": "한국어 부스 정보 입력"
+        },
+        {
+          "src": "assets/danzzan-translation-admin-en.png",
+          "width": 3164,
+          "height": 1966,
+          "alt": "관리자 페이지의 영어 번역 확인 및 수정 입력란",
+          "source_url": "https://github.com/user-attachments/assets/c2ef91c2-d3bb-498a-ace3-037c127f274b",
+          "label": "영문 번역 확인·수정"
+        }
+      ],
+      "partnership": {
+        "src": "assets/danzzan-partnership.jpg",
+        "width": 1667,
+        "height": 280,
+        "alt": "DANZZAN과 네이버페이 협업 로고",
+        "source_url": "https://raw.githubusercontent.com/DKU-Dan-Zzan/.github/main/profile/collab-logo.jpg"
+      }
     },
     {
       "slug": "conquer-health",
@@ -810,7 +981,69 @@
       "outcome_items": [
         "팀 성과: 정식 평가 3라운드 평균 46.51점 · 평가 참여 14팀 중 1위",
         "의료 특화 파운데이션 모델 해커톤 벤치마크상 수상"
-      ]
+      ],
+      "case_story": {
+        "headline": "평가 근거로 의료 AI 응답 규칙 개선",
+        "feature_sections": [
+          0
+        ],
+        "stories": [
+          {
+            "section": 1,
+            "title": "부분 점수의 한계를 고려한 제출 방향 제안",
+            "groups": [
+              {
+                "label": "문제",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "접근",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 2,
+            "title": "HealthBench 기준을 의료 응답 규칙으로 구체화",
+            "groups": [
+              {
+                "label": "개선 기준",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "접근·공동 구현",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 3,
+            "title": "정식 평가 3라운드 평균 1위",
+            "groups": [
+              {
+                "label": "팀 결과",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "해석 범위",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "slug": "olly",
@@ -994,7 +1227,51 @@
       "outcome_items": [
         "팀 검증: 5개 시나리오 × 각 10회 실행",
         "주입한 지연·오류가 해당 관측 구간에 나타나는 것 확인"
-      ]
+      ],
+      "case_story": {
+        "headline": "Kubernetes 기반 요청 단위 LLM 관측성",
+        "feature_sections": [
+          2
+        ],
+        "stories": [
+          {
+            "section": 0,
+            "title": "전체 응답 시간에서 지연 발생 구간으로",
+            "groups": [
+              {
+                "label": "문제",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "접근·팀 구현",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 1,
+            "title": "5개 시나리오로 관측 결과 반복 검증",
+            "groups": [
+              {
+                "label": "검증 설계",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "검증 결과",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "slug": "sketch-to-spec",
@@ -1102,7 +1379,15 @@
       "outcome_items": [
         "UI 요소 감지 · LangGraph StateGraph 기반 계획 수정 루프 구현",
         "멀티모달 ReAct Agent 파이프라인 구축"
-      ]
+      ],
+      "case_story": {
+        "headline": "손그림에서 요구사항 명세와 화면 흐름 생성",
+        "feature_sections": [
+          0,
+          1
+        ],
+        "stories": []
+      }
     },
     {
       "slug": "sun-date",
@@ -1201,7 +1486,49 @@
       ],
       "outcome_items": [
         "팀 프로토타입 제작·시연 · EASYTHON 2025 우수상"
-      ]
+      ],
+      "case_story": {
+        "headline": "봉사와 만남을 연결한 교내 서비스 프로토타입",
+        "feature_sections": [],
+        "stories": [
+          {
+            "section": 0,
+            "title": "참여 동기와 신원 확인을 고려한 서비스 범위 조정",
+            "groups": [
+              {
+                "label": "문제",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "접근",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "section": 1,
+            "title": "기획을 프론트엔드 구현과 시연으로 연결",
+            "groups": [
+              {
+                "label": "기여·팀 결과",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "검증·한계",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "slug": "gamegc",
@@ -1298,7 +1625,27 @@
       ],
       "outcome_items": [
         "GC latency의 스파이크 및 점진적 회수 패턴 비교·분석"
-      ]
+      ],
+      "case_story": {
+        "headline": "Xilinx · Cosmos+ 기반 FTL·GC 성능 비교",
+        "feature_sections": [
+          0
+        ],
+        "stories": [
+          {
+            "section": 1,
+            "title": "GC 지연 스파이크와 점진적 회수 패턴 분석",
+            "groups": [
+              {
+                "label": "분석 항목",
+                "row_indices": [
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "slug": "dacon",
@@ -1393,7 +1740,27 @@
       ],
       "outcome_items": [
         "F1 Score 상위 10% 달성"
-      ]
+      ],
+      "case_story": {
+        "headline": "고객 데이터로 지원 필요 수준 분류",
+        "feature_sections": [
+          0
+        ],
+        "stories": [
+          {
+            "section": 1,
+            "title": "분류 모델 비교와 F1 Score 평가",
+            "groups": [
+              {
+                "label": "비교 방법",
+                "row_indices": [
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "slug": "bird-repeller",
@@ -1486,7 +1853,33 @@
       "outcome_items": [
         "팀 결과: 조류 탐지·소리 재생 연계 프로토타입 완성",
         "KHUTHON 2025 우수상 수상"
-      ]
+      ],
+      "case_story": {
+        "headline": "조류 탐지와 퇴치음 재생을 연결한 프로토타입",
+        "feature_sections": [
+          0
+        ],
+        "stories": [
+          {
+            "section": 1,
+            "title": "탐지 결과를 API 기반 소리 재생으로 연결",
+            "groups": [
+              {
+                "label": "구현·발표",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "팀 결과·한계",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "slug": "rocksdb",
@@ -1627,7 +2020,45 @@
       ],
       "context_items": [
         "정책별 성능 자동 측정 및 분석·시각화"
-      ]
+      ],
+      "case_story": {
+        "headline": "처리율과 데이터 보존을 함께 본 RocksDB 분석",
+        "feature_sections": [
+          0
+        ],
+        "stories": [
+          {
+            "section": 1,
+            "title": "높은 처리율과 실제 조회 성공 횟수 함께 해석",
+            "groups": [
+              {
+                "label": "분석 결과",
+                "row_indices": [
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "section": 2,
+            "title": "실험 결과의 논문 작성과 학술대회 발표",
+            "groups": [
+              {
+                "label": "담당 역할",
+                "row_indices": [
+                  0
+                ]
+              },
+              {
+                "label": "한계·후속 연구",
+                "row_indices": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   ],
   "publications": [
