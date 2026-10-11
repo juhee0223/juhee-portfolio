@@ -86,7 +86,7 @@ def card(p, i):
 
 def skills_section():
     groups = ''.join(f'<article class="skill-group"><h3>{e(g["title"])}</h3><div class="tech-tags">{tags(g["tech"])}</div><p>{e(g["context"])}</p><div class="skill-links">{links(g["links"])}</div></article>' for g in DATA['skills'])
-    return f'<section id="skills" class="skills-section container" aria-labelledby="skills-title"><div class="section-heading"><h2 id="skills-title">사용 기술</h2><p>프로젝트에서 활용한 기술과 경험</p></div><div class="skill-grid">{groups}</div><p class="skills-collaboration"><strong>단짠 협업</strong> Jira · Agile / Scrum · 스프린트·데일리 스크럼 · GitHub Flow</p></section>'
+    return f'<section id="skills" class="skills-section container" aria-labelledby="skills-title"><div class="section-heading"><h2 id="skills-title">사용 기술</h2><p>프로젝트에서 활용한 기술과 경험</p></div><div class="skill-grid">{groups}</div><div class="skills-collaboration"><strong>협업 도구·방식</strong><div class="tech-tags">{tags(["Jira", "Agile / Scrum", "스프린트·데일리 스크럼", "GitHub Flow"])}</div></div></section>'
 
 def home():
     featured_html=''.join(card(p,i) for i,p in enumerate(DATA['projects'][:2]))

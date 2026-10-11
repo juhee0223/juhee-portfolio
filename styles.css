@@ -332,8 +332,9 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 .skill-group .tech-tags { margin-top: 10px; }
 .skill-group > p { color: var(--muted); font-size: 12px; margin-top: 12px; }
 .skill-links { display: flex; flex-wrap: wrap; gap: 5px 12px; margin-top: 8px; }
-.skills-collaboration { margin-top: 20px; font-size: 11px; color: var(--muted); }
-.skills-collaboration strong { color: var(--ink); margin-right: 10px; font-weight: 500; }
+.skills-collaboration { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 12px; margin-top: 20px; font-size: 12px; }
+.skills-collaboration strong { color: var(--ink); font-weight: 500; }
+.skills-collaboration .tech-tags { margin-top: 0; }
 .card-role { font-size: 12px; line-height: 1.9; margin-top: 14px; color: #41566b; }
 .card-role > span { color: var(--muted); margin-right: 8px; }
 .pub-main .pub-finding { color: var(--ink); }
