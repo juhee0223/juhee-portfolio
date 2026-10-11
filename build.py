@@ -80,7 +80,9 @@ def project_diagram(p):
     for step in diagram['steps']:
         branches = '<ul class="system-branches">'+''.join(f'<li>{e(branch)}</li>' for branch in step['branches'])+'</ul>' if step.get('branches') else ''
         nodes += f'<li class="system-node"><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p>{branches}</li>'
-    return f'<figure id="flow" class="system-diagram"><figcaption><span class="flow-label">{e(labels[p["slug"]])}</span><div><h2>{e(diagram["title"])}</h2><p>{e(diagram["description"])}</p></div></figcaption><ol class="system-graph system-graph-{len(diagram["steps"])}" aria-label="{e(diagram["title"])}">{nodes}</ol><div class="flow-attribution"><span>참여 범위</span><p>{e(diagram["note"])}</p></div></figure>'
+    label = diagram.get('label', labels.get(p['slug'], '시스템 흐름'))
+    feedback = f'<p class="system-feedback"><span aria-hidden="true">↶</span>{e(diagram["feedback"])}</p>' if diagram.get('feedback') else ''
+    return f'<figure id="flow" class="system-diagram"><figcaption><span class="flow-label">{e(label)}</span><div><h2>{e(diagram["title"])}</h2><p>{e(diagram["description"])}</p></div></figcaption><ol class="system-graph system-graph-{len(diagram["steps"])}" aria-label="{e(diagram["title"])}">{nodes}</ol>{feedback}<div class="flow-attribution"><span>참여 범위</span><p>{e(diagram["note"])}</p></div></figure>'
 
 def phrase_list(items, slug=None):
     render = (lambda value: highlighted(value, slug)) if slug else e
@@ -88,6 +90,21 @@ def phrase_list(items, slug=None):
 
 def info_row(label, value):
     return f'<div class="info-row"><dt>{e(label)}</dt><dd>{value}</dd></div>'
+
+def evidence_table(table):
+    """Render a compact, source-backed comparison table for a case-study section."""
+    if not table:
+        return ''
+    columns = ''.join(f'<th scope="col">{e(column)}</th>' for column in table['columns'])
+    rows = ''.join(
+        '<tr>'+''.join(
+            f'<th scope="row">{e(value)}</th>' if index == 0 else f'<td>{e(value)}</td>'
+            for index, value in enumerate(row)
+        )+'</tr>'
+        for row in table['rows']
+    )
+    note = f'<p class="evidence-table-note">{e(table["note"])}</p>' if table.get('note') else ''
+    return f'<div class="evidence-table-wrap" tabindex="0" role="region" aria-label="{e(table["caption"])}"><table class="evidence-table"><caption>{e(table["caption"])}</caption><thead><tr>{columns}</tr></thead><tbody>{rows}</tbody></table>{note}</div>'
 
 def project_facts(p, detail=False):
     role = phrase_list(p['role_items'], p['slug']) if detail and p.get('role_items') else highlighted(p['role'], p['slug']) if detail else e(p['card_role'])
@@ -174,7 +191,7 @@ def section_extras(p, s):
     if s.get('score_comparison'):
         rows = ''.join(f'<tr><th scope="row">{e(row["round"])}</th><td class="aim-score">{e(row["aim"])}</td><td>{e(row["runner_up"])}</td><td>{Decimal(row["aim"]) - Decimal(row["runner_up"]):+.2f}</td></tr>' for row in s['score_comparison'])
         comparison = f'<div class="score-comparison"><table><caption>최종 상위 2팀의 라운드별 점수 (점)</caption><thead><tr><th scope="col">평가</th><th scope="col">AIM · 1위</th><th scope="col">2위 팀</th><th scope="col">차이</th></tr></thead><tbody>{rows}</tbody></table><p class="score-note">{e(s["score_note"])}</p></div>'
-    return status, bullets+metrics+comparison
+    return status, bullets+metrics+comparison+evidence_table(s.get('evidence_table'))
 
 def case_band(label, title, body, anchor):
     number, rail_title = label.split(' / ', 1)

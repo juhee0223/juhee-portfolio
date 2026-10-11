@@ -622,12 +622,25 @@ html:has(.case-study) {
 .system-branches li::before { content: ''; position: absolute; width: 14px; height: 1px; background: #9aafc1; left: -15px; top: 50%; }
 .flow-attribution { padding-top: 20px; border-top: 1px solid var(--line); }
 .flow-attribution p { font-size: 13px; color: var(--muted); line-height: 1.9; }
+.system-feedback { display: flex; align-items: center; gap: 10px; margin: -8px 0 24px auto; width: calc(100% - 128px); padding: 11px 14px; border-left: 3px solid var(--accent); background: #eff6fc; color: #35536d; font-size: 13px; line-height: 1.75; }
+.system-feedback span { color: var(--accent); font-size: 18px; font-weight: 800; }
+
+/* Tables only surface compact, reviewed evidence from a case-study section. */
+.evidence-table-wrap { max-width: 100%; overflow-x: auto; margin-top: 34px; }
+.evidence-table-wrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.evidence-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; line-height: 1.65; }
+.evidence-table caption { padding-bottom: 13px; text-align: left; color: var(--ink); font-weight: 700; }
+.evidence-table th, .evidence-table td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.evidence-table thead th { background: #eef5fb; color: #35536d; font-size: 13px; font-weight: 700; }
+.evidence-table tbody th { color: var(--ink); font-weight: 700; white-space: nowrap; }
+.evidence-table-note { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.8; }
 @media (max-width: 1000px) {
   .system-graph { grid-template-columns: minmax(0,1fr); gap: 30px; }
   .system-node { padding: 20px; }
   .system-node + .system-node::before { width: 1px; height: 30px; left: 50%; top: -33px; }
   .system-node + .system-node::after { left: calc(50% - 3px); top: -12px; transform: rotate(135deg); }
   .system-node p { font-size: 14px; }
+  .system-feedback { width: 100%; margin-left: 0; }
 }
 @media (max-width: 600px) {
   .case-study .case-toc {
@@ -641,4 +654,6 @@ html:has(.case-study) {
   .system-diagram figcaption, .flow-attribution { grid-template-columns: 76px minmax(0,1fr); gap: 16px; }
   .system-diagram h2 { font-size: 19px; }
   .flow-label, .flow-attribution > span { font-size: 13px; }
+  .evidence-table { font-size: 13px; }
+  .evidence-table th, .evidence-table td { padding: 10px 12px; }
 }
