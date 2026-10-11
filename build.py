@@ -66,6 +66,9 @@ def project_visual(p):
     v = p.get('visual')
     if not v:
         return ''
+    if v.get('detail_rows'):
+        rows=''.join(f'<div class="story-row"><h4>{e(row["label"])}</h4>{phrase_list(row["items"],p["slug"])}</div>' for row in v['detail_rows'])
+        return f'<article id="visual" class="case-story"><h3>{e(v["label"])}</h3><div class="story-rows">{rows}</div></article>'
     source = f'<a class="text-link" href="{e(v["source_url"])}" target="_blank" rel="noopener noreferrer">자료 출처 ↗</a>' if v.get('source_url') else ''
     images = ''.join(f'<figure>{project_image(item, "../")}<figcaption>{e(item["label"])}</figcaption></figure>' for item in v['images']) if v.get('images') else project_image(v, '../')
     layout = ' screen-strip' if v.get('images') else ''
@@ -154,7 +157,7 @@ def publication_abstract(p):
 
 def skills_section():
     groups = ''.join(f'<article class="skill-group"><h3>{e(g["title"])}</h3><div class="tech-tags">{tags(g["tech"])}</div><p>{e(g["context"])}</p><div class="skill-links">{links(g["links"])}</div></article>' for g in DATA['skills'])
-    return f'<section id="skills" class="skills-section container" aria-labelledby="skills-title"><div class="section-heading"><h2 id="skills-title">사용 기술</h2><p>프로젝트에서 활용한 기술과 경험</p></div><div class="skill-grid">{groups}</div><div class="skills-collaboration"><strong>협업 도구·방식</strong><div class="tech-tags">{tags(["Jira", "Agile / Scrum", "스프린트·데일리 스크럼", "GitHub Flow"])}</div></div></section>'
+    return f'<section id="skills" class="skills-section container" aria-labelledby="skills-title"><div class="section-heading"><h2 id="skills-title">사용 기술</h2></div><div class="skill-grid">{groups}</div><div class="skills-collaboration"><strong>협업 도구·방식</strong><div class="tech-tags">{tags(["Jira", "Agile / Scrum", "스프린트·데일리 스크럼", "GitHub Flow"])}</div></div></section>'
 
 def home():
     featured_html=''.join(card(p,i) for i,p in enumerate(DATA['projects'][:2]))
@@ -176,8 +179,8 @@ def home():
     return f'''<main id="main">
 <section class="hero container"><img class="hero-portrait" src="assets/juhee-portrait.jpg" alt="박주희 프로필 사진" width="1169" height="1712" fetchpriority="high"><h1>만든 서비스가<br><span class="accent-text">실제로 쓰일 때까지.</span></h1><p class="hero-description">사용자와 운영자의 요구를 정리하고,<br>AI를 활용한 화면·서버 구현부터 배포와 운영 후 개선까지 이어갑니다.</p><div class="hero-actions"><a class="text-link" href="#projects">프로젝트 살펴보기 ↓</a><a class="text-link" href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></section>
 {skills_section()}
-<section id="projects" class="section container"><div class="section-heading"><div><h2>프로젝트 <span class="section-count">9</span></h2></div><p>서비스를 완성한 경험과 근거를 바탕으로 판단한 경험.<br>단짠과 의료 AI 해커톤을 대표 사례로 소개합니다.</p></div><div class="filter-row"><div class="filters" role="group" aria-label="프로젝트 분야 필터"><button type="button" data-filter="all" class="active" aria-pressed="true">전체 <span>9</span></button><button type="button" data-filter="service" aria-pressed="false">서비스</button><button type="button" data-filter="ai" aria-pressed="false">AI 응용</button><button type="button" data-filter="systems" aria-pressed="false">시스템 연구</button></div><p class="project-count" role="status" aria-live="polite">9개의 프로젝트</p></div><div class="project-group"><h3 class="project-group-title">대표 프로젝트 <span>서비스 완성과 문제 해결</span></h3><div class="project-grid featured-grid">{featured_html}</div></div><div class="project-group"><h3 class="project-group-title">더 살펴볼 경험 <span>관측성 · AI 응용 · 시스템 실험</span></h3><div class="project-grid supporting-grid">{supporting_html}</div></div></section>
-<section id="research" class="section research-section"><div class="container"><div class="section-heading"><div><h2>논문 · 출판 <span class="section-count">{len(DATA["publications"])}</span></h2></div><p>스토리지 성능 분석과 텍스트 임베딩 연구,<br>그리고 운영체제 교재 기반 RAG 저서.</p></div><div class="publication-list">{pubs}</div></div></section>
+<section id="projects" class="section container"><div class="section-heading"><div><h2>프로젝트 <span class="section-count">9</span></h2></div></div><div class="filter-row"><div class="filters" role="group" aria-label="프로젝트 분야 필터"><button type="button" data-filter="all" class="active" aria-pressed="true">전체 <span>9</span></button><button type="button" data-filter="service" aria-pressed="false">서비스</button><button type="button" data-filter="ai" aria-pressed="false">AI 응용</button><button type="button" data-filter="systems" aria-pressed="false">시스템 연구</button></div><p class="project-count" role="status" aria-live="polite">9개의 프로젝트</p></div><div class="project-group"><h3 class="project-group-title">대표 프로젝트 <span>서비스 완성과 문제 해결</span></h3><div class="project-grid featured-grid">{featured_html}</div></div><div class="project-group"><h3 class="project-group-title">더 살펴볼 경험 <span>관측성 · AI 응용 · 시스템 실험</span></h3><div class="project-grid supporting-grid">{supporting_html}</div></div></section>
+<section id="research" class="section research-section"><div class="container"><div class="section-heading"><div><h2>논문 · 출판 <span class="section-count">{len(DATA["publications"])}</span></h2></div></div><div class="publication-list">{pubs}</div></div></section>
 <section id="awards" class="section container"><div class="section-heading"><div><h2>수상 <span class="section-count">4</span></h2></div><p>해커톤에서의 실행과 연구의 성과.</p></div><div class="award-list">{awards}</div></section>
 <section id="activities" class="section activities-section"><div class="container"><div class="section-heading"><div><h2>활동 <span class="section-count">{len(DATA["activities"])}</span></h2></div><p>현장의 반복 업무 개선부터 연구·정보 전달까지,<br>개발 밖에서 문제를 보고 실행한 경험입니다.</p></div><div class="activity-grid">{activities}</div></div></section>
 <section id="credentials" class="section container"><div class="section-heading"><h2>자격증 · 어학</h2></div><div class="credential-grid">{credentials}</div></section>
