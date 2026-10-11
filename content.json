@@ -242,12 +242,35 @@
         "src": "assets/danzzan-ticketing.png",
         "width": 941,
         "height": 1672,
-        "label": "예매 서비스 화면",
+        "label": "정보 탐색부터 예매까지",
         "alt": "단짠의 날짜별 예매 상태와 예매 버튼 화면",
-        "caption": "기존 운영 기간의 날짜별 예매 상태와 신청 흐름을 보여주는 서비스 화면입니다. 팀 공동 산출물이며, 현재 서버 운영은 종료된 상태입니다.",
-        "source_url": "",
+        "caption": "기존 운영 기간의 축제 홈, 부스맵, 날짜별 예매 화면입니다. 팀 공동 산출물이며, 현재 서버 운영은 종료된 상태입니다.",
+        "source_url": "https://github.com/DKU-Dan-Zzan",
         "preview_layout": "phone-detail",
-        "preview_label": "기존 운영 당시 예매 화면"
+        "preview_label": "축제 홈 · 부스맵 · 예매 화면",
+        "images": [
+          {
+            "src": "assets/danzzan-user-home.png",
+            "width": 941,
+            "height": 1672,
+            "label": "축제 홈",
+            "alt": "단짠 축제 홈 화면의 포스터와 주요 메뉴"
+          },
+          {
+            "src": "assets/danzzan-user-boothmap.png",
+            "width": 941,
+            "height": 1672,
+            "label": "부스맵",
+            "alt": "단짠의 날짜 및 유형별 부스 위치 지도"
+          },
+          {
+            "src": "assets/danzzan-ticketing.png",
+            "width": 941,
+            "height": 1672,
+            "label": "예매 서비스 화면",
+            "alt": "단짠의 날짜별 예매 상태와 예매 버튼 화면"
+          }
+        ]
       },
       "status": "현재 서버 운영 종료 / 고도화 후 2026년 11월 재배포 예정",
       "primary_links": [
@@ -300,7 +323,18 @@
           "value": "3,500장"
         }
       ],
-      "card_status": "현재 운영 종료 · 고도화 후 2026년 11월 재배포 예정"
+      "card_status": "현재 운영 종료 · 고도화 후 2026년 11월 재배포 예정",
+      "gallery": [
+        {
+          "src": "assets/danzzan-admin-wristband.png",
+          "width": 1010,
+          "height": 626,
+          "label": "팔찌 배부 관리자 화면",
+          "alt": "단짠 관리자 포털의 팔찌 배부 현황과 학번 기반 티켓 조회 화면",
+          "caption": "팔찌 지급·미지급 현황과 학번 기반 티켓 조회를 한 화면에서 확인하는 관리자 화면입니다. GitHub에 공개된 팀 공동 산출물입니다.",
+          "source_url": "https://github.com/DKU-Dan-Zzan/.github/blob/main/profile/screenshots/admin/wristband.png"
+        }
+      ]
     },
     {
       "slug": "conquer-health",

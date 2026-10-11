@@ -58,7 +58,7 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 .filters button:hover { color: var(--accent); }
 .filters button span { font-size: 10px; margin-left: 3px; }
 .project-count { font-size: 11px; color: var(--muted); }
-.project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.project-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; }
 .project-card { display: flex; border: 1px solid #dce0e4; border-radius: 6px; }
 .project-card:hover, .project-card:focus-within { border-color: var(--accent); }
 .card-body:hover h3, .card-body:hover .card-cta, .contact-email:hover { color: var(--accent-hover); }
@@ -354,15 +354,16 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 }
 
 /* Clear reading order: image, purpose, contribution, outcome, evidence. */
-.card-copy { display: flex; flex: 1; flex-direction: column; align-items: stretch; padding: 24px; }
+.project-card .card-body { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; }
+.card-media-wrap { min-width: 0; padding: 24px 0 24px 24px; }
+.card-media { height: 280px; border: 0; border-radius: 4px; }
+.card-media.phone-detail img { object-fit: contain; }
+.card-media-label { padding: 10px 0 0; }
+.card-copy { display: flex; flex: 1; flex-direction: column; align-items: stretch; padding: 28px; }
 .card-body h3 { font-size: 24px; }
-.featured-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
-.featured-card .card-body { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; }
+.featured-grid { gap: 48px; }
 .featured-card .card-copy { padding: 32px; }
-.featured-card .card-media-wrap { min-width: 0; padding: 24px 0 24px 24px; }
 .featured-card .card-media { height: 300px; border: 0; border-radius: 4px; }
-.featured-card .card-media.phone-detail img { object-fit: contain; }
-.featured-card .card-media-label { padding: 10px 0 0; }
 .featured-card h3 { font-size: 26px; }
 .card-metrics { display: flex; flex-wrap: wrap; gap: 20px 32px; margin: 22px 0 0; }
 .card-metrics dt { font-size: 13px; color: var(--muted); }
@@ -391,16 +392,16 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 .research-table th:first-child { text-align: left; }
 .research-table thead { background: #f5f7f9; }
 @media (max-width: 900px) {
-  .featured-card .card-body { grid-template-columns: minmax(0, 1fr); }
-  .featured-card .card-media-wrap { padding: 24px 24px 0; }
-  .featured-card .card-copy { padding: 24px; }
-  .featured-card .card-media { height: 270px; }
+  .project-card .card-body { grid-template-columns: minmax(0, 1fr); }
+  .card-media-wrap { padding: 24px 24px 0; }
+  .card-copy, .featured-card .card-copy { padding: 24px; }
+  .card-media, .featured-card .card-media { height: 270px; }
 }
 @media (max-width: 600px) {
   .featured-card h3, .card-body h3 { font-size: 24px; }
   .featured-card .card-copy, .card-copy { padding: 22px; }
-  .featured-card .card-media-wrap { padding: 18px 18px 0; }
-  .featured-card .card-media { height: 220px; }
+  .card-media-wrap { padding: 18px 18px 0; }
+  .card-media, .featured-card .card-media { height: 220px; }
   .featured-grid { gap: 32px; }
   .card-subtitle, .card-result, .pub-abstract-row p, .activity ul, .award-summary { font-size: 15px; }
   .card-meta { justify-content: flex-start; }
@@ -408,4 +409,16 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
   .case-section { padding-bottom: 32px; margin-bottom: 32px; }
   .research-table { font-size: 13px; }
   .research-table th, .research-table td { padding: 10px 8px; }
+}
+
+/* Public service screens stay static and retain their original aspect ratios. */
+.card-media.screen-strip, .visual-frame.screen-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: center; }
+.card-media.screen-strip img { min-width: 0; width: 100%; height: auto; max-height: 100%; object-fit: contain; }
+.screen-strip figure { margin: 0; min-width: 0; }
+.screen-strip figure figcaption { text-align: center; font-size: 13px; margin-top: 10px; }
+.supplementary-visual { margin-top: 20px; }
+.case-gallery .supplementary-visual figcaption { text-align: left; font-size: 14px; }
+@media (max-width: 600px) {
+  .visual-frame.screen-strip { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .visual-frame.screen-strip img { max-height: 420px; }
 }

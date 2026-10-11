@@ -67,7 +67,9 @@ def project_visual(p):
     if not v:
         return ''
     source = f'<a class="text-link" href="{e(v["source_url"])}" target="_blank" rel="noopener noreferrer">자료 출처 ↗</a>' if v.get('source_url') else ''
-    return f'''<figure id="visual" class="case-visual"><div class="visual-frame">{project_image(v, '../')}</div><figcaption><strong>{e(v['label'])}</strong><p>{e(v['caption'])}</p><div class="visual-links">{source}</div></figcaption></figure>'''
+    images = ''.join(f'<figure>{project_image(item, "../")}<figcaption>{e(item["label"])}</figcaption></figure>' for item in v['images']) if v.get('images') else project_image(v, '../')
+    layout = ' screen-strip' if v.get('images') else ''
+    return f'''<figure id="visual" class="case-visual"><div class="visual-frame{layout}">{images}</div><figcaption><strong>{e(v['label'])}</strong><p>{e(v['caption'])}</p><div class="visual-links">{source}</div></figcaption></figure>'''
 
 def project_diagram(p):
     diagram = p.get('diagram')
@@ -81,7 +83,9 @@ def project_diagram(p):
 
 def card(p, i):
     v = p.get('visual')
-    media = f'<div class="card-media-wrap"><div class="card-media {e(v.get("preview_layout", ""))}">{project_image(v.get("preview", v))}</div><p class="card-media-label">{e(v.get("preview_label", v["label"]))}</p></div>' if v else ''
+    preview = (''.join(project_image(item) for item in v["images"]) if v.get("images") else project_image(v.get("preview", v))) if v else ''
+    layout = "screen-strip" if v and v.get("images") else v.get("preview_layout", "") if v else ""
+    media = f'<div class="card-media-wrap"><div class="card-media {e(layout)}">{preview}</div><p class="card-media-label">{e(v.get("preview_label", v["label"]))}</p></div>' if v else ''
     metrics = '<dl class="card-metrics">'+''.join(f'<div><dt>{e(m["label"])}</dt><dd>{e(m["value"])}</dd></div>' for m in p['card_metrics'])+'</dl>' if p.get('card_metrics') else ''
     status = f'<p class="card-status">{e(p["card_status"])}</p>' if p.get('card_status') else ''
     return f'''<article class="project-card {"featured-card" if i < 2 else "supporting-card"}" data-category="{e(p['category'])}"><a class="card-body" href="projects/{e(p['slug'])}.html" aria-labelledby="project-{e(p['slug'])}">{media}<div class="card-copy"><div class="card-meta"><span>{e(p['kind'])}</span><span>{e(p['period'])}</span></div><h3 id="project-{e(p['slug'])}">{e(p['title'])}<span aria-hidden="true">↗</span></h3><p class="card-subtitle">{e(p.get('card_intro',p['subtitle']))}</p><p class="card-role"><span>담당</span>{e(p["card_role"])}</p>{metrics}<p class="card-result">{e(p.get('card_outcome',p['outcome']))}</p>{status}<div class="tech-tags">{tags(p['tech'][:5])}</div><span class="card-cta">프로젝트 읽기 <span aria-hidden="true">→</span></span></div></a></article>'''
@@ -154,6 +158,8 @@ def detail(p,i):
         gallery='''<section class="case-gallery"><div class="eyebrow">서비스 화면</div><h2>예매 안내와 동의 확인</h2><div class="phone-gallery"><figure><img src="../assets/danzzan-consent.png" alt="단짠 예매 안내와 필수 동의 확인 화면" loading="lazy" width="941" height="1672"><figcaption>예매 안내와 필수 동의 확인 · 팀 공동 산출물</figcaption></figure></div></section>'''
     elif p['slug']=='olly':
         gallery='''<section class="case-gallery"><div class="eyebrow">로컬 MVP 데모</div><h2>오류 요청도 추적할 수 있도록</h2><figure><img class="wide-image" src="../assets/olly-error.png" alt="의도적으로 오류를 발생시킨 OLLY 데모에서 요청 ID, trace ID, 오류 상태가 함께 표시된 화면" width="1336" height="676" loading="lazy"><figcaption>실패 요청의 ID와 오류 상태를 유지하는 데모 화면 · 팀 공동 산출물</figcaption></figure></section>'''
+    for item in p.get('gallery', []):
+        gallery += f'<section class="case-gallery"><h2>{e(item["label"])}</h2><figure class="supplementary-visual"><div class="visual-frame">{project_image(item, "../")}</div><figcaption>{e(item["caption"])}</figcaption></figure><div class="visual-links">{links([{"label":"자료 출처", "url":item["source_url"]}])}</div></section>'
     nav=('<a href="#visual">대표 자료</a>' if p.get('visual') else '') + ('<a href="#flow">흐름 한눈에 보기</a>' if p.get('diagram') else '') + ''.join(f'<a href="#section-{j}">{e(s.get("display_title",s["title"]))}</a>' for j,s in enumerate(p['sections']))
     status = f'<p class="case-status">{e(p["status"])}</p>' if p.get('status') else ''
     collaboration = f'<p class="collaboration-tools"><span class="eyebrow">협업 도구</span><br>{e(p["collaboration"])}</p>' if p.get('collaboration') else ''
