@@ -81,18 +81,24 @@ def project_diagram(p):
         steps += f'<li><span class="diagram-index">{i+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p>{branches}</li>'
     return f'<figure id="flow" class="project-diagram"><figcaption><p class="eyebrow">흐름 한눈에 보기 · 팀 공동 산출물</p><h2>{e(diagram["title"])}</h2><p>{e(diagram["description"])}</p></figcaption><ol class="diagram-steps diagram-steps-{len(diagram["steps"])}">{steps}</ol><p class="diagram-note">{e(diagram["note"])}</p></figure>'
 
+def phrase_list(items, slug=None):
+    render = (lambda value: highlighted(value, slug)) if slug else e
+    return '<ul class="phrase-list">'+''.join(f'<li>{render(item)}</li>' for item in items)+'</ul>'
+
 def info_row(label, value):
     return f'<div class="info-row"><dt>{e(label)}</dt><dd>{value}</dd></div>'
 
 def project_facts(p, detail=False):
-    rows = info_row('담당', highlighted(p['role'], p['slug']) if detail else e(p['card_role']))
+    role = phrase_list(p['role_items'], p['slug']) if detail and p.get('role_items') else highlighted(p['role'], p['slug']) if detail else e(p['card_role'])
+    rows = info_row('담당', role)
     if detail:
         rows += info_row('기간·구성', e(p['period']+' · '+p['kind']))
     for metric in p.get('card_metrics', []):
         rows += info_row(metric['label'], f'<strong class="metric-value">{e(metric["value"])}</strong>')
     # Numeric results appear in their own rows; the outcome row retains team context.
     outcome = p.get('card_outcome', p['outcome']) if not detail or p.get('card_metrics') else p['outcome']
-    rows += info_row('성과', highlighted(outcome, p['slug']))
+    result = phrase_list(p['outcome_items'], p['slug']) if detail and p.get('outcome_items') and not p.get('card_metrics') else highlighted(outcome, p['slug'])
+    rows += info_row('성과', result)
     status = p.get('status') if detail else p.get('card_status')
     if status:
         rows += info_row('운영 상태', e(status))
@@ -112,7 +118,7 @@ def card(p, i):
     return f'''<article class="project-card {"featured-card" if i < 2 else "supporting-card"}" data-category="{e(p['category'])}"><a class="card-body" href="projects/{e(p['slug'])}.html" aria-labelledby="project-{e(p['slug'])}">{media}<div class="card-copy"><div class="card-meta"><span>{e(p['kind'])}</span><span>{e(p['period'])}</span></div><h3 id="project-{e(p['slug'])}">{e(p['title'])}<span aria-hidden="true">↗</span></h3><p class="card-subtitle">{e(p.get('card_intro',p['subtitle']))}</p>{project_facts(p)}<span class="card-cta">프로젝트 읽기 <span aria-hidden="true">→</span></span></div></a></article>'''
 
 def publication_abstract(p):
-    rows = p.get('display_abstract', p.get('abstract', []))
+    rows = p.get('phrase_abstract', p.get('display_abstract', p.get('abstract', [])))
     if not rows:
         return f'<p>{e(p["description"])}</p>'
     table = ''
@@ -123,7 +129,8 @@ def publication_abstract(p):
         table = f'<div class="research-table-wrap" tabindex="0" role="region" aria-label="{e(c["caption"])}"><table class="research-table"><caption>{e(c["caption"])}</caption><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>'
     result = ''
     for i,row in enumerate(rows):
-        result += f'<div class="pub-abstract-row"><h4>{e(row["label"])}</h4><p>{e(row["text"])}</p></div>'
+        contents = phrase_list(row['items']) if 'items' in row else f'<p>{e(row["text"])}</p>'
+        result += f'<div class="pub-abstract-row"><h4>{e(row["label"])}</h4>{contents}</div>'
         if i == 1: result += table
     return '<div class="pub-abstract">'+result+'</div>'
 
@@ -136,14 +143,17 @@ def home():
     supporting_html=''.join(card(p,i) for i,p in enumerate(DATA['projects'][2:], start=2))
     pubs=''
     for p in DATA['publications']:
-        pubs+=f'''<article class="publication" id="{e(p['id'])}"><div class="pub-main"><div class="eyebrow">{e(p['venue'])} / {e(p['year'])}</div><h3>{e(p['title'])}</h3><p class="pub-authors">{e(p['authors'])}</p>{publication_abstract(p)}<div class="pub-links">{links(p['links'])}</div></div><span class="pub-distinction">{e(p['distinction'])}</span></article>'''
+        metadata = info_row('게재·발행', e(p['venue']+' / '+p['year']))+info_row('저자·역할', e(p['authors']))+info_row('구분', e(p['distinction']))
+        pubs+=f'''<article class="publication" id="{e(p['id'])}"><div class="pub-main"><h3>{e(p['title'])}</h3><dl class="info-list publication-meta">{metadata}</dl>{publication_abstract(p)}<div class="pub-links">{links(p['links'])}</div></div></article>'''
     awards=''.join(f'''<article class="award"><time>{e(a['date'])}</time><div><h3>{e(a['title'])}</h3><p class="award-summary">{e(a['summary'])}</p><p class="award-host">주최: {e(a['organization'])}</p></div><a class="award-project" href="{e(a['url'])}"><span>{e(a['project'])}</span><span class="award-cta">{e(a['link_label'])} <span aria-hidden="true">→</span></span></a></article>''' for a in DATA['awards'])
     activities=''
     for a in DATA['activities']:
         role = f'<span class="activity-role">{e(a["role"])}</span> · ' if a.get('role') else ''
         focus = f'<p class="activity-focus">{e(a["focus"])}</p>' if a.get('focus') else ''
         related = '<div class="activity-links">'+''.join(f'<a class="text-link" href="{e(link["url"])}">{e(link["label"])} →</a>' for link in a['links'])+'</div>' if a.get('links') else ''
-        activities+=f'''<article class="activity"><div class="eyebrow">{role}{e(a['period'])}</div><h3>{e(a['title'])}</h3>{focus}<ul>{''.join(f'<li>{e(b)}</li>' for b in a['bullets'])}</ul>{related}</article>'''
+        activity_rows = a.get('phrase_rows', [{'label':'활동 내용', 'items':a['bullets']}])
+        details = ''.join(info_row(row['label'], phrase_list(row['items'])) for row in activity_rows)
+        activities+=f'''<article class="activity"><div class="eyebrow">{role}{e(a['period'])}</div><h3>{e(a['title'])}</h3>{focus}<dl class="info-list activity-facts">{details}</dl>{related}</article>'''
     credentials=''.join(f'''<article class="credential"><p class="eyebrow">{e(c["category"])}</p><h3>{e(c["title"])}</h3><p class="credential-detail">{e(c["detail"])} · <time>{e(c["date"])}</time></p></article>''' for c in DATA["credentials"])
     return f'''<main id="main">
 <section class="hero container"><img class="hero-portrait" src="assets/juhee-portrait.jpg" alt="박주희 프로필 사진" width="1169" height="1712" fetchpriority="high"><h1>만든 서비스가<br><span class="accent-text">실제로 쓰일 때까지.</span></h1><p class="hero-description">사용자와 운영자의 요구를 정리하고,<br>AI를 활용한 화면·서버 구현부터 배포와 운영 후 개선까지 이어갑니다.</p><div class="hero-actions"><a class="text-link" href="#projects">프로젝트 살펴보기 ↓</a><a class="text-link" href="https://github.com/juhee0223" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></section>
@@ -162,10 +172,14 @@ def detail(p,i):
     for j,s in enumerate(p['sections']):
         paragraphs = ''
         labels = s.get('paragraph_labels', [])
-        for k,t in enumerate(s.get('paragraphs', [])):
-            label = f'<h3>{e(labels[k])}</h3>' if k < len(labels) and labels[k] else ''
-            paragraphs += f'<div class="case-paragraph{" has-label" if label else ""}">{label}<p>{highlighted(t,p["slug"])}</p></div>'
-        bullets='<ul>'+''.join(f'<li>{highlighted(t,p["slug"])}</li>' for t in s.get('bullets',[]))+'</ul>' if s.get('bullets') else ''
+        if s.get('phrase_rows'):
+            for row in s['phrase_rows']:
+                paragraphs += f'<div class="case-paragraph has-label"><h3>{e(row["label"])}</h3>{phrase_list(row["items"], p["slug"])}</div>'
+        else:
+            for k,t in enumerate(s.get('paragraphs', [])):
+                label = f'<h3>{e(labels[k])}</h3>' if k < len(labels) and labels[k] else ''
+                paragraphs += f'<div class="case-paragraph{" has-label" if label else ""}">{label}<p>{highlighted(t,p["slug"])}</p></div>'
+        bullets = phrase_list(s.get('display_bullets', s.get('bullets', [])), p['slug']) if s.get('display_bullets', s.get('bullets')) else ''
         status = f'<p class="case-status">{e(s["status"])}</p>' if s.get('status') else ''
         flow = '<div class="decision-flow" aria-label="과정 설명">'+''.join(f'<div><span class="flow-index">{k+1:02d}</span><h3>{e(step["title"])}</h3><p>{e(step["text"])}</p></div>' for k,step in enumerate(s['steps']))+'</div>' if s.get('steps') else ''
         metrics = '<dl class="info-list result-metrics">'+''.join(info_row(m['label'], f'<strong class="metric-value">{e(m["value"])}</strong>') for m in s['metrics'])+'</dl>' if s.get('metrics') else ''
@@ -184,9 +198,9 @@ def detail(p,i):
     nav=('<a href="#visual">대표 자료</a>' if p.get('visual') else '') + ('<a href="#flow">흐름 한눈에 보기</a>' if p.get('diagram') else '') + ''.join(f'<a href="#section-{j}">{e(s.get("display_title",s["title"]))}</a>' for j,s in enumerate(p['sections']))
     hero_period = p.get('hero_period', p['period'].replace('-', '.'))
     hero_kind = p['kind'].split(' · ')[0]
-    context = f'<p class="case-context">{e(p["detail_context"])}</p>' if p.get('detail_context') else ''
+    context = '<div class="case-context">'+phrase_list(p['context_items'])+'</div>' if p.get('context_items') else f'<p class="case-context">{e(p["detail_context"])}</p>' if p.get('detail_context') else ''
     nxt=DATA['projects'][(i+1)%len(DATA['projects'])]
-    return f'''<main id="main"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><div><p class="case-meta"><span>{e(CATS[p['category']])}</span><span>{e(hero_period)}</span><span>{e(hero_kind)}</span></p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(p.get('card_intro', p['subtitle']))}</p>{award_summary}{context}<div class="pub-links">{links(p.get('primary_links', p['links'])[:2])}</div></div></section>{project_facts(p, detail=True)}<div class="case-layout"><aside class="case-toc"><span class="eyebrow">목차</span>{nav}<a href="#evidence">관련 자료</a></aside><div class="case-body">{project_visual(p)}{project_diagram(p)}{body_sections}{gallery}<section id="evidence" class="case-evidence"><p class="eyebrow">관련 자료</p><h2>프로젝트 자료 및 구현 근거</h2><div class="evidence-links">{links(p['links'])}</div></section></div></div><nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
+    return f'''<main id="main"><div class="container"><a class="back-link" href="../index.html#projects">← 전체 프로젝트</a><section class="case-hero"><div><p class="case-meta"><span>{e(CATS[p['category']])}</span><span>{e(hero_period)}</span><span>{e(hero_kind)}</span></p><h1>{e(p['title'])}</h1><p class="case-subtitle">{e(p.get('intro_phrase', p.get('card_intro', p['subtitle'])))}</p>{award_summary}{context}<div class="pub-links">{links(p.get('primary_links', p['links'])[:2])}</div></div></section>{project_facts(p, detail=True)}<div class="case-layout"><aside class="case-toc"><span class="eyebrow">목차</span>{nav}<a href="#evidence">관련 자료</a></aside><div class="case-body">{project_visual(p)}{project_diagram(p)}{body_sections}{gallery}<section id="evidence" class="case-evidence"><p class="eyebrow">관련 자료</p><h2>프로젝트 자료 및 구현 근거</h2><div class="evidence-links">{links(p['links'])}</div></section></div></div><nav class="project-pagination" aria-label="프로젝트 이동"><a href="../index.html#projects">← 프로젝트 목록</a><a href="{e(nxt['slug'])}.html"><small>다음 프로젝트</small><strong>{e(nxt['title'])} →</strong></a></nav></div></main>'''
 
 (ROOT/'index.html').write_text(shell('포트폴리오', home()))
 (ROOT/'projects').mkdir(exist_ok=True)
