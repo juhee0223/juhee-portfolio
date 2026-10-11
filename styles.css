@@ -365,7 +365,9 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 .featured-card .card-copy { padding: 32px; }
 .featured-card .card-media { height: 300px; border: 0; border-radius: 4px; }
 .featured-card h3 { font-size: 26px; }
-.card-metrics { display: flex; flex-wrap: wrap; gap: 20px 32px; margin: 22px 0 0; }
+.card-metrics { display: flex; gap: 0; margin: 22px 0 0; }
+.card-metrics > div { min-width: 0; }
+.card-metrics > div + div { border-left: 1px solid var(--line); margin-left: 24px; padding-left: 24px; }
 .card-metrics dt { font-size: 13px; color: var(--muted); }
 .card-metrics dd { margin: 4px 0 0; font-size: 24px; font-weight: 600; color: var(--accent); }
 .card-metrics + .card-result { margin-top: 12px; font-size: 14px; }
@@ -405,6 +407,7 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
   .featured-grid { gap: 32px; }
   .card-subtitle, .card-result, .pub-abstract-row p, .activity ul, .award-summary { font-size: 15px; }
   .card-meta { justify-content: flex-start; }
+  .card-metrics > div + div { margin-left: 16px; padding-left: 16px; }
   .case-paragraph { margin-top: 24px; }
   .case-section { padding-bottom: 32px; margin-bottom: 32px; }
   .research-table { font-size: 13px; }
