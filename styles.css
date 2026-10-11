@@ -538,6 +538,70 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
 .recovery-result strong { display: block; margin: 10px 0; font-size: 26px; color: var(--accent); }
 .recovery-result p { font-size: 14px; color: var(--muted); }
 
+/* Project-section wayfinding stays visible without competing with the content. */
+.case-study .case-toc {
+  position: sticky;
+  top: var(--site-header-height, 92px);
+  z-index: 20;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  background: #fff;
+  scrollbar-width: thin;
+  padding: 11px 0;
+}
+.case-study .case-toc a {
+  flex: 0 0 auto;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 8px 4px;
+}
+.case-study .case-toc a[aria-current="location"] {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+.case-study .case-toc a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+html:has(.case-study) {
+  scroll-padding-top: calc(var(--site-header-height, 92px) + var(--case-toc-height, 64px) + 20px);
+}
+.case-study [id] { scroll-margin-top: 0; }
+.case-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-top: 2px;
+  color: var(--ink);
+}
+.case-rail-index {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.case-rail-title {
+  font-size: 23px;
+  font-weight: 750;
+  line-height: 1.35;
+  letter-spacing: -.04em;
+}
+.operation-history { margin: 0; padding-left: 18px; }
+.operation-history li + li { margin-top: 10px; }
+.operation-history strong { color: var(--ink); font-weight: 700; }
+@media (max-width: 700px) {
+  .case-band { display: block; padding: 54px 0; }
+  .case-rail { gap: 5px; margin-bottom: 20px; }
+  .case-rail-title { display: none; }
+  .case-band-title { font-size: 24px; margin-bottom: 30px; }
+}
+
 
 /* Connected system graphs precede the corresponding narrative. */
 .system-diagram { margin: 0 0 56px; }
@@ -566,6 +630,14 @@ h1, h2, h3 { line-height: 1.5; letter-spacing: -.04em; }
   .system-node p { font-size: 14px; }
 }
 @media (max-width: 600px) {
+  .case-study .case-toc {
+    top: var(--site-header-height, 84px);
+    margin-inline: -2px;
+    padding-inline: 2px;
+    gap: 12px 22px;
+  }
+  .case-study .case-toc a { min-height: 42px; }
+  .case-rail-index { font-size: 11px; }
   .system-diagram figcaption, .flow-attribution { grid-template-columns: 76px minmax(0,1fr); gap: 16px; }
   .system-diagram h2 { font-size: 19px; }
   .flow-label, .flow-attribution > span { font-size: 13px; }

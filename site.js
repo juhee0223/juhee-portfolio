@@ -23,9 +23,19 @@
     .map(link => ({ link, section: document.getElementById(link.hash.slice(1)) }))
     .filter(item => item.section);
   if (contents.length) {
+    const caseToc = document.querySelector('.case-toc');
+    const siteHeader = document.querySelector('.site-header');
     let scheduled = false;
+    let activeContent = null;
+    function caseNavigationOffset() {
+      const headerHeight = siteHeader?.offsetHeight || 0;
+      const tocHeight = caseToc?.offsetHeight || 0;
+      document.documentElement.style.setProperty('--site-header-height', `${headerHeight}px`);
+      document.documentElement.style.setProperty('--case-toc-height', `${tocHeight}px`);
+      return headerHeight + tocHeight + 24;
+    }
     function updateContents() {
-      const offset = document.querySelector('.site-header').offsetHeight + 40;
+      const offset = caseNavigationOffset();
       let current = contents[0];
       contents.forEach(item => {
         if (item.section.getBoundingClientRect().top <= offset) current = item;
@@ -37,6 +47,15 @@
         if (item === current) item.link.setAttribute('aria-current', 'location');
         else item.link.removeAttribute('aria-current');
       });
+      if (current !== activeContent && caseToc && caseToc.scrollWidth > caseToc.clientWidth) {
+        const tocRect = caseToc.getBoundingClientRect();
+        const linkRect = current.link.getBoundingClientRect();
+        if (linkRect.left < tocRect.left || linkRect.right > tocRect.right) {
+          const left = caseToc.scrollLeft + linkRect.left - tocRect.left - (tocRect.width - linkRect.width) / 2;
+          caseToc.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+        }
+      }
+      activeContent = current;
       scheduled = false;
     }
     function scheduleContents() {
@@ -47,6 +66,11 @@
     }
     window.addEventListener('scroll', scheduleContents, { passive: true });
     window.addEventListener('resize', scheduleContents);
+    window.addEventListener('load', scheduleContents);
+    window.addEventListener('hashchange', () => {
+      scheduleContents();
+      requestAnimationFrame(scheduleContents);
+    });
     updateContents();
   }
   let scheduleHeaderNavigation = () => {};
